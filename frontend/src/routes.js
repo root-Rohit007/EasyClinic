@@ -42,6 +42,8 @@ import Tables from "./layouts/tables";
 // import RTL from "./layouts/rtl";
 // import Notifications from "./layouts/notifications";
 import Profile from "./layouts/profile";
+import Hospitals from "layouts/Hospitals/hospital";
+import HospitalAdmin from "layouts/HospitalAdminDetails/hospitalAdmin";
 // import SignIn from "./layouts/authentication/sign-in";
 // import SignUp from "./layouts/authentication/sign-up";
 
@@ -49,6 +51,21 @@ import Profile from "./layouts/profile";
 import Icon from "@mui/material/Icon";
 
 export const routesSuperAdmin = [
+  {
+    type: "collapse",
+    name: "Hospitals",
+    key: "Hospitals",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/hospitals",
+    component: <Hospitals />,
+  },
+  {
+    name: "Prof",
+    key: "prof",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/hospitals/:id",
+    component: <HospitalAdmin />,
+  },
   {
     type: "collapse",
     name: "Profile",
@@ -65,14 +82,7 @@ export const routesSuperAdmin = [
     route: "/dashboard",
     component: <Dashboard />,
   },
-  {
-    type: "collapse",
-    name: "Tables",
-    key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
-    component: <Tables />,
-  },
+
   // {
   //   type: "collapse",
   //   name: "Billing",

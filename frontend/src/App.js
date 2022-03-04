@@ -66,6 +66,9 @@ import { useSelector } from "react-redux";
 
 import SignIn from "./layouts/authentication/sign-in";
 
+import { loadUser } from "./Actions/userActions";
+import store from "./store";
+
 export default function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [controller, dispatch] = useMaterialUIController();
@@ -102,6 +105,10 @@ export default function App() {
   // Change the openConfigurator state
   const handleConfiguratorOpen = () =>
     setOpenConfigurator(dispatch, !openConfigurator);
+
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
 
   // Setting the dir attribute for the body element
   useEffect(() => {
