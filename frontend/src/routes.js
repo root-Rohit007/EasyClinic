@@ -38,6 +38,7 @@ Coded by www.creative-tim.com
 // Material Dashboard 2 React layouts
 import Dashboard from "./layouts/dashboard";
 import Tables from "./layouts/tables";
+import Patients from "./layouts/patients";
 // import Billing from "./layouts/billing";
 // import RTL from "./layouts/rtl";
 // import Notifications from "./layouts/notifications";
@@ -144,22 +145,22 @@ export const routesAdmin = [
     route: "/dashboard",
     component: <Dashboard />,
   },
-  // {
-  //   type: "collapse",
-  //   name: "Tables",
-  //   key: "tables",
-  //   icon: <Icon fontSize="small">table_view</Icon>,
-  //   route: "/tables",
-  //   component: <Tables />,
-  // },
-  // {
-  //   type: "collapse",
-  //   name: "Billing",
-  //   key: "billing",
-  //   icon: <Icon fontSize="small">receipt_long</Icon>,
-  //   route: "/billing",
-  //   component: <Billing />,
-  // },
+  {
+    type: "collapse",
+    name: "All Users",
+    key: "all_users",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/allusers",
+    component: <Tables />,
+  },
+  {
+    type: "collapse",
+    name: "Patients",
+    key: "patients",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/patients",
+    component: <Patients />,
+  },
   // {
   //   type: "collapse",
   //   name: "RTL",
