@@ -83,14 +83,14 @@ export const routesSuperAdmin = [
     component: <Dashboard />,
   },
 
-  // {
-  //   type: "collapse",
-  //   name: "Billing",
-  //   key: "billing",
-  //   icon: <Icon fontSize="small">receipt_long</Icon>,
-  //   route: "/billing",
-  //   component: <Billing />,
-  // },
+  {
+    type: "collapse",
+    name: "All Users",
+    key: "all_users",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/allusers",
+    component: <Tables />,
+  },
   // {
   //   type: "collapse",
   //   name: "RTL",
