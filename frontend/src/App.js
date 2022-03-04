@@ -1,4 +1,3 @@
-// import logo from "./logo.svg";
 // import "./App.css";
 // import Login from "./Pages/Authentication/Login";
 // import Header from "./Component/Layout/header.js";
