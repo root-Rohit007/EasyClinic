@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 /** 
   All of the routes for the Material Dashboard 2 React are added here,
   You can add a new route, customize the routes and delete the routes here.
@@ -40,7 +25,6 @@ import Dashboard from "./layouts/dashboard";
 import Tables from "./layouts/tables";
 import Patients from "./layouts/patients";
 // import Billing from "./layouts/billing";
-// import RTL from "./layouts/rtl";
 // import Notifications from "./layouts/notifications";
 import Profile from "./layouts/profile";
 import Hospitals from "layouts/Hospitals/hospital";
@@ -92,14 +76,7 @@ export const routesSuperAdmin = [
   //   route: "/billing",
   //   component: <Billing />,
   // },
-  // {
-  //   type: "collapse",
-  //   name: "RTL",
-  //   key: "rtl",
-  //   icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
-  //   route: "/rtl",
-  //   component: <RTL />,
-  // },
+
   // {
   //   type: "collapse",
   //   name: "Notifications",
@@ -161,14 +138,7 @@ export const routesAdmin = [
     route: "/patients",
     component: <Patients />,
   },
-  // {
-  //   type: "collapse",
-  //   name: "RTL",
-  //   key: "rtl",
-  //   icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
-  //   route: "/rtl",
-  //   component: <RTL />,
-  // },
+
   // {
   //   type: "collapse",
   //   name: "Notifications",
