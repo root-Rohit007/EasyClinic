@@ -28,14 +28,14 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import usersTableData from "layouts/tables/data/usersTableData";
+// import usersTableData from "layouts/tables/data/usersTableData";
 // import projectsTableData from "layouts/tables/data/projectsTableData";
-// import patientTableData from "layouts/tables/data/patientTableData";
+import patientTableData from "layouts/patients/data/patientTableData";
 
 function Tables() {
-  const { columns, rows } = usersTableData();
+  const { columns, rows } = patientTableData();
   // const { columns: pColumns, rows: pRows } = projectsTableData();
-  // const { columns: tCol, rows:tRow } = patientTableData();
+//   const { columns: tCol, rows:tRow } = patientTableData();
 
   return (
     <DashboardLayout>
@@ -55,7 +55,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Users
+                  Patients
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

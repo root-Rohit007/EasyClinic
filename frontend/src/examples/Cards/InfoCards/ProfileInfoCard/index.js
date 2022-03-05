@@ -36,7 +36,7 @@ import typography from "assets/theme/base/typography";
 function ProfileInfoCard({ title, description, info, social, action, shadow }) {
   const labels = [];
   const values = [];
-  const { socialMediaColors } = colors;
+  // const { socialMediaColors } = colors;
   const { size } = typography;
 
   // Convert this form `objectKey` of the object key in to this `object key`
@@ -73,26 +73,26 @@ function ProfileInfoCard({ title, description, info, social, action, shadow }) {
     </MDBox>
   ));
 
-  // Render the card social media icons
-  let renderSocial = null;
-  if (social) {
-    renderSocial = social.map(({ link, icon, color }) => (
-      <MDBox
-        key={color}
-        component="a"
-        href={link}
-        target="_blank"
-        rel="noreferrer"
-        fontSize={size.lg}
-        color={socialMediaColors[color].main}
-        pr={1}
-        pl={0.5}
-        lineHeight={1}
-      >
-        {icon}
-      </MDBox>
-    ));
-  }
+  // // Render the card social media icons
+  // let renderSocial = null;
+  // if (social) {
+  //   renderSocial = social.map(({ link, icon, color }) => (
+  //     <MDBox
+  //       key={color}
+  //       component="a"
+  //       href={link}
+  //       target="_blank"
+  //       rel="noreferrer"
+  //       fontSize={size.lg}
+  //       color={socialMediaColors[color].main}
+  //       pr={1}
+  //       pl={0.5}
+  //       lineHeight={1}
+  //     >
+  //       {icon}
+  //     </MDBox>
+  //   ));
+  // }
 
   return (
     <Card sx={{ height: "100%", boxShadow: !shadow && "none" }}>
@@ -130,8 +130,8 @@ function ProfileInfoCard({ title, description, info, social, action, shadow }) {
         <MDBox opacity={0.3}>
           <Divider />
         </MDBox>
-        <MDBox>
           {renderItems}
+        {/* <MDBox>
           <MDBox display="flex" py={1} pr={2}>
             {social ? (
               <MDTypography
@@ -146,7 +146,7 @@ function ProfileInfoCard({ title, description, info, social, action, shadow }) {
             )}
             {social ? renderSocial : " "}
           </MDBox>
-        </MDBox>
+        </MDBox> */}
       </MDBox>
     </Card>
   );

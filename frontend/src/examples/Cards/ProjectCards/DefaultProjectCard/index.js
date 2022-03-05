@@ -30,8 +30,8 @@ import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
 import MDAvatar from "components/MDAvatar";
 
-function DefaultProjectCard({ image, label, title, description, action, authors }) {
-  const renderAuthors = authors.map(({ image: media, name }) => (
+function DefaultProjectCard({ image, label, title, description, action, users }) {
+  const renderUsers = users.map(({ image: media, name }) => (
     <Tooltip key={name} title={name} placement="bottom">
       <MDAvatar
         src={media}
@@ -131,7 +131,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
               {action.label}
             </MDButton>
           )}
-          <MDBox display="flex">{renderAuthors}</MDBox>
+          <MDBox display="flex">{renderUsers}</MDBox>
         </MDBox>
       </MDBox>
     </Card>
@@ -140,7 +140,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
 
 // Setting default values for the props of DefaultProjectCard
 DefaultProjectCard.defaultProps = {
-  authors: [],
+  users: [],
 };
 
 // Typechecking props for the DefaultProjectCard
@@ -165,7 +165,7 @@ DefaultProjectCard.propTypes = {
     ]).isRequired,
     label: PropTypes.string.isRequired,
   }).isRequired,
-  authors: PropTypes.arrayOf(PropTypes.object),
+  users: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default DefaultProjectCard;

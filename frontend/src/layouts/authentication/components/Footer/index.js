@@ -34,7 +34,7 @@ function Footer({ light }) {
   return (
     <MDBox position="absolute" width="100%" bottom={0} py={4}>
       <Container>
-        <MDBox
+        {/* <MDBox
           width="100%"
           display="flex"
           flexDirection={{ xs: "column", lg: "row" }}
@@ -126,7 +126,7 @@ function Footer({ light }) {
               </Link>
             </MDBox>
           </MDBox>
-        </MDBox>
+        </MDBox> */}
       </Container>
     </MDBox>
   );
