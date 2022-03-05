@@ -68,6 +68,7 @@ export const routesSuperAdmin = [
     component: <Dashboard />,
   },
 
+<<<<<<< HEAD
   // {
   //   type: "collapse",
   //   name: "Billing",
@@ -77,6 +78,24 @@ export const routesSuperAdmin = [
   //   component: <Billing />,
   // },
 
+=======
+  {
+    type: "collapse",
+    name: "All Users",
+    key: "all_users",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/allusers",
+    component: <Tables />,
+  },
+  // {
+  //   type: "collapse",
+  //   name: "RTL",
+  //   key: "rtl",
+  //   icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
+  //   route: "/rtl",
+  //   component: <RTL />,
+  // },
+>>>>>>> 9c72343c7eda010a3f8d9eeee7c703ba16424e26
   // {
   //   type: "collapse",
   //   name: "Notifications",

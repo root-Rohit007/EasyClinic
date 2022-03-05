@@ -95,6 +95,12 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  adminID: {
+    type: String,
+  },
+  hospitalID: {
+    type: String,
+  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
