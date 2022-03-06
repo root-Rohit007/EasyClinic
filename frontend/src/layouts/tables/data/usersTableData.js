@@ -8,11 +8,11 @@ import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
 
 // Images
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+// import team2 from "assets/images/team-2.jpg";
+// import team3 from "assets/images/team-3.jpg";
+// import team4 from "assets/images/team-4.jpg";
 
-export default function data() {
+export default function Data() {
   const Author = ({ name, email }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       {/* <MDAvatar src={image} name={name} size="sm" /> */}
@@ -27,7 +27,12 @@ export default function data() {
 
   const Job = ({ title, description }) => (
     <MDBox lineHeight={1} textAlign="left">
-      <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
+      <MDTypography
+        display="block"
+        variant="caption"
+        color="text"
+        fontWeight="medium"
+      >
         {title}
       </MDTypography>
       <MDTypography variant="caption">{description}</MDTypography>
@@ -49,16 +54,33 @@ export default function data() {
         role: <Job title="DOCTOR" />,
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent="active" color="success" variant="gradient" size="sm" />
+            <MDBadge
+              badgeContent="active"
+              color="success"
+              variant="gradient"
+              size="sm"
+            />
           </MDBox>
         ),
         view: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+          <MDTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="text"
+            fontWeight="medium"
+          >
             View
           </MDTypography>
         ),
         edit: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+          <MDTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="text"
+            fontWeight="medium"
+          >
             Edit
           </MDTypography>
         ),

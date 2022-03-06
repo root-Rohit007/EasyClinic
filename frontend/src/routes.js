@@ -77,14 +77,14 @@ export const routesSuperAdmin = [
   //   component: <Billing />,
   // },
 
-  {
-    type: "collapse",
-    name: "All Users",
-    key: "all_users",
-    icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/allusers",
-    component: <Tables />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "All Users",
+  //   key: "all_users",
+  //   icon: <Icon fontSize="small">receipt_long</Icon>,
+  //   route: "/allusers",
+  //   component: <Tables />,
+  // },
   // {
   //   type: "collapse",
   //   name: "RTL",

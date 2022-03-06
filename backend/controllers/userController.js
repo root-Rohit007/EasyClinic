@@ -157,7 +157,13 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
 // Get all users(admin)
 exports.getAllUser = catchAsyncErrors(async (req, res, next) => {
-  const users = await User.find();
+  const { hospitalID } = req.body;
+  // console.log(hospitalID);
+  const users = await User.find({
+    role: { $in: ["Doctor", "Receptionist"] },
+    hospitalID: hospitalID,
+    isAdmin: { $in: [false, null] },
+  });
 
   res.status(200).json({
     success: true,

@@ -19,7 +19,7 @@ router.route("/me").get(isAuthenticatedUser, getUserDetails);
 
 router
   .route("/admin/users")
-  .get(isAuthenticatedUser, authorizeRoles("admin"), getAllUser);
+  .post(isAuthenticatedUser, authorizeRoles("admin"), getAllUser);
 
 router
   .route("/admin/user/:id")

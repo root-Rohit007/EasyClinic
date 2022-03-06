@@ -8,6 +8,9 @@ import {
   LOAD_USER_FAIL,
   LOAD_USER_SUCCESS,
   LOAD_USER_REQUEST,
+  ALL_USERS_REQUEST,
+  ALL_USERS_SUCCESS,
+  ALL_USERS_FAIL,
 } from "../Constants/userConstants";
 import axios from "axios";
 
@@ -57,5 +60,24 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
+  }
+};
+
+// get All Users
+export const getAllUsers = (hospitalID) => async (dispatch) => {
+  try {
+    dispatch({ type: ALL_USERS_REQUEST });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.post(
+      `/api/v2/admin/users`,
+      {
+        hospitalID,
+      },
+      config
+    );
+
+    dispatch({ type: ALL_USERS_SUCCESS, payload: data.users });
+  } catch (error) {
+    dispatch({ type: ALL_USERS_FAIL, payload: error.response.data.message });
   }
 };
