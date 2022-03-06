@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const patientSchema = new mongoose.Schema({
   name: {
@@ -34,8 +35,9 @@ const patientSchema = new mongoose.Schema({
 
   bloodGroup: {
     type: String,
+    enum: ["O-", "O+", "A-", "B-", "B+", "AB-", "AB+"],
   },
-  bloodPre: {
+  bloodPressure: {
     type: String,
   },
   height: {
@@ -46,6 +48,7 @@ const patientSchema = new mongoose.Schema({
   },
   hospitalID: {
     type: String,
+    required: true,
   },
 });
 

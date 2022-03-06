@@ -66,7 +66,7 @@ import { loadUser } from "./Actions/userActions";
 import store from "./store";
 
 export default function App() {
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, user, loading } = useSelector((state) => state.user);
   const [controller, dispatch] = useMaterialUIController();
   const {
     miniSidenav,
@@ -160,8 +160,9 @@ export default function App() {
       </Icon>
     </MDBox>
   );
-
-  if (!isAuthenticated) {
+  if (loading) {
+    return <h1>Loading...</h1>;
+  } else if (!isAuthenticated) {
     return (
       <ThemeProvider theme={darkMode ? themeDark : theme}>
         <CssBaseline />
@@ -171,38 +172,40 @@ export default function App() {
         <SignIn />
       </ThemeProvider>
     );
-  }
+  } else {
+    return (
+      <ThemeProvider theme={darkMode ? themeDark : theme}>
+        <CssBaseline />
 
-  return (
-    <ThemeProvider theme={darkMode ? themeDark : theme}>
-      <CssBaseline />
-
-      {layout === "dashboard" && (
-        <>
-          <Sidenav
-            color={sidenavColor}
-            brand={
-              (transparentSidenav && !darkMode) || whiteSidenav
-                ? brandDark
-                : brandWhite
-            }
-            brandName="Easy Clinic"
-            routes={user.role === "SuperAdmin" ? routesSuperAdmin : routesAdmin}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
-          {/* <Configurator />
+        {layout === "dashboard" && (
+          <>
+            <Sidenav
+              color={sidenavColor}
+              brand={
+                (transparentSidenav && !darkMode) || whiteSidenav
+                  ? brandDark
+                  : brandWhite
+              }
+              brandName="Easy Clinic"
+              routes={
+                user.role === "SuperAdmin" ? routesSuperAdmin : routesAdmin
+              }
+              onMouseEnter={handleOnMouseEnter}
+              onMouseLeave={handleOnMouseLeave}
+            />
+            {/* <Configurator />
           {configsButton} */}
-        </>
-      )}
-      {/* {layout === "vr" && <Configurator />} */}
+          </>
+        )}
+        {/* {layout === "vr" && <Configurator />} */}
 
-      <Routes>
-        {user.role === "SuperAdmin"
-          ? getRoutes(routesSuperAdmin)
-          : getRoutes(routesAdmin)}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
-      </Routes>
-    </ThemeProvider>
-  );
+        <Routes>
+          {user.role === "SuperAdmin"
+            ? getRoutes(routesSuperAdmin)
+            : getRoutes(routesAdmin)}
+          <Route path="*" element={<Navigate to="/dashboard" />} />
+        </Routes>
+      </ThemeProvider>
+    );
+  }
 }

@@ -37,7 +37,8 @@ exports.registerPatient = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.getPatients = catchAsyncErrors(async (req, res, next) => {
-  const patients = await Patient.find();
+  const { hospitalID } = req.body;
+  const patients = await Patient.find({ hospitalID: hospitalID });
 
   res.status(200).json({
     success: true,
@@ -48,7 +49,7 @@ exports.getPatients = catchAsyncErrors(async (req, res, next) => {
 exports.getPatientbyID = catchAsyncErrors(async (req, res, next) => {
   const patient = await Patient.findById(req.params.id);
 
-  if (!user) {
+  if (!patient) {
     return next(
       new ErrorHander(`User does not exist with Id: ${req.params.id}`)
     );

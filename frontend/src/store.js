@@ -8,12 +8,14 @@ import {
   userDetailsReducer,
 } from "./Reducers/userReducers";
 import { hospitalReducer } from "./Reducers/hospitalReducer";
+import { allPatientsReducer } from "./Reducers/patientsReducer";
 const reducer = combineReducers({
   test: testReducer,
   user: userReducer,
   hospitals: hospitalReducer,
   allUsers: allUsersReducer,
   userDetails: userDetailsReducer,
+  patientDetails: allPatientsReducer,
 });
 
 let initialState = {};
