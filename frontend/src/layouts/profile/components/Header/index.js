@@ -23,7 +23,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
-import backgroundImage from "assets/images/bg-profile.jpeg";
+// import backgroundImage from "assets/images/bg-profile.jpeg";
 
 function Header({ children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
@@ -59,21 +59,21 @@ function Header({ children }) {
         display="flex"
         alignItems="center"
         position="relative"
-        minHeight="18.75rem"
+        minHeight="4.75rem"
         borderRadius="xl"
-        sx={{
-          backgroundImage: ({
-            functions: { rgba, linearGradient },
-            palette: { gradients },
-          }) =>
-            `${linearGradient(
-              rgba(gradients.info.main, 0.6),
-              rgba(gradients.info.state, 0.6)
-            )}, url(${backgroundImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "50%",
-          overflow: "hidden",
-        }}
+        // sx={{
+        //   backgroundImage: ({
+        //     functions: { rgba, linearGradient },
+        //     palette: { gradients },
+        //   }) =>
+        //     `${linearGradient(
+        //       rgba(gradients.info.main, 0.6),
+        //       rgba(gradients.info.state, 0.6)
+        //     )}, url(${backgroundImage})`,
+        //   backgroundSize: "cover",
+        //   backgroundPosition: "50%",
+        //   overflow: "hidden",
+        // }}
       />
       <Card
         sx={{

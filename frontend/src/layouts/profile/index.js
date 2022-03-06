@@ -90,23 +90,23 @@ function Overview() {
                   "Adhar no.": user.adhar,
                   "Pan no.": user.pan,
                 }}
-                social={[
-                  {
-                    link: "https://www.facebook.com/",
-                    icon: <FacebookIcon />,
-                    color: "facebook",
-                  },
-                  {
-                    link: "https://twitter.com/",
-                    icon: <TwitterIcon />,
-                    color: "twitter",
-                  },
-                  {
-                    link: "https://www.instagram.com/",
-                    icon: <InstagramIcon />,
-                    color: "instagram",
-                  },
-                ]}
+                // social={[
+                //   {
+                //     link: "https://www.facebook.com/",
+                //     icon: <FacebookIcon />,
+                //     color: "facebook",
+                //   },
+                //   {
+                //     link: "https://twitter.com/",
+                //     icon: <TwitterIcon />,
+                //     color: "twitter",
+                //   },
+                //   {
+                //     link: "https://www.instagram.com/",
+                //     icon: <InstagramIcon />,
+                //     color: "instagram",
+                //   },
+                // ]}
                 action={{ route: "", tooltip: "Edit Profile" }}
                 shadow={false}
               />
