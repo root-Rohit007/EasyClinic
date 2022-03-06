@@ -22,6 +22,8 @@ import { useEffect, useState } from "react";
 import { getAllUsers, clearErrors } from "Actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 
+import Test from "Component/Test/test";
+
 function Tables() {
   // const { columns: pColumns, rows: pRows } = projectsTableData();
   // const { columns: tCol, rows:tRow } = patientTableData();
@@ -91,7 +93,7 @@ function Tables() {
         view: (
           <MDTypography
             component="a"
-            href="#"
+            href={"/allusers/" + u._id}
             variant="caption"
             color="text"
             fontWeight="medium"
@@ -125,7 +127,7 @@ function Tables() {
 
   if (!loading && users) {
     const { columns, rows } = Data();
-
+    console.log(users);
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -154,6 +156,8 @@ function Tables() {
                     entriesPerPage={false}
                     showTotalEntries={false}
                     noEndBorder
+
+                    // canSearch={true}
                   />
                 </MDBox>
               </Card>

@@ -29,6 +29,7 @@ import Patients from "./layouts/patients";
 import Profile from "./layouts/profile";
 import Hospitals from "layouts/Hospitals/hospital";
 import HospitalAdmin from "layouts/HospitalAdminDetails/hospitalAdmin";
+import UserDetails from "layouts/user_profiles";
 // import SignIn from "./layouts/authentication/sign-in";
 // import SignUp from "./layouts/authentication/sign-up";
 
@@ -153,6 +154,13 @@ export const routesAdmin = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/patients",
     component: <Patients />,
+  },
+  {
+    name: "user details",
+    key: "user_details",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/allusers/:id",
+    component: <UserDetails />,
   },
 
   // {
