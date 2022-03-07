@@ -160,19 +160,8 @@ export default function App() {
       </Icon>
     </MDBox>
   );
-  if (loading) {
-    return <h1>Loading...</h1>;
-  } else if (!isAuthenticated) {
-    return (
-      <ThemeProvider theme={darkMode ? themeDark : theme}>
-        <CssBaseline />
-        <Routes>
-          <Route exact path="/authentication/sign-in" element={<SignIn />} />
-        </Routes>
-        <SignIn />
-      </ThemeProvider>
-    );
-  } else {
+
+  if (isAuthenticated && user) {
     return (
       <ThemeProvider theme={darkMode ? themeDark : theme}>
         <CssBaseline />
@@ -205,6 +194,19 @@ export default function App() {
             : getRoutes(routesAdmin)}
           <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
+      </ThemeProvider>
+    );
+  }
+  if (loading) {
+    return <h1>Loading...</h1>;
+  } else {
+    return (
+      <ThemeProvider theme={darkMode ? themeDark : theme}>
+        <CssBaseline />
+        <Routes>
+          <Route exact path="/authentication/sign-in" element={<SignIn />} />
+        </Routes>
+        <SignIn />
       </ThemeProvider>
     );
   }

@@ -125,7 +125,7 @@ function Tables() {
     dispatch(getAllUsers(hospitalID));
   }, [dispatch, error]);
 
-  if (!loading && users) {
+  if (users) {
     const { columns, rows } = Data();
     console.log(users);
     return (

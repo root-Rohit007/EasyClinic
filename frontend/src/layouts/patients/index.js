@@ -19,9 +19,10 @@ import DataTable from "examples/Tables/DataTable";
 import patientTableData from "layouts/patients/data/patientTableData";
 
 import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, getALLPatients } from "Actions/patientActions";
 // import {} from "Actions/"
 
-function Tables() {
+function Patients() {
   // const { columns, rows } = patientTableData();
   // const { columns: pColumns, rows: pRows } = projectsTableData();
   //   const { columns: tCol, rows:tRow } = patientTableData();
@@ -32,7 +33,7 @@ function Tables() {
   );
   const hospitalID = useSelector((state) => state.user.user.hospitalID);
 
-  function data() {
+  function Data() {
     const Author = ({ name, email }) => (
       <MDBox display="flex" alignItems="center" lineHeight={1}>
         {/* <MDAvatar src={image} name={name} size="sm" /> */}
@@ -100,47 +101,54 @@ function Tables() {
     };
   }
 
-  // useEffect(()=> {
-  //   if(error){
-  //     console.log(error);
-  //     dispatch(clear)
-  //   }
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      dispatch(clearErrors());
+    }
+    if (patients) {
+      console.log(patients);
+    }
+    dispatch(getALLPatients(hospitalID));
+  }, [dispatch, error]);
 
-  // })
+  if (patients) {
+    const { columns, rows } = Data();
+    console.log(patients);
 
-  return (
-    <DashboardLayout>
-      <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
-        <Grid container spacing={6}>
-          <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Patients
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  // table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
-          </Grid>
-          {/* <Grid item xs={12}>
+    return (
+      <DashboardLayout>
+        <DashboardNavbar />
+        <MDBox pt={6} pb={3}>
+          <Grid container spacing={6}>
+            <Grid item xs={12}>
+              <Card>
+                <MDBox
+                  mx={2}
+                  mt={-3}
+                  py={3}
+                  px={2}
+                  variant="gradient"
+                  bgColor="info"
+                  borderRadius="lg"
+                  coloredShadow="info"
+                >
+                  <MDTypography variant="h6" color="white">
+                    Patients
+                  </MDTypography>
+                </MDBox>
+                <MDBox pt={3}>
+                  <DataTable
+                    table={{ columns, rows }}
+                    isSorted={false}
+                    entriesPerPage={false}
+                    showTotalEntries={false}
+                    noEndBorder
+                  />
+                </MDBox>
+              </Card>
+            </Grid>
+            {/* <Grid item xs={12}>
             <Card>
               <MDBox
                 mx={2}
@@ -167,11 +175,19 @@ function Tables() {
               </MDBox>
             </Card>
           </Grid> */}
-        </Grid>
-      </MDBox>
-      <Footer />
-    </DashboardLayout>
-  );
+          </Grid>
+        </MDBox>
+        <Footer />
+      </DashboardLayout>
+    );
+  } else {
+    return (
+      <DashboardLayout>
+        <DashboardNavbar />
+        <h1>Loading</h1>
+      </DashboardLayout>
+    );
+  }
 }
 
-export default Tables;
+export default Patients;
