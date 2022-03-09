@@ -114,9 +114,9 @@ const Signup = () => {
             <Avatar style={avatarStyle}>
               <AddCircleOutlineOutlinedIcon />
             </Avatar>
-            <h2 style={headerStyle}>Sign Up</h2>
+            <h2 style={headerStyle}>Create user</h2>
             <Typography variant="caption" gutterBottom>
-              Please fill this form to create an account !
+              Please fill this form to create user account!
             </Typography>
           </Grid>
           <form onSubmit={handleSubmit}>
@@ -124,11 +124,11 @@ const Signup = () => {
               <TextField
                 style={{
                   marginRight: "10px",
-                  width: "100px",
+                  width: "120px",
                 }}
-                label="Mr./Mrs."
+                label="Mr./Mrs./Dr."
                 variant="outlined"
-                placeholder="Mr./Mrs."
+                placeholder="Mr./Mrs./Dr."
                 required
                 value={salutation}
                 onChange={(e) => setStalutation(e.target.value)}
@@ -136,7 +136,7 @@ const Signup = () => {
 
               <TextField
                 style={{
-                  width: "450px",
+                  width: "610px",
                 }}
                 variant="outlined"
                 label="Name"
@@ -157,6 +157,7 @@ const Signup = () => {
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Primary Email"
                 variant="outlined"
@@ -169,6 +170,7 @@ const Signup = () => {
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Secondary Email"
                 variant="outlined"
@@ -178,13 +180,13 @@ const Signup = () => {
               />
             </Grid>
             <br />
-            <br />
 
             {/* style ={{width: '80%'}} */}
             <Grid align="left">
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Primary Phone"
                 variant="outlined"
@@ -197,6 +199,7 @@ const Signup = () => {
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Secondary Phone"
                 variant="outlined"
@@ -212,23 +215,21 @@ const Signup = () => {
                     <br />
                     <br /> */}
             <br />
-            <br />
             <Grid align="left">
               <TextField
                 style={{
-                  width: "500px",
+                  marginRight: "40px",
+                  width: "100px",
                 }}
                 label="Age"
                 id="outlined-size-small"
                 size="small"
                 variant="outlined"
                 value={age}
+                required
                 onChange={(e) => setAge(e.target.value)}
               />
-            </Grid>
 
-            <br />
-            <Grid align="left">
               <FormControl component="fieldset" style={marginTop}>
                 <FormLabel component="legend" required>
                   Gender
@@ -240,20 +241,19 @@ const Signup = () => {
                   style={{ display: "initial" }}
                   onChange={(e) => setGender(e.target.value)}
                 >
-                  <FormControlLabel
-                    value="female"
-                    control={<Radio />}
-                    label="Female"
-                  />
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="Male"
-                  />
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Female"
+                />
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Male"
+                />
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <br />
 
             <Grid align="left">
               <TextField
@@ -326,10 +326,8 @@ const Signup = () => {
               <br />
             </Grid>
 
-            {/* <TextField fullWidth label='Age' variant="outlined" placeholder="Enter your age" /> */}
-
             <Grid align="left">
-              <FormControl variant="outlined">
+              <FormControl variant="outlined" required>
                 <InputLabel htmlFor="outlined-age-native-simple">
                   Role
                 </InputLabel>
@@ -349,13 +347,6 @@ const Signup = () => {
                 </Select>
 
                 <br />
-                {/* <FormControl component="fieldset" style={marginTop}>
-                                <FormLabel component="legend" required>Gender</FormLabel>
-                                <RadioGroup aria-label="gender" name="gender"  style={{ display: 'initial' }}>
-                                    <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                    <FormControlLabel value="male" control={<Radio />} label="Male" />
-                                </RadioGroup>
-                                </FormControl> */}
 
                 <TextField
                   label="Password"
@@ -365,11 +356,6 @@ const Signup = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <br />
-                {/* <TextField
-                  label="Confirm Password"
-                  variant="outlined"
-                  placeholder="Confirm your password"
-                /> */}
                 <FormControlLabel
                   control={<Checkbox name="checkedA" />}
                   label="Is Active"

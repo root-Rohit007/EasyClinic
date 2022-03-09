@@ -155,7 +155,7 @@ function Tables() {
                     Users
                   </MDTypography>
 
-                  <MDButton onClick={() => navigate("/allusers/createusers")}>
+                  <MDButton onClick={() => navigate("/allusers/createuser")}>
                     Create user
                   </MDButton>
                 </MDBox>

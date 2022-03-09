@@ -174,7 +174,7 @@ export const routesAdmin = [
   {
     name: "create user",
     key: "create_user",
-    route: "allusers/createusers",
+    route: "allusers/createuser",
     icon: <Icon fontSize="small">table_view</Icon>,
     component: <Signup />,
   },
