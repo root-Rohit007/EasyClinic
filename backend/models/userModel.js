@@ -67,16 +67,16 @@ const userSchema = new mongoose.Schema({
   signature: {
     type: String,
   },
-  Address: {
+  address: {
     type: String,
   },
-  Adhar: {
+  adhar: {
     type: String,
   },
-  Pan: {
+  pan: {
     type: String,
   },
-  // RegNo: {
+  // regNo: {
   //   type: String,
   //   required: true,
   // },
