@@ -78,7 +78,7 @@ function Patients() {
         view: (
           <MDTypography
             component="a"
-            href="#"
+            href={"/patients/" + p._id}
             variant="caption"
             color="text"
             fontWeight="medium"

@@ -14,21 +14,24 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import usersTableData from "layouts/tables/data/usersTableData";
+// import usersTableData from "layouts/tables/data/usersTableData";
 // import projectsTableData from "layouts/tables/data/projectsTableData";
 // import patientTableData from "layouts/tables/data/patientTableData";
 
 import { useEffect, useState } from "react";
 import { getAllUsers, clearErrors } from "Actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import Test from "Component/Test/test";
+// import Test from "Component/Test/test";
+import MDButton from "components/MDButton";
 
 function Tables() {
   // const { columns: pColumns, rows: pRows } = projectsTableData();
   // const { columns: tCol, rows:tRow } = patientTableData();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { error, loading, users } = useSelector((state) => state.allUsers);
   const hospitalID = useSelector((state) => state.user.user.hospitalID);
 
@@ -93,10 +96,11 @@ function Tables() {
         view: (
           <MDTypography
             component="a"
-            href={"/allusers/" + u._id}
+            href=""
             variant="caption"
             color="text"
             fontWeight="medium"
+            onClick={() => navigate("/allusers/" + u._id)}
           >
             View
           </MDTypography>
@@ -127,7 +131,7 @@ function Tables() {
 
   if (users) {
     const { columns, rows } = Data();
-    console.log(users);
+    // console.log(users);
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -144,10 +148,16 @@ function Tables() {
                   bgColor="info"
                   borderRadius="lg"
                   coloredShadow="info"
+                  display="flex"
+                  justifyContent="space-between"
                 >
                   <MDTypography variant="h6" color="white">
                     Users
                   </MDTypography>
+
+                  <MDButton onClick={() => navigate("/allusers/createusers")}>
+                    Create user
+                  </MDButton>
                 </MDBox>
                 <MDBox pt={3}>
                   <DataTable

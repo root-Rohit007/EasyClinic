@@ -76,10 +76,10 @@ const userSchema = new mongoose.Schema({
   Pan: {
     type: String,
   },
-  RegNo: {
-    type: String,
-    required: true,
-  },
+  // RegNo: {
+  //   type: String,
+  //   required: true,
+  // },
   role: {
     type: String,
     enum: ["SuperAdmin", "Doctor", "Receptionist"],

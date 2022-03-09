@@ -14,6 +14,9 @@ import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
+  REGISTER_USER_FAIL,
+  REGISTER_USER_REQUEST,
+  REGISTER_USER_SUCCESS,
 } from "../Constants/userConstants";
 
 export const userReducer = (state = { user: {} }, action) => {
@@ -69,6 +72,40 @@ export const userReducer = (state = { user: {} }, action) => {
         isAuthenticated: false,
         user: null,
         error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const registerUserReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case REGISTER_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case REGISTER_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload,
+      };
+
+    case REGISTER_USER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        user: null,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
       };
 
     default:

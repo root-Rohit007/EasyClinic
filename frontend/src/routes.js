@@ -30,6 +30,8 @@ import Profile from "./layouts/profile";
 import Hospitals from "layouts/Hospitals/hospital";
 import HospitalAdmin from "layouts/HospitalAdminDetails/hospitalAdmin";
 import UserDetails from "layouts/user_profiles";
+import PatientDetails from "layouts/patient_profiles";
+import Signup from "layouts/create_user/create_user";
 // import SignIn from "./layouts/authentication/sign-in";
 // import SignUp from "./layouts/authentication/sign-up";
 
@@ -161,6 +163,20 @@ export const routesAdmin = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/allusers/:id",
     component: <UserDetails />,
+  },
+  {
+    name: "patient details",
+    key: "patient_details",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id",
+    component: <PatientDetails />,
+  },
+  {
+    name: "create user",
+    key: "create_user",
+    route: "allusers/createusers",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    component: <Signup />,
   },
 
   // {

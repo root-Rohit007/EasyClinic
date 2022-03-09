@@ -29,11 +29,13 @@ import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import { useDispatch, useSelector, Navi } from "react-redux";
 import { login, clearErrors } from "Actions/userActions";
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 function Basic() {
   // const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
   const Navigate = useNavigate();
+  const alert = useAlert();
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -61,7 +63,7 @@ function Basic() {
   useEffect(() => {
     if (error) {
       // console.log("error");
-      // alert.error(error);
+      alert.error(error);
       console.log(error);
       dispatch(clearErrors());
     } else if (isAuthenticated) {

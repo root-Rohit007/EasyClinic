@@ -20,7 +20,7 @@ import ProfilesList from "examples/Lists/ProfilesList";
 import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 
 // Overview page components
-import Header from "layouts/user_profiles/components/Header";
+import Header from "layouts/patient_profiles/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
 
 // Data
@@ -29,33 +29,33 @@ import profilesListData from "layouts/profile/data/profilesListData";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getUserDetails, clearErrors } from "Actions/userActions";
+import { getPatientsDetail, clearErrors } from "Actions/patientActions";
 import { useParams } from "react-router-dom";
 
-function UserDetails() {
+function PatientDtails() {
   const { id } = useParams();
   console.log(id);
   const dispatch = useDispatch();
-  const { user, loading, error } = useSelector((state) => state.userDetails);
+  const { patient, loading, error } = useSelector(
+    (state) => state.patientProfile
+  );
   useEffect(() => {
     if (error) {
       console.log(error);
       dispatch(clearErrors());
     }
 
-    if (user) {
-      console.log(user);
+    if (patient) {
+      console.log(patient);
     }
 
-    dispatch(getUserDetails(id));
+    dispatch(getPatientsDetail(id));
   }, [dispatch, error]);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      {loading ? (
-        <h1>Loading</h1>
-      ) : (
+      {patient ? (
         <Header>
           <MDBox mt={5} mb={3}>
             <Grid container spacing={1}>
@@ -68,14 +68,13 @@ function UserDetails() {
                   title="profile information"
                   // description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
                   info={{
-                    "Reg. No": user.RegNo,
-                    fullName: user.name,
-                    mobile:
-                      user.phone + " " + (user.phone2 ? user.phone2 : " "),
-                    email: user.email,
-                    Address: user.Address,
+                    Name: patient.name,
+                    // fullName: user.name,
+                    Mobile: patient.phone,
+                    Email: patient.email,
+                    Gender: patient.gender,
 
-                    Role: user.role,
+                    // Role: user.role,
                   }}
                   // social={[
                   //   {
@@ -105,10 +104,12 @@ function UserDetails() {
                   title="Other information"
                   // description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
                   info={{
-                    Age: user.age,
-                    Gender: user.gender,
-                    "Adhar no.": user.adhar,
-                    "Pan no.": user.pan,
+                    Age: patient.age,
+                    BloodGroupt: patient.bloodGroup,
+                    Height: patient.height,
+                    Weight: patient.weight,
+                    // "Adhar no.": user.adhar,
+                    // "Pan no.": user.pan,
                   }}
                   // social={[
                   //   {
@@ -229,6 +230,8 @@ function UserDetails() {
           </Grid>
         </MDBox> */}
         </Header>
+      ) : (
+        <h1>Loading..</h1>
       )}
 
       <Footer />
@@ -236,4 +239,4 @@ function UserDetails() {
   );
 }
 
-export default UserDetails;
+export default PatientDtails;

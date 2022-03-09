@@ -5,6 +5,7 @@ const sendToken = require("../utils/jwtToken");
 
 // register user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  console.log("api hit", req.body);
   const {
     salutation,
     name,
@@ -25,6 +26,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     role,
     isActive,
     isAdmin,
+    hospitalID,
   } = req.body;
 
   const user = await User.create({
@@ -47,17 +49,17 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     role,
     isActive,
     isAdmin,
+    hospitalID,
   });
 
   //   const token = user.getJWTToken();
 
-  //   res.status(201).json({
-  //     success: true,
-  //     user,
-  //     token,
-  //   });
+  res.status(201).json({
+    success: true,
+    user,
+  });
 
-  sendToken(user, 201, res);
+  // sendToken(user, 201, res);
 });
 
 // Login User

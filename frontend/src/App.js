@@ -161,7 +161,9 @@ export default function App() {
     </MDBox>
   );
 
-  if (isAuthenticated && user) {
+  if (loading) {
+    return <h1>Loading...</h1>;
+  } else if (isAuthenticated && user) {
     return (
       <ThemeProvider theme={darkMode ? themeDark : theme}>
         <CssBaseline />
@@ -196,9 +198,6 @@ export default function App() {
         </Routes>
       </ThemeProvider>
     );
-  }
-  if (loading) {
-    return <h1>Loading...</h1>;
   } else {
     return (
       <ThemeProvider theme={darkMode ? themeDark : theme}>
