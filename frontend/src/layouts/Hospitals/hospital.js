@@ -11,9 +11,13 @@ import Bill from "layouts/billing/components/Bill";
 import Bill2 from "layouts/billing/components/Bill2";
 import { getHospitals, clearErrors } from "Actions/hospitalActions";
 import { useDispatch, useSelector } from "react-redux";
+import MDButton from "components/MDButton";
+import { useNavigate } from "react-router-dom";
 
 const Hospitals = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { error, hospitals, loading } = useSelector((state) => state.hospitals);
   useEffect(() => {
     if (error) {
@@ -27,7 +31,7 @@ const Hospitals = () => {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      {hospitals ? (
+      {!loading ? (
         <MDBox pt={6} pb={3}>
           <Grid container spacing={6}>
             <Grid item xs={12}>
@@ -41,10 +45,15 @@ const Hospitals = () => {
                   bgColor="info"
                   borderRadius="lg"
                   coloredShadow="info"
+                  display="flex"
+                  justifyContent="space-between"
                 >
                   <MDTypography variant="h6" color="white">
                     Hospitals
                   </MDTypography>
+                  <MDButton onClick={() => navigate("/hospitals/create")}>
+                    create hospital
+                  </MDButton>
                 </MDBox>
 
                 <MDBox pt={3}>

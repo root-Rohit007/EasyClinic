@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Paper,
@@ -19,24 +19,31 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { register, clearErrors, resetUser } from "Actions/userActions";
 import { useAlert } from "react-alert";
+import { register, clearErrors } from "Actions/userActions";
+import {
+  createHospital,
+  resetHospital,
+  clearErrors as clearErrorsHospital,
+} from "Actions/hospitalActions";
 
-const Signup = () => {
+const Create_Hospitals = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
 
-  const hospitalID = useSelector((state) => state.user.user.hospitalID);
-  const { error, loading, user } = useSelector((state) => state.registerUser);
-
   const paperStyle = { padding: "30px 20px", width: 800, margin: "20px auto" };
   const headerStyle = { margin: 0 };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
-  const marginTop = { marginTop: 5 };
+  // const marginTop = { marginTop: 5 }
+
+  const [nameH, setHName] = useState("");
+  const [addressH, setHAddress] = useState("");
+  const [gst, setGst] = useState("");
+  const [desclaimer, setDesclaimer] = useState("");
+  const [tandc, setTandc] = useState("");
 
   const [salutation, setStalutation] = useState("");
   const [name, setName] = useState("");
@@ -54,25 +61,26 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [isActive, setIsActive] = useState(false);
 
-  const handleSubmit = (e) => {
+  const [admin, setAdmin] = useState(false);
+  const [adminID, setAdminID] = useState("");
+
+  const handleSubmit2 = (e) => {
     e.preventDefault();
-    // console.log(
-    //   salutation,
-    //   name,
-    //   email1,
-    //   email2,
-    //   phone,
-    //   phone2,
-    //   age,
-    //   gender,
-    //   degree,
-    //   adhar,
-    //   pan,
-    //   address,
-    //   role,
-    //   password,
-    //   isActive
-    // );
+    console.log(nameH, addressH, gst, desclaimer, tandc);
+    const hospitaData = {
+      name: nameH,
+      address: addressH,
+      GST: gst,
+      desclaimer,
+      termsAndCondition: tandc,
+      admin: adminID,
+    };
+    dispatch(createHospital(hospitaData));
+  };
+
+  const handleSubmit1 = (e) => {
+    e.preventDefault();
+
     const userData = {
       salutation,
       name,
@@ -89,26 +97,46 @@ const Signup = () => {
       role,
       password,
       isActive,
-      hospitalID,
+      isAdmin: true,
     };
     dispatch(register(userData));
   };
 
+  const { error, loading, user } = useSelector((state) => state.registerUser);
+  const { errorHospital, loadingHospital, hospital } = useSelector(
+    (state) => state.registerHospital
+  );
   useEffect(() => {
     if (error) {
       console.log(error);
       alert.error(error);
       dispatch(clearErrors());
     } else if (user !== null && user.name) {
-      dispatch(resetUser());
-      navigate("/allusers");
-      console.log("sucess", user);
+      // navigate("/allusers");
+      console.log("success", user);
+      setAdmin(true);
+      setAdminID(user._id);
+      alert.success("Admin Created " + adminID + " Now create hospital");
     }
   }, [dispatch, error, user]);
+
+  useEffect(() => {
+    if (errorHospital) {
+      console.log(errorHospital);
+      alert.error(errorHospital);
+      dispatch(clearErrorsHospital());
+    } else if (hospital !== null && hospital.name) {
+      console.log("success", hospital);
+      alert.success("Hopital Created");
+      dispatch(resetHospital());
+      navigate("/hospitals");
+    }
+  }, [dispatch, errorHospital, hospital]);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
+
       <Grid>
         <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
@@ -117,10 +145,10 @@ const Signup = () => {
             </Avatar>
             <h2 style={headerStyle}>Sign Up</h2>
             <Typography variant="caption" gutterBottom>
-              Please fill this form to create an account !
+              Create Admin First
             </Typography>
           </Grid>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit1}>
             <Grid align="left">
               <TextField
                 style={{
@@ -230,7 +258,7 @@ const Signup = () => {
 
             <br />
             <Grid align="left">
-              <FormControl component="fieldset" style={marginTop}>
+              <FormControl component="fieldset" style={{ marginTop: 5 }}>
                 <FormLabel component="legend" required>
                   Gender
                 </FormLabel>
@@ -378,9 +406,136 @@ const Signup = () => {
                     setIsActive(!isActive);
                   }}
                 />
-                <Button type="submit" variant="contained" color="primary">
-                  Sign up
-                </Button>
+                {!admin ? (
+                  <Button type="submit" variant="contained" color="primary">
+                    create Admin
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled
+                  >
+                    create Admin
+                  </Button>
+                )}
+              </FormControl>
+            </Grid>
+          </form>
+        </Paper>
+      </Grid>
+
+      <Grid>
+        <Paper elevation={20} style={paperStyle}>
+          <Grid align="center">
+            <Avatar style={avatarStyle}>
+              <AddCircleOutlineOutlinedIcon />
+            </Avatar>
+            <h2 style={headerStyle}>Hospital Form</h2>
+            <Typography variant="caption" gutterBottom>
+              Please fill this form to create an account !
+            </Typography>
+          </Grid>
+          <form onSubmit={handleSubmit2}>
+            <Grid align="left">
+              <TextField
+                style={{
+                  width: "500px",
+                }}
+                variant="outlined"
+                label="Name"
+                placeholder="Enter Hospital name"
+                required
+                value={nameH}
+                onChange={(e) => setHName(e.target.value)}
+              />
+
+              <br />
+              <br />
+              <TextField
+                style={{
+                  width: "500px",
+                }}
+                multiline
+                rows={3}
+                label="Address"
+                variant="outlined"
+                placeholder="Enter your Address"
+                required
+                value={addressH}
+                onChange={(e) => setHAddress(e.target.value)}
+              />
+              <br />
+              <br />
+            </Grid>
+
+            <Grid align="left">
+              <TextField
+                style={{
+                  width: "500px",
+                }}
+                label="GST No."
+                variant="outlined"
+                placeholder="Enter your GST Number"
+                required
+                value={gst}
+                onChange={(e) => setGst(e.target.value)}
+              />
+              <br />
+              <br />
+            </Grid>
+
+            <Grid align="left">
+              <TextField
+                style={{
+                  width: "500px",
+                }}
+                multiline
+                rows={3}
+                label="Disclaimer"
+                variant="outlined"
+                placeholder="Enter your Disclaimer"
+                required
+                value={desclaimer}
+                onChange={(e) => setDesclaimer(e.target.value)}
+              />
+              <br />
+              <br />
+
+              <TextField
+                style={{
+                  width: "500px",
+                }}
+                multiline
+                rows={3}
+                label="Terms And Conditions"
+                variant="outlined"
+                placeholder="Enter your Terms And Conditions"
+                required
+                value={tandc}
+                onChange={(e) => setTandc(e.target.value)}
+              />
+              <br />
+              <br />
+            </Grid>
+
+            <Grid align="left">
+              <FormControl variant="outlined">
+                {admin ? (
+                  <Button type="submit" variant="contained" color="primary">
+                    Submit
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled
+                  >
+                    Submit
+                  </Button>
+                )}
               </FormControl>
             </Grid>
           </form>
@@ -390,4 +545,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Create_Hospitals;

@@ -17,6 +17,7 @@ import {
   REGISTER_USER_FAIL,
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
+  REGISTER_USER_RESET,
 } from "../Constants/userConstants";
 import axios from "axios";
 
@@ -117,4 +118,8 @@ export const register = (userData) => async (dispatch) => {
       payload: error.response.data.error,
     });
   }
+};
+
+export const resetUser = () => async (dispatch) => {
+  dispatch({ type: REGISTER_USER_RESET });
 };

@@ -17,6 +17,7 @@ import {
   REGISTER_USER_FAIL,
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
+  REGISTER_USER_RESET,
 } from "../Constants/userConstants";
 
 export const userReducer = (state = { user: {} }, action) => {
@@ -100,6 +101,13 @@ export const registerUserReducer = (state = { user: {} }, action) => {
         loading: false,
         user: null,
         error: action.payload,
+      };
+
+    case REGISTER_USER_RESET:
+      return {
+        ...state,
+        user: null,
+        loading: false,
       };
 
     case CLEAR_ERRORS:

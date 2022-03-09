@@ -32,6 +32,7 @@ import HospitalAdmin from "layouts/HospitalAdminDetails/hospitalAdmin";
 import UserDetails from "layouts/user_profiles";
 import PatientDetails from "layouts/patient_profiles";
 import Signup from "layouts/create_user/create_user";
+import CreateHospitals from "layouts/create_hospital/create_hospital";
 // import SignIn from "./layouts/authentication/sign-in";
 // import SignUp from "./layouts/authentication/sign-up";
 
@@ -46,6 +47,13 @@ export const routesSuperAdmin = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/hospitals",
     component: <Hospitals />,
+  },
+  {
+    name: "Create Hospital",
+    key: "create_hospital",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/hospitals/create",
+    component: <CreateHospitals />,
   },
   {
     name: "Prof",
