@@ -31,6 +31,21 @@ exports.getHospitals = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Get hospital by id
+exports.getHospitalbyID = catchAsyncErrors(async (req, res, next) => {
+  const id = req.params.id;
+  const hospital = await Hospital.findById(id);
+
+  if (!hospital) {
+    return next(new ErrorHander(`Hospital dosent exists any more`));
+  }
+
+  res.status(200).json({
+    success: true,
+    hospital,
+  });
+});
+
 exports.getHospitalAdmin = catchAsyncErrors(async (req, res, next) => {
   const admin = await userModel.findById(req.params.id);
 

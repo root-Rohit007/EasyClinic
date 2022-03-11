@@ -121,9 +121,50 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 
 // update User Profile
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
-  const newUserData = {
-    name: req.body.name,
-    email: req.body.email,
+  const {
+    salutation,
+    name,
+    email,
+    email2,
+
+    phone,
+    phone2,
+    age,
+    gender,
+    degree,
+    photo,
+    signature,
+    address,
+    adhar,
+    pan,
+    regNo,
+    role,
+    isActive,
+    isAdmin,
+    hospitalID,
+  } = req.body;
+
+  const newData = {
+    salutation,
+    name,
+    email,
+    email2,
+
+    phone,
+    phone2,
+    age,
+    gender,
+    degree,
+    photo,
+    signature,
+    address,
+    adhar,
+    pan,
+    regNo,
+    role,
+    isActive,
+    isAdmin,
+    hospitalID,
   };
 
   // if (req.body.avatar !== "") {
@@ -145,7 +186,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   //   };
   // }
 
-  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+  const user = await User.findByIdAndUpdate(req.params.id, newData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,

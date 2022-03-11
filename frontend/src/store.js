@@ -7,10 +7,12 @@ import {
   userReducer,
   userDetailsReducer,
   registerUserReducer,
+  profileReducer,
 } from "./Reducers/userReducers";
 import {
   hospitalReducer,
   registerHospitalReducer,
+  hospitalDetailsReducers,
 } from "./Reducers/hospitalReducer";
 import {
   allPatientsReducer,
@@ -20,12 +22,14 @@ const reducer = combineReducers({
   test: testReducer,
   user: userReducer,
   hospitals: hospitalReducer,
+  hospitalDetails: hospitalDetailsReducers,
   allUsers: allUsersReducer,
   userDetails: userDetailsReducer,
   patientDetails: allPatientsReducer,
   patientProfile: patientDetailsReducer,
   registerUser: registerUserReducer,
   registerHospital: registerHospitalReducer,
+  profileUpdate: profileReducer,
 });
 
 let initialState = {};

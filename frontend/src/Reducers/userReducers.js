@@ -18,6 +18,14 @@ import {
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_RESET,
+  UPDATE_PROFILE_FAIL,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCCESS,
+  DELETE_USER_FAIL,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_RESET,
+  UPDATE_PROFILE_RESET,
 } from "../Constants/userConstants";
 
 export const userReducer = (state = { user: {} }, action) => {
@@ -172,6 +180,60 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const profileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case UPDATE_PROFILE_REQUEST:
+    case DELETE_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isUpdated: action.payload,
+      };
+
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload.success,
+        message: action.payload.message,
+      };
+
+    case UPDATE_PROFILE_FAIL:
+    case DELETE_USER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case UPDATE_PROFILE_RESET:
+      return {
+        ...state,
+        isUpdated: false,
+      };
+
+    case DELETE_USER_RESET:
+      return {
+        ...state,
+        isDeleted: false,
       };
 
     case CLEAR_ERRORS:

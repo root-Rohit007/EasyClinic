@@ -83,9 +83,9 @@ const Signup = () => {
       age: +age,
       gender,
       degree: degree.split(" "),
-      Adhar: adhar,
-      Pan: pan,
-      Address: address,
+      adhar: adhar,
+      pan: pan,
+      address: address,
       role,
       password,
       isActive,
@@ -242,16 +242,16 @@ const Signup = () => {
                   style={{ display: "initial" }}
                   onChange={(e) => setGender(e.target.value)}
                 >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label="Male"
-                />
+                  <FormControlLabel
+                    value="female"
+                    control={<Radio />}
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio />}
+                    label="Male"
+                  />
                 </RadioGroup>
               </FormControl>
             </Grid>

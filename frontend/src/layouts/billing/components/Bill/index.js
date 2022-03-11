@@ -1,4 +1,3 @@
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -67,13 +66,6 @@ function Bill({
             </MDBox>
             <MDButton variant="text" color={darkMode ? "white" : "dark"}>
               <Icon>edit</Icon>&nbsp;edit
-            </MDButton>
-            <MDButton
-              variant="text"
-              color={darkMode ? "white" : "dark"}
-              onClick={(e) => console.log("hello")}
-            >
-              <Icon>edit</Icon>&nbsp;Get-Admin-Details
             </MDButton>
           </MDBox>
         </MDBox>

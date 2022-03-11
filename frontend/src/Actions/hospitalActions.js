@@ -8,6 +8,9 @@ import {
   CREATE_HOSPITAL_REQ,
   CLEAR_ERRORS,
   CREATE_HOSPITAL_RESET,
+  HOSPITAL_DETAILS_FAIL,
+  HOSPITAL_DETAILS_REQ,
+  HOSPITAL_DETAILS_SUC,
 } from "../Constants/hospitalConstant";
 
 export const getHospitals = () => async (dispatch) => {
@@ -36,6 +39,19 @@ export const createHospital = (hospitalData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CREATE_HOSPITAL_FAIL,
+      payload: error.response.data.error,
+    });
+  }
+};
+
+export const getHospitalbyID = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: HOSPITAL_DETAILS_REQ });
+    const { data } = await axios.get(`/api/v3/SA/getHospital/${id}`);
+    dispatch({ type: HOSPITAL_DETAILS_SUC, payload: data.hospital });
+  } catch (error) {
+    dispatch({
+      type: HOSPITAL_DETAILS_FAIL,
       payload: error.response.data.error,
     });
   }

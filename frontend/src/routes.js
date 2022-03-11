@@ -33,11 +33,15 @@ import UserDetails from "layouts/user_profiles";
 import PatientDetails from "layouts/patient_profiles";
 import Signup from "layouts/create_user/create_user";
 import CreateHospitals from "layouts/create_hospital/create_hospital";
+import UpdateUser from "layouts/update_user/updateUser";
+import UpdateAdmin from "layouts/update_admin_profile/updateAdmin";
+
 // import SignIn from "./layouts/authentication/sign-in";
 // import SignUp from "./layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import HospitalDetails from "layouts/Hospital_Details/hospital_details";
 
 export const routesSuperAdmin = [
   {
@@ -47,6 +51,13 @@ export const routesSuperAdmin = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/hospitals",
     component: <Hospitals />,
+  },
+  {
+    name: "Hospital details",
+    key: "hospital_details",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/hospitals/:id",
+    component: <HospitalDetails />,
   },
   {
     name: "Create Hospital",
@@ -142,6 +153,13 @@ export const routesAdmin = [
     component: <Profile />,
   },
   {
+    name: "Profile",
+    key: "profile",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/profile/update",
+    component: <UpdateAdmin />,
+  },
+  {
     type: "collapse",
     name: "Dashboard",
     key: "dashboard",
@@ -185,6 +203,13 @@ export const routesAdmin = [
     route: "allusers/createuser",
     icon: <Icon fontSize="small">table_view</Icon>,
     component: <Signup />,
+  },
+  {
+    name: "update user",
+    key: "update_user",
+    route: "allusers/:id/update",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    component: <UpdateUser />,
   },
 
   // {

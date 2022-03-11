@@ -7,6 +7,9 @@ import {
   CREATE_HOSPITAL_SUC,
   CLEAR_ERRORS,
   CREATE_HOSPITAL_RESET,
+  HOSPITAL_DETAILS_REQ,
+  HOSPITAL_DETAILS_SUC,
+  HOSPITAL_DETAILS_FAIL,
 } from "../Constants/hospitalConstant";
 
 export const hospitalReducer = (state = { hospitals: [] }, action) => {
@@ -27,6 +30,39 @@ export const hospitalReducer = (state = { hospitals: [] }, action) => {
       return {
         loading: false,
         error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const hospitalDetailsReducers = (state = { hospital: {} }, action) => {
+  switch (action.type) {
+    case HOSPITAL_DETAILS_REQ:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case HOSPITAL_DETAILS_SUC:
+      return {
+        ...state,
+        loading: false,
+        hospital: action.payload,
+      };
+
+    case HOSPITAL_DETAILS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
       };
 
     default:

@@ -95,8 +95,7 @@ function Tables() {
         ),
         view: (
           <MDTypography
-            component="a"
-            href=""
+            component="button"
             variant="caption"
             color="text"
             fontWeight="medium"

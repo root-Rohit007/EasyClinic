@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Paper,
@@ -19,33 +19,36 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useAlert } from "react-alert";
-import { register, clearErrors } from "Actions/userActions";
-import {
-  createHospital,
-  resetHospital,
-  clearErrors as clearErrorsHospital,
-} from "Actions/hospitalActions";
 
-const Create_Hospitals = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  updateProfile,
+  clearErrors,
+  resetProfileUpdate,
+} from "Actions/userActions";
+import { useAlert } from "react-alert";
+
+const UpdateUser = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
 
+  const hospitalID = useSelector((state) => state.user.user.hospitalID);
+  const { user } = useSelector((state) => state.userDetails);
+  const {
+    loading,
+    isUpdated,
+    error: errorProfileUpdate,
+  } = useSelector((state) => state.profileUpdate);
+
   const paperStyle = { padding: "30px 20px", width: 800, margin: "20px auto" };
   const headerStyle = { margin: 0 };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
-  // const marginTop = { marginTop: 5 }
+  const marginTop = { marginTop: 5 };
 
-  const [nameH, setHName] = useState("");
-  const [addressH, setHAddress] = useState("");
-  const [gst, setGst] = useState("");
-  const [desclaimer, setDesclaimer] = useState("");
-  const [tandc, setTandc] = useState("");
-
-  const [salutation, setStalutation] = useState("");
+  const [salutation, setSalutation] = useState("");
   const [name, setName] = useState("");
   const [email1, setEmail1] = useState("");
   const [email2, setEmail2] = useState("");
@@ -58,29 +61,28 @@ const Create_Hospitals = () => {
   const [pan, setPan] = useState("");
   const [address, setAddress] = useState("");
   const [role, setRole] = useState("");
-  const [password, setPassword] = useState("");
+
   const [isActive, setIsActive] = useState(false);
 
-  const [admin, setAdmin] = useState(false);
-  const [adminID, setAdminID] = useState("");
-
-  const handleSubmit2 = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(nameH, addressH, gst, desclaimer, tandc);
-    const hospitaData = {
-      name: nameH,
-      address: addressH,
-      GST: gst,
-      desclaimer,
-      termsAndConditions: tandc,
-      admin: adminID,
-    };
-    dispatch(createHospital(hospitaData));
-  };
+    console.log(
+      salutation,
+      name,
+      email1,
+      email2,
+      phone,
+      phone2,
+      age,
+      gender,
+      degree,
+      adhar,
+      pan,
+      address,
+      role,
 
-  const handleSubmit1 = (e) => {
-    e.preventDefault();
-
+      isActive
+    );
     const userData = {
       salutation,
       name,
@@ -91,81 +93,86 @@ const Create_Hospitals = () => {
       age: +age,
       gender,
       degree: degree.split(" "),
-      Adhar: adhar,
-      Pan: pan,
-      Address: address,
+      adhar: adhar,
+      pan: pan,
+      address: address,
       role,
-      password,
       isActive,
-      isAdmin: true,
+      hospitalID: hospitalID,
     };
-    dispatch(register(userData));
+    dispatch(updateProfile(userData, id));
   };
 
-  const { error, loading, user } = useSelector((state) => state.registerUser);
-  const { errorHospital, loadingHospital, hospital } = useSelector(
-    (state) => state.registerHospital
-  );
   useEffect(() => {
-    if (error) {
-      console.log(error);
-      alert.error(error);
+    if (!loading && isUpdated) {
+      dispatch(resetProfileUpdate());
+      navigate("/allusers/" + id);
+      alert.success("updated Successfully");
+    }
+    if (user === null || !user.name) {
+      console.log("nnavigate", id);
+      navigate("/allusers/" + id);
+    }
+    if (errorProfileUpdate) {
+      console.log(errorProfileUpdate);
+      alert.error(errorProfileUpdate);
       dispatch(clearErrors());
     } else if (user !== null && user.name) {
-      // navigate("/allusers");
-      console.log("success", user);
-      setAdmin(true);
-      setAdminID(user._id);
-      alert.success("Admin Created " + adminID + " Now create hospital");
+      setSalutation(user.salutation);
+      setName(user.name);
+      setEmail1(user.email);
+      setEmail2(user.email2);
+      setPhone(user.phone);
+      setPhone2(user.phone2);
+      setAge(user.age);
+      setGender(user.gender);
+      setDegree(user.degree.join(" "));
+      setAdhar(user.adhar);
+      setPan(user.pan);
+      setAddress(user.address);
+      setRole(user.role);
+      setIsActive(user.isActive);
+      //   pan: pan,
+      //   address: address,
+      //   role,
+      //   password,
+      //   isActive,
+      //   hospitalID,
     }
-  }, [dispatch, error, user]);
-
-  useEffect(() => {
-    if (errorHospital) {
-      console.log(errorHospital);
-      alert.error(errorHospital);
-      dispatch(clearErrorsHospital());
-    } else if (hospital !== null && hospital.name) {
-      console.log("success", hospital);
-      alert.success("Hopital Created");
-      dispatch(resetHospital());
-      navigate("/hospitals");
-    }
-  }, [dispatch, errorHospital, hospital]);
+  }, [dispatch, errorProfileUpdate, user, isUpdated, loading]);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-
       <Grid>
         <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
             <Avatar style={avatarStyle}>
               <AddCircleOutlineOutlinedIcon />
             </Avatar>
-            <h2 style={headerStyle}>Sign Up</h2>
+            <h2 style={headerStyle}>Update details</h2>
             <Typography variant="caption" gutterBottom>
-              Create Admin First
+              Please fill this form to update user account!
             </Typography>
           </Grid>
-          <form onSubmit={handleSubmit1}>
+          <form onSubmit={handleSubmit}>
             <Grid align="left">
               <TextField
                 style={{
                   marginRight: "10px",
-                  width: "100px",
+                  width: "120px",
                 }}
-                label="Mr./Mrs."
+                label="Mr./Mrs./Dr."
                 variant="outlined"
-                placeholder="Mr./Mrs."
+                placeholder="Mr./Mrs./Dr."
                 required
                 value={salutation}
-                onChange={(e) => setStalutation(e.target.value)}
+                onChange={(e) => setSalutation(e.target.value)}
               />
 
               <TextField
                 style={{
-                  width: "450px",
+                  width: "610px",
                 }}
                 variant="outlined"
                 label="Name"
@@ -186,6 +193,7 @@ const Create_Hospitals = () => {
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Primary Email"
                 variant="outlined"
@@ -198,6 +206,7 @@ const Create_Hospitals = () => {
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Secondary Email"
                 variant="outlined"
@@ -207,13 +216,13 @@ const Create_Hospitals = () => {
               />
             </Grid>
             <br />
-            <br />
 
             {/* style ={{width: '80%'}} */}
             <Grid align="left">
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Primary Phone"
                 variant="outlined"
@@ -226,6 +235,7 @@ const Create_Hospitals = () => {
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Secondary Phone"
                 variant="outlined"
@@ -234,31 +244,24 @@ const Create_Hospitals = () => {
                 onChange={(e) => setPhone2(e.target.value)}
               />
             </Grid>
-            {/* <TextField fullWidth label='Phone Number' variant="outlined" placeholder="Enter your phone number" />
-                    <br />
-                    <br />
-                    <TextField fullWidth label='Secondary Phone Number' variant="outlined" placeholder="Enter your phone number" />
-                    <br />
-                    <br /> */}
-            <br />
+
             <br />
             <Grid align="left">
               <TextField
                 style={{
-                  width: "500px",
+                  marginRight: "40px",
+                  width: "100px",
                 }}
                 label="Age"
                 id="outlined-size-small"
                 size="small"
                 variant="outlined"
                 value={age}
+                required
                 onChange={(e) => setAge(e.target.value)}
               />
-            </Grid>
 
-            <br />
-            <Grid align="left">
-              <FormControl component="fieldset" style={{ marginTop: 5 }}>
+              <FormControl component="fieldset" style={marginTop}>
                 <FormLabel component="legend" required>
                   Gender
                 </FormLabel>
@@ -273,16 +276,17 @@ const Create_Hospitals = () => {
                     value="female"
                     control={<Radio />}
                     label="Female"
+                    checked={gender === "female"}
                   />
                   <FormControlLabel
                     value="male"
                     control={<Radio />}
                     label="Male"
+                    checked={gender === "male"}
                   />
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <br />
 
             <Grid align="left">
               <TextField
@@ -292,6 +296,7 @@ const Create_Hospitals = () => {
                 label="Degree"
                 variant="outlined"
                 placeholder="Enter your degrees"
+                value={degree}
                 onChange={(e) => setDegree(e.target.value)}
               />
               <br />
@@ -355,10 +360,8 @@ const Create_Hospitals = () => {
               <br />
             </Grid>
 
-            {/* <TextField fullWidth label='Age' variant="outlined" placeholder="Enter your age" /> */}
-
             <Grid align="left">
-              <FormControl variant="outlined">
+              <FormControl variant="outlined" required>
                 <InputLabel htmlFor="outlined-age-native-simple">
                   Role
                 </InputLabel>
@@ -370,6 +373,7 @@ const Create_Hospitals = () => {
                       id="outlined-age-native-simple"
                     />
                   }
+                  value={role}
                   onChange={(e) => setRole(e.target.value)}
                 >
                   <option value="" />
@@ -378,164 +382,26 @@ const Create_Hospitals = () => {
                 </Select>
 
                 <br />
-                {/* <FormControl component="fieldset" style={marginTop}>
-                                <FormLabel component="legend" required>Gender</FormLabel>
-                                <RadioGroup aria-label="gender" name="gender"  style={{ display: 'initial' }}>
-                                    <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                    <FormControlLabel value="male" control={<Radio />} label="Male" />
-                                </RadioGroup>
-                                </FormControl> */}
 
-                <TextField
+                {/* <TextField
                   label="Password"
                   variant="outlined"
                   placeholder="Enter your password"
                   required
                   onChange={(e) => setPassword(e.target.value)}
-                />
-                <br />
-                {/* <TextField
-                  label="Confirm Password"
-                  variant="outlined"
-                  placeholder="Confirm your password"
                 /> */}
+                <br />
                 <FormControlLabel
                   control={<Checkbox name="checkedA" />}
                   label="Is Active"
+                  checked={isActive}
                   onChange={() => {
                     setIsActive(!isActive);
                   }}
                 />
-                {!admin ? (
-                  <Button type="submit" variant="contained" color="primary">
-                    create Admin
-                  </Button>
-                ) : (
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    disabled
-                  >
-                    create Admin
-                  </Button>
-                )}
-              </FormControl>
-            </Grid>
-          </form>
-        </Paper>
-      </Grid>
-
-      <Grid>
-        <Paper elevation={20} style={paperStyle}>
-          <Grid align="center">
-            <Avatar style={avatarStyle}>
-              <AddCircleOutlineOutlinedIcon />
-            </Avatar>
-            <h2 style={headerStyle}>Hospital Form</h2>
-            <Typography variant="caption" gutterBottom>
-              Please fill this form to create an account !
-            </Typography>
-          </Grid>
-          <form onSubmit={handleSubmit2}>
-            <Grid align="left">
-              <TextField
-                style={{
-                  width: "500px",
-                }}
-                variant="outlined"
-                label="Name"
-                placeholder="Enter Hospital name"
-                required
-                value={nameH}
-                onChange={(e) => setHName(e.target.value)}
-              />
-
-              <br />
-              <br />
-              <TextField
-                style={{
-                  width: "500px",
-                }}
-                multiline
-                rows={3}
-                label="Address"
-                variant="outlined"
-                placeholder="Enter your Address"
-                required
-                value={addressH}
-                onChange={(e) => setHAddress(e.target.value)}
-              />
-              <br />
-              <br />
-            </Grid>
-
-            <Grid align="left">
-              <TextField
-                style={{
-                  width: "500px",
-                }}
-                label="GST No."
-                variant="outlined"
-                placeholder="Enter your GST Number"
-                required
-                value={gst}
-                onChange={(e) => setGst(e.target.value)}
-              />
-              <br />
-              <br />
-            </Grid>
-
-            <Grid align="left">
-              <TextField
-                style={{
-                  width: "500px",
-                }}
-                multiline
-                rows={3}
-                label="Disclaimer"
-                variant="outlined"
-                placeholder="Enter your Disclaimer"
-                required
-                value={desclaimer}
-                onChange={(e) => setDesclaimer(e.target.value)}
-              />
-              <br />
-              <br />
-
-              <TextField
-                style={{
-                  width: "500px",
-                }}
-                multiline
-                rows={3}
-                label="Terms And Conditions"
-                variant="outlined"
-                placeholder="Enter your Terms And Conditions"
-                required
-                value={tandc}
-                onChange={(e) => setTandc(e.target.value)}
-              />
-              <br />
-              <br />
-            </Grid>
-
-            <Grid align="left">
-              <FormControl variant="outlined">
-                {admin ? (
-                  <Button type="submit" variant="contained" color="primary">
-                    Submit
-                  </Button>
-                ) : (
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    disabled
-                  >
-                    Submit
-                  </Button>
-                )}
+                <Button type="submit" variant="contained" color="primary">
+                  Update
+                </Button>
               </FormControl>
             </Grid>
           </form>
@@ -545,4 +411,4 @@ const Create_Hospitals = () => {
   );
 };
 
-export default Create_Hospitals;
+export default UpdateUser;

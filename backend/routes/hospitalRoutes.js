@@ -5,6 +5,7 @@ const {
   createHospitals,
   getHospitals,
   getHospitalAdmin,
+  getHospitalbyID,
 } = require("../controllers/hospitalController");
 
 const { authorizeRoles, isAuthenticatedUser } = require("../middleware/auth");
@@ -16,6 +17,10 @@ router
 router
   .route("/SA/getHospital")
   .get(isAuthenticatedUser, authorizeRoles("SuperAdmin"), getHospitals);
+
+router
+  .route("/SA/getHospital/:id")
+  .get(isAuthenticatedUser, authorizeRoles("SuperAdmin"), getHospitalbyID);
 
 router
   .route("/SA/getHospitalAdmin/:id")

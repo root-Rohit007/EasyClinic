@@ -34,7 +34,7 @@ import { useParams } from "react-router-dom";
 
 function UserDetails() {
   const { id } = useParams();
-  console.log(id);
+
   const dispatch = useDispatch();
   const { user, loading, error } = useSelector((state) => state.userDetails);
   useEffect(() => {
@@ -76,35 +76,6 @@ function UserDetails() {
                     Address: user.address,
 
                     Role: user.role,
-                  }}
-                  // social={[
-                  //   {
-                  //     link: "https://www.facebook.com/",
-                  //     icon: <FacebookIcon />,
-                  //     color: "facebook",
-                  //   },
-                  //   {
-                  //     link: "https://twitter.com/",
-                  //     icon: <TwitterIcon />,
-                  //     color: "twitter",
-                  //   },
-                  //   {
-                  //     link: "https://www.instagram.com/",
-                  //     icon: <InstagramIcon />,
-                  //     color: "instagram",
-                  //   },
-                  // ]}
-                  action={{ route: "", tooltip: "Edit Profile" }}
-                  shadow={false}
-                />
-                {/* <Divider orientation="vertical" sx={{ mx: 0 }} /> */}
-              </Grid>
-              <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
-                <Divider orientation="vertical" sx={{ ml: -2, mr: 1 }} />
-                <ProfileInfoCard
-                  title="Other information"
-                  // description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
-                  info={{
                     Age: user.age,
                     Gender: user.gender,
                     "Adhar no.": user.adhar,
@@ -127,7 +98,10 @@ function UserDetails() {
                   //     color: "instagram",
                   //   },
                   // ]}
-                  action={{ route: "", tooltip: "Edit Profile" }}
+                  action={{
+                    route: "/allusers/" + user._id + "/update",
+                    tooltip: "Edit Profile",
+                  }}
                   shadow={false}
                 />
                 {/* <Divider orientation="vertical" sx={{ mx: 0 }} /> */}

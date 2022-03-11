@@ -18,6 +18,10 @@ import {
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_RESET,
+  UPDATE_PROFILE_FAIL,
+  UPDATE_PROFILE_RESET,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCCESS,
 } from "../Constants/userConstants";
 import axios from "axios";
 
@@ -118,6 +122,29 @@ export const register = (userData) => async (dispatch) => {
       payload: error.response.data.error,
     });
   }
+};
+
+// Update Profile
+export const updateProfile = (userData, id) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PROFILE_REQUEST });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.put(
+      `/api/v2/admin/user/` + id,
+      userData,
+      config
+    );
+    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.user });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PROFILE_FAIL,
+      payload: error.response.data.error,
+    });
+  }
+};
+
+export const resetProfileUpdate = () => async (dispatch) => {
+  dispatch({ type: UPDATE_PROFILE_RESET });
 };
 
 export const resetUser = () => async (dispatch) => {
