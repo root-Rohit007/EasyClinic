@@ -106,11 +106,12 @@ function Tables() {
         ),
         edit: (
           <MDTypography
-            component="a"
-            href="#"
+            component="button"
+            // href="#"
             variant="caption"
             color="text"
             fontWeight="medium"
+            onClick={() => navigate("/allusers/" + u._id + "/update")}
           >
             Edit
           </MDTypography>

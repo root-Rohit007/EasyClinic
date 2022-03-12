@@ -46,10 +46,10 @@ function Overview() {
                 info={{
                   "Reg. No": user.regNo,
                   fullName: user.name,
-                  mobile: user.phone + " " + (user.phone2 ? user.phone2 : " "),
-                  email: user.email,
+                  mobile: user.phone + "  &  " + (user.phone2 ? user.phone2 : " "),
+                  primaryEmail: user.email,
+                  secondaryEmail:  (user.email2 ? user.email2 : "NA"),
                   Address: user.address,
-
                   Role: user.role,
                   Age: user.age,
                   Gender: user.gender,
