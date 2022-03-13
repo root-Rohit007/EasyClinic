@@ -239,3 +239,37 @@ export const routesAdmin = [
   //   component: <SignUp />,
   // },
 ];
+
+export const receptionistRoutes = [
+  {
+    type: "collapse",
+    name: "Profile",
+    key: "profile",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/profile",
+    component: <Profile />,
+  },
+  {
+    type: "collapse",
+    name: "Dashboard",
+    key: "dashboard",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "/dashboard",
+    component: <Dashboard />,
+  },
+  {
+    type: "collapse",
+    name: "Patients",
+    key: "patients",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/patients",
+    component: <Patients />,
+  },
+  {
+    name: "patient details",
+    key: "patient_details",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id",
+    component: <PatientDetails />,
+  },
+];

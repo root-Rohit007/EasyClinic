@@ -45,7 +45,7 @@ import themeDark from "./assets/theme-dark";
 // import createCache from "@emotion/cache";
 
 // Material Dashboard 2 React routes
-import { routesAdmin, routesSuperAdmin } from "./routes";
+import { routesAdmin, routesSuperAdmin, receptionistRoutes } from "./routes";
 
 // Material Dashboard 2 React contexts
 import {
@@ -164,6 +164,14 @@ export default function App() {
   if (loading) {
     return <h1>Loading...</h1>;
   } else if (isAuthenticated && user) {
+    let routing;
+    if (user.role === "SuperAdmin") {
+      routing = routesSuperAdmin;
+    } else if (user.isAdmin) {
+      routing = routesAdmin;
+    } else {
+      routing = receptionistRoutes;
+    }
     return (
       <ThemeProvider theme={darkMode ? themeDark : theme}>
         <CssBaseline />
@@ -179,7 +187,8 @@ export default function App() {
               }
               brandName="Easy Clinic"
               routes={
-                user.role === "SuperAdmin" ? routesSuperAdmin : routesAdmin
+                // user.role === "SuperAdmin" ? routesSuperAdmin : routesAdmin
+                routing
               }
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
@@ -191,9 +200,10 @@ export default function App() {
         {/* {layout === "vr" && <Configurator />} */}
 
         <Routes>
-          {user.role === "SuperAdmin"
-            ? getRoutes(routesSuperAdmin)
-            : getRoutes(routesAdmin)}
+          {/* {user.role === "SuperAdmin"
+              ? getRoutes(routesSuperAdmin)
+              : getRoutes(routesAdmin)} */}
+          {getRoutes(routing)}
           <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
       </ThemeProvider>
