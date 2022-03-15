@@ -106,8 +106,8 @@ function PatientDtails() {
                   info={{
                     Age: patient.age,
                     BloodGroupt: patient.bloodGroup,
-                    Height: patient.height,
-                    Weight: patient.weight,
+                    Height: patient.height + "cm",
+                    Weight: patient.weight + "Kg",
                     // "Adhar no.": user.adhar,
                     // "Pan no.": user.pan,
                   }}

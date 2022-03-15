@@ -153,11 +153,11 @@ const Create_Hospitals = () => {
               <TextField
                 style={{
                   marginRight: "10px",
-                  width: "100px",
+                  width: "120px",
                 }}
-                label="Mr./Mrs."
+                label="Mr./Mrs./Dr."
                 variant="outlined"
-                placeholder="Mr./Mrs."
+                placeholder="Mr./Mrs./Dr."
                 required
                 value={salutation}
                 onChange={(e) => setStalutation(e.target.value)}
@@ -165,7 +165,7 @@ const Create_Hospitals = () => {
 
               <TextField
                 style={{
-                  width: "450px",
+                  width: "610px",
                 }}
                 variant="outlined"
                 label="Name"
@@ -186,6 +186,7 @@ const Create_Hospitals = () => {
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Primary Email"
                 variant="outlined"
@@ -198,6 +199,7 @@ const Create_Hospitals = () => {
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Secondary Email"
                 variant="outlined"
@@ -214,6 +216,7 @@ const Create_Hospitals = () => {
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Primary Phone"
                 variant="outlined"
@@ -226,6 +229,7 @@ const Create_Hospitals = () => {
               <TextField
                 style={{
                   marginRight: "20px",
+                  width: "360px",
                 }}
                 label="Secondary Phone"
                 variant="outlined"
@@ -241,11 +245,11 @@ const Create_Hospitals = () => {
                     <br />
                     <br /> */}
             <br />
-            <br />
             <Grid align="left">
               <TextField
                 style={{
-                  width: "500px",
+                  marginRight: "40px",
+                  width: "100px",
                 }}
                 label="Age"
                 id="outlined-size-small"
@@ -254,10 +258,7 @@ const Create_Hospitals = () => {
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
               />
-            </Grid>
 
-            <br />
-            <Grid align="left">
               <FormControl component="fieldset" style={{ marginTop: 5 }}>
                 <FormLabel component="legend" required>
                   Gender
