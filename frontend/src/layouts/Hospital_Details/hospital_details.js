@@ -19,7 +19,8 @@ import { useAlert } from "react-alert";
 
 const HospitalDetails = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
+  const dispatch1 = useDispatch();
+  const dispatch2 = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
 
@@ -38,16 +39,16 @@ const HospitalDetails = () => {
   useEffect(() => {
     if (error) {
       console.log(error);
-      dispatch(clearErrors());
+      dispatch1(clearErrors());
     }
     if (errorAdmin) {
       console.log(error);
       alert.error(error);
-      dispatch(clearErrorsAdmin());
+      dispatch2(clearErrorsAdmin());
     }
 
-    dispatch(getHospitalbyID(id));
-  }, [dispatch, error, loadingAdmin, errorAdmin]);
+    dispatch1(getHospitalbyID(id));
+  }, [dispatch1, dispatch2, error, loadingAdmin, errorAdmin]);
 
   return (
     <DashboardLayout>
@@ -72,17 +73,6 @@ const HospitalDetails = () => {
                   <MDTypography variant="h6" color="white">
                     Hospital : {hospital.name}
                   </MDTypography>
-
-                  {/* <MDButton
-                    onClick={() => {
-                      if (!user.name) {
-                        dispatch(getUserDetails(hospital.admin));
-                      }
-                      setadmin(!admin);
-                    }}
-                  >
-                    Admin
-                  </MDButton> */}
                 </MDBox>
 
                 <MDBox pt={3}>
@@ -102,17 +92,25 @@ const HospitalDetails = () => {
                           desclaimer={hospital.desclaimer}
                           termsAndConditions={hospital.termsAndConditions}
                           admin={hospital.admin}
+                          id={id}
                         />
-                        {admin && loadingAdmin ? (
-                          <h3>Loadin admin ...</h3>
-                        ) : (
-                          <div></div>
-                        )}
-                        {admin && user && !loadingAdmin ? (
+
+                        {/* <MDButton
+                          onClick={() => {
+                            console.log("clicked");
+                            dispatch2(getUserDetails(hospital.admin));
+                          }}
+                        >
+                          Admin
+                        </MDButton> */}
+                        {/* {dispatch(getUserDetails(hospital.admin))} */}
+
+                        {/* {loadingAdmin ? <h3>Loadin admin ...</h3> : <div></div>}
+                        {user && !loadingAdmin ? (
                           <Bill name={user.name} email={user.email} />
                         ) : (
                           <div></div>
-                        )}
+                        )} */}
                       </Grid>
                     </Grid>
                   </MDBox>

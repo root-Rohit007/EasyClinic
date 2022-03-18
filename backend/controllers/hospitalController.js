@@ -58,3 +58,28 @@ exports.getHospitalAdmin = catchAsyncErrors(async (req, res, next) => {
     admin,
   });
 });
+
+exports.updateHospital = catchAsyncErrors(async (req, res, next) => {
+  const { name, address, GST, desclaimer, termsAndConditions, admin } =
+    req.body;
+
+  const newData = {
+    name,
+    address,
+    GST,
+    desclaimer,
+    termsAndConditions,
+    admin,
+  };
+
+  const hospital = await Hospital.findByIdAndUpdate(req.params.id, newData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    hospital,
+  });
+});

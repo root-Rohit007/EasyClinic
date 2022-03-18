@@ -6,6 +6,7 @@ const {
   getHospitals,
   getHospitalAdmin,
   getHospitalbyID,
+  updateHospital,
 } = require("../controllers/hospitalController");
 
 const { authorizeRoles, isAuthenticatedUser } = require("../middleware/auth");
@@ -25,5 +26,9 @@ router
 router
   .route("/SA/getHospitalAdmin/:id")
   .get(isAuthenticatedUser, authorizeRoles("SuperAdmin"), getHospitalAdmin);
+
+router
+  .route("/SA/updateHospital/:id")
+  .put(isAuthenticatedUser, authorizeRoles("SuperAdmin"), updateHospital);
 
 module.exports = router;

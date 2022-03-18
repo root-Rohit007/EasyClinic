@@ -1,3 +1,4 @@
+import { UPDATE_PROFILE_SUCCESS } from "Constants/userConstants";
 import {
   GET_HOSPITAL_FAIL,
   GET_HOSPITAL_REQ,
@@ -10,6 +11,10 @@ import {
   HOSPITAL_DETAILS_REQ,
   HOSPITAL_DETAILS_SUC,
   HOSPITAL_DETAILS_FAIL,
+  UPDATE_HOSPITAL_FAIL,
+  UPDATE_HOSPITAL_RESET,
+  UPDATE_HOSPITAL_SUC,
+  UPDATE_HOSPITAL_REQ,
 } from "../Constants/hospitalConstant";
 
 export const hospitalReducer = (state = { hospitals: [] }, action) => {
@@ -106,6 +111,44 @@ export const registerHospitalReducer = (state = { hospital: {} }, action) => {
         errorHospital: null,
       };
 
+    default:
+      return state;
+  }
+};
+
+export const updateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case UPDATE_HOSPITAL_REQ:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case UPDATE_HOSPITAL_SUC:
+      return {
+        ...state,
+        loading: false,
+        isUpdated: true,
+      };
+
+    case UPDATE_HOSPITAL_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case UPDATE_HOSPITAL_RESET:
+      return {
+        ...state,
+        isUpdated: false,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }

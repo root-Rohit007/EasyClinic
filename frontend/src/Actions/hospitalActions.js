@@ -11,6 +11,10 @@ import {
   HOSPITAL_DETAILS_FAIL,
   HOSPITAL_DETAILS_REQ,
   HOSPITAL_DETAILS_SUC,
+  UPDATE_HOSPITAL_FAIL,
+  UPDATE_HOSPITAL_RESET,
+  UPDATE_HOSPITAL_SUC,
+  UPDATE_HOSPITAL_REQ,
 } from "../Constants/hospitalConstant";
 
 export const getHospitals = () => async (dispatch) => {
@@ -55,6 +59,30 @@ export const getHospitalbyID = (id) => async (dispatch) => {
       payload: error.response.data.error,
     });
   }
+};
+
+// Update hospital
+export const updateHospital = (hospitalData, id) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_HOSPITAL_REQ });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.put(
+      `/api/v3/SA/updateHospital/${id}`,
+      hospitalData,
+      config
+    );
+    dispatch({ type: UPDATE_HOSPITAL_SUC, payload: data.hospital });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_HOSPITAL_FAIL,
+      payload: error.response.data.error,
+    });
+  }
+};
+
+// Reset update hospital
+export const resetUpdateHospital = () => async (dispatch) => {
+  dispatch({ type: UPDATE_HOSPITAL_RESET });
 };
 
 // clearing errors

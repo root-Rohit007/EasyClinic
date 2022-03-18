@@ -13,6 +13,7 @@ import {
   hospitalReducer,
   registerHospitalReducer,
   hospitalDetailsReducers,
+  updateReducer,
 } from "./Reducers/hospitalReducer";
 import {
   allPatientsReducer,
@@ -23,6 +24,7 @@ const reducer = combineReducers({
   user: userReducer,
   hospitals: hospitalReducer,
   hospitalDetails: hospitalDetailsReducers,
+  hospitalEdits: updateReducer,
   allUsers: allUsersReducer,
   userDetails: userDetailsReducer,
   patientDetails: allPatientsReducer,

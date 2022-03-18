@@ -27,6 +27,10 @@ import {
   clearErrors,
   resetProfileUpdate,
 } from "Actions/userActions";
+import {
+  getUserDetails,
+  clearErrors as clearErrorsUser,
+} from "Actions/userActions";
 import { useAlert } from "react-alert";
 
 const UpdateUser = () => {
@@ -36,7 +40,11 @@ const UpdateUser = () => {
   const alert = useAlert();
 
   const hospitalID = useSelector((state) => state.user.user.hospitalID);
-  const { user } = useSelector((state) => state.userDetails);
+  const {
+    user,
+    loading: loadingUser,
+    error: errorUser,
+  } = useSelector((state) => state.userDetails);
   const {
     loading,
     isUpdated,
@@ -110,8 +118,14 @@ const UpdateUser = () => {
       alert.success("updated Successfully");
     }
     if (user === null || !user.name) {
-      console.log("nnavigate", id);
-      navigate("/allusers/" + id);
+      // console.log("nnavigate", id);
+      // navigate("/allusers/" + id);
+      dispatch(getUserDetails(id));
+    }
+    if (errorUser) {
+      console.log("error-user", errorUser);
+      alert.error(errorUser);
+      dispatch(clearErrorsUser());
     }
     if (errorProfileUpdate) {
       console.log(errorProfileUpdate);
@@ -144,166 +158,169 @@ const UpdateUser = () => {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <Grid>
-        <Paper elevation={20} style={paperStyle}>
-          <Grid align="center">
-            <Avatar style={avatarStyle}>
-              <AddCircleOutlineOutlinedIcon />
-            </Avatar>
-            <h2 style={headerStyle}>Update details</h2>
-            <Typography variant="caption" gutterBottom>
-              Please fill this form to update user account!
-            </Typography>
-          </Grid>
-          <form onSubmit={handleSubmit}>
-            <Grid align="left">
-              <TextField
-                style={{
-                  marginRight: "10px",
-                  width: "120px",
-                }}
-                label="Mr./Mrs./Dr."
-                variant="outlined"
-                placeholder="Mr./Mrs./Dr."
-                required
-                value={salutation}
-                onChange={(e) => setSalutation(e.target.value)}
-              />
-
-              <TextField
-                style={{
-                  width: "610px",
-                }}
-                variant="outlined"
-                label="Name"
-                placeholder="Enter your name"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+      {loadingUser ? (
+        <h1>Loading</h1>
+      ) : (
+        <Grid>
+          <Paper elevation={20} style={paperStyle}>
+            <Grid align="center">
+              <Avatar style={avatarStyle}>
+                <AddCircleOutlineOutlinedIcon />
+              </Avatar>
+              <h2 style={headerStyle}>Update details</h2>
+              <Typography variant="caption" gutterBottom>
+                Please fill this form to update user account!
+              </Typography>
             </Grid>
-            {/* //multiline 
+            <form onSubmit={handleSubmit}>
+              <Grid align="left">
+                <TextField
+                  style={{
+                    marginRight: "10px",
+                    width: "120px",
+                  }}
+                  label="Mr./Mrs./Dr."
+                  variant="outlined"
+                  placeholder="Mr./Mrs./Dr."
+                  required
+                  value={salutation}
+                  onChange={(e) => setSalutation(e.target.value)}
+                />
+
+                <TextField
+                  style={{
+                    width: "610px",
+                  }}
+                  variant="outlined"
+                  label="Name"
+                  placeholder="Enter your name"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Grid>
+              {/* //multiline 
                     // maxRows={4}
                     // id="outlined-multiline-flexible" */}
 
-            <br />
-
-            {/* <TextField id="outlined-basic" halfWidth label='Name' placeholder="Enter your name" required/> */}
-            <Grid align="left">
-              <TextField
-                style={{
-                  marginRight: "20px",
-                  width: "360px",
-                }}
-                label="Primary Email"
-                variant="outlined"
-                placeholder="Enter your email"
-                required
-                value={email1}
-                onChange={(e) => setEmail1(e.target.value)}
-              />
-
-              <TextField
-                style={{
-                  marginRight: "20px",
-                  width: "360px",
-                }}
-                label="Secondary Email"
-                variant="outlined"
-                placeholder="Enter your email"
-                value={email2}
-                onChange={(e) => setEmail2(e.target.value)}
-              />
-            </Grid>
-            <br />
-
-            {/* style ={{width: '80%'}} */}
-            <Grid align="left">
-              <TextField
-                style={{
-                  marginRight: "20px",
-                  width: "360px",
-                }}
-                label="Primary Phone"
-                variant="outlined"
-                placeholder="Enter your Phone"
-                required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-
-              <TextField
-                style={{
-                  marginRight: "20px",
-                  width: "360px",
-                }}
-                label="Secondary Phone"
-                variant="outlined"
-                placeholder="Enter your Phone"
-                value={phone2}
-                onChange={(e) => setPhone2(e.target.value)}
-              />
-            </Grid>
-
-            <br />
-            <Grid align="left">
-              <TextField
-                style={{
-                  marginRight: "40px",
-                  width: "100px",
-                }}
-                label="Age"
-                id="outlined-size-small"
-                size="small"
-                variant="outlined"
-                value={age}
-                required
-                onChange={(e) => setAge(e.target.value)}
-              />
-
-              <FormControl component="fieldset" style={marginTop}>
-                <FormLabel component="legend" required>
-                  Gender
-                </FormLabel>
-
-                <RadioGroup
-                  aria-label="gender"
-                  name="gender"
-                  style={{ display: "initial" }}
-                  onChange={(e) => setGender(e.target.value)}
-                >
-                  <FormControlLabel
-                    value="female"
-                    control={<Radio />}
-                    label="Female"
-                    checked={gender === "female"}
-                  />
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="Male"
-                    checked={gender === "male"}
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Grid>
-
-            <Grid align="left">
-              <TextField
-                style={{
-                  width: "500px",
-                }}
-                label="Degree"
-                variant="outlined"
-                placeholder="Enter your degrees"
-                value={degree}
-                onChange={(e) => setDegree(e.target.value)}
-              />
               <br />
-              <br />
-            </Grid>
 
-            {/* <Grid align='left'>
+              {/* <TextField id="outlined-basic" halfWidth label='Name' placeholder="Enter your name" required/> */}
+              <Grid align="left">
+                <TextField
+                  style={{
+                    marginRight: "20px",
+                    width: "360px",
+                  }}
+                  label="Primary Email"
+                  variant="outlined"
+                  placeholder="Enter your email"
+                  required
+                  value={email1}
+                  onChange={(e) => setEmail1(e.target.value)}
+                />
+
+                <TextField
+                  style={{
+                    marginRight: "20px",
+                    width: "360px",
+                  }}
+                  label="Secondary Email"
+                  variant="outlined"
+                  placeholder="Enter your email"
+                  value={email2}
+                  onChange={(e) => setEmail2(e.target.value)}
+                />
+              </Grid>
+              <br />
+
+              {/* style ={{width: '80%'}} */}
+              <Grid align="left">
+                <TextField
+                  style={{
+                    marginRight: "20px",
+                    width: "360px",
+                  }}
+                  label="Primary Phone"
+                  variant="outlined"
+                  placeholder="Enter your Phone"
+                  required
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+
+                <TextField
+                  style={{
+                    marginRight: "20px",
+                    width: "360px",
+                  }}
+                  label="Secondary Phone"
+                  variant="outlined"
+                  placeholder="Enter your Phone"
+                  value={phone2}
+                  onChange={(e) => setPhone2(e.target.value)}
+                />
+              </Grid>
+
+              <br />
+              <Grid align="left">
+                <TextField
+                  style={{
+                    marginRight: "40px",
+                    width: "100px",
+                  }}
+                  label="Age"
+                  id="outlined-size-small"
+                  size="small"
+                  variant="outlined"
+                  value={age}
+                  required
+                  onChange={(e) => setAge(e.target.value)}
+                />
+
+                <FormControl component="fieldset" style={marginTop}>
+                  <FormLabel component="legend" required>
+                    Gender
+                  </FormLabel>
+
+                  <RadioGroup
+                    aria-label="gender"
+                    name="gender"
+                    style={{ display: "initial" }}
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio />}
+                      label="Female"
+                      checked={gender === "female"}
+                    />
+                    <FormControlLabel
+                      value="male"
+                      control={<Radio />}
+                      label="Male"
+                      checked={gender === "male"}
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+
+              <Grid align="left">
+                <TextField
+                  style={{
+                    width: "500px",
+                  }}
+                  label="Degree"
+                  variant="outlined"
+                  placeholder="Enter your degrees"
+                  value={degree}
+                  onChange={(e) => setDegree(e.target.value)}
+                />
+                <br />
+                <br />
+              </Grid>
+
+              {/* <Grid align='left'>
                     <TextField 
                     style={{
                       width:'500px'
@@ -313,100 +330,101 @@ const UpdateUser = () => {
                     <br />
                     </Grid> */}
 
-            <Grid align="left">
-              <TextField
-                style={{
-                  width: "500px",
-                }}
-                label="Aadhaar No."
-                variant="outlined"
-                placeholder="Enter your Aadhaar Number"
-                value={adhar}
-                onChange={(e) => setAdhar(e.target.value)}
-              />
-              <br />
-              <br />
-            </Grid>
-
-            <Grid align="left">
-              <TextField
-                style={{
-                  width: "500px",
-                }}
-                label="PAN No."
-                variant="outlined"
-                placeholder="Enter your PAN Number"
-                value={pan}
-                onChange={(e) => setPan(e.target.value)}
-              />
-              <br />
-              <br />
-            </Grid>
-
-            <Grid align="left">
-              <TextField
-                style={{
-                  width: "500px",
-                }}
-                multiline
-                rows={3}
-                label="Address"
-                variant="outlined"
-                placeholder="Enter your Address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-              <br />
-              <br />
-            </Grid>
-
-            <Grid align="left">
-              <FormControl variant="outlined" required>
-                <InputLabel htmlFor="outlined-age-native-simple">
-                  Role
-                </InputLabel>
-                <Select
-                  native
-                  input={
-                    <OutlinedInput
-                      name="Role"
-                      id="outlined-age-native-simple"
-                    />
-                  }
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                >
-                  <option value="" />
-                  <option>Doctor</option>
-                  <option>Receptionist</option>
-                </Select>
-
+              <Grid align="left">
+                <TextField
+                  style={{
+                    width: "500px",
+                  }}
+                  label="Aadhaar No."
+                  variant="outlined"
+                  placeholder="Enter your Aadhaar Number"
+                  value={adhar}
+                  onChange={(e) => setAdhar(e.target.value)}
+                />
                 <br />
+                <br />
+              </Grid>
 
-                {/* <TextField
+              <Grid align="left">
+                <TextField
+                  style={{
+                    width: "500px",
+                  }}
+                  label="PAN No."
+                  variant="outlined"
+                  placeholder="Enter your PAN Number"
+                  value={pan}
+                  onChange={(e) => setPan(e.target.value)}
+                />
+                <br />
+                <br />
+              </Grid>
+
+              <Grid align="left">
+                <TextField
+                  style={{
+                    width: "500px",
+                  }}
+                  multiline
+                  rows={3}
+                  label="Address"
+                  variant="outlined"
+                  placeholder="Enter your Address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+                <br />
+                <br />
+              </Grid>
+
+              <Grid align="left">
+                <FormControl variant="outlined" required>
+                  <InputLabel htmlFor="outlined-age-native-simple">
+                    Role
+                  </InputLabel>
+                  <Select
+                    native
+                    input={
+                      <OutlinedInput
+                        name="Role"
+                        id="outlined-age-native-simple"
+                      />
+                    }
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                  >
+                    <option value="" />
+                    <option>Doctor</option>
+                    <option>Receptionist</option>
+                  </Select>
+
+                  <br />
+
+                  {/* <TextField
                   label="Password"
                   variant="outlined"
                   placeholder="Enter your password"
                   required
                   onChange={(e) => setPassword(e.target.value)}
                 /> */}
-                <br />
-                <FormControlLabel
-                  control={<Checkbox name="checkedA" />}
-                  label="Is Active"
-                  checked={isActive}
-                  onChange={() => {
-                    setIsActive(!isActive);
-                  }}
-                />
-                <Button type="submit" variant="contained" color="primary">
-                  Update
-                </Button>
-              </FormControl>
-            </Grid>
-          </form>
-        </Paper>
-      </Grid>
+                  <br />
+                  <FormControlLabel
+                    control={<Checkbox name="checkedA" />}
+                    label="Is Active"
+                    checked={isActive}
+                    onChange={() => {
+                      setIsActive(!isActive);
+                    }}
+                  />
+                  <Button type="submit" variant="contained" color="primary">
+                    Update
+                  </Button>
+                </FormControl>
+              </Grid>
+            </form>
+          </Paper>
+        </Grid>
+      )}
     </DashboardLayout>
   );
 };

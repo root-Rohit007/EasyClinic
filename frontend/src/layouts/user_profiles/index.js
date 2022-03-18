@@ -21,10 +21,6 @@ import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 
 // Overview page components
 import Header from "layouts/user_profiles/components/Header";
-import PlatformSettings from "layouts/profile/components/PlatformSettings";
-
-// Data
-import profilesListData from "layouts/profile/data/profilesListData";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -70,9 +66,10 @@ function UserDetails() {
                   info={{
                     "Reg. No": user.regNo,
                     fullName: user.name,
-                    mobile: user.phone + "  &  " + (user.phone2 ? user.phone2 : " "),
+                    mobile:
+                      user.phone + "  &  " + (user.phone2 ? user.phone2 : " "),
                     primaryEmail: user.email,
-                    secondaryEmail:  (user.email2 ? user.email2 : "NA"),
+                    secondaryEmail: user.email2 ? user.email2 : "NA",
                     Address: user.address,
                     Role: user.role,
                     Age: user.age,

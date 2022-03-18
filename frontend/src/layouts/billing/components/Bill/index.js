@@ -9,6 +9,8 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
 
+import { useNavigate } from "react-router-dom";
+
 // Material Dashboard 2 React context
 import { useMaterialUIController } from "../../../../context";
 
@@ -20,9 +22,11 @@ function Bill({
   termsAndConditions,
   admin,
   noGutter,
+  id,
 }) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
+  const navigate = useNavigate();
 
   return (
     <MDBox
@@ -64,7 +68,11 @@ function Bill({
                 <Icon>delete</Icon>&nbsp;delete
               </MDButton> */}
             </MDBox>
-            <MDButton variant="text" color={darkMode ? "white" : "dark"}>
+            <MDButton
+              onClick={() => navigate("/hospitals/" + id + "/update")}
+              variant="text"
+              color={darkMode ? "white" : "dark"}
+            >
               <Icon>edit</Icon>&nbsp;edit
             </MDButton>
           </MDBox>
@@ -113,12 +121,6 @@ function Bill({
         ) : (
           " "
         )}
-        {/* <MDTypography variant="caption" color="text">
-          VAT Number:&nbsp;&nbsp;&nbsp;
-          <MDTypography variant="caption" fontWeight="medium">
-            {vat}
-          </MDTypography>
-        </MDTypography> */}
       </MDBox>
     </MDBox>
   );

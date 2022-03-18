@@ -1,5 +1,5 @@
 /** 
-  All of the routes for the Material Dashboard 2 React are added here,
+ 
   You can add a new route, customize the routes and delete the routes here.
 
   Once you add a new route on this file it will be visible automatically on
@@ -35,6 +35,7 @@ import Signup from "layouts/create_user/create_user";
 import CreateHospitals from "layouts/create_hospital/create_hospital";
 import UpdateUser from "layouts/update_user/updateUser";
 import UpdateAdmin from "layouts/update_admin_profile/updateAdmin";
+import UpdateHospital from "layouts/update_hospital/updateHospital";
 
 // import SignIn from "./layouts/authentication/sign-in";
 // import SignUp from "./layouts/authentication/sign-up";
@@ -60,19 +61,20 @@ export const routesSuperAdmin = [
     component: <HospitalDetails />,
   },
   {
+    name: "Hospital details",
+    key: "hospital_details",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/hospitals/:id/update",
+    component: <UpdateHospital />,
+  },
+  {
     name: "Create Hospital",
     key: "create_hospital",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/hospitals/create",
     component: <CreateHospitals />,
   },
-  {
-    name: "Prof",
-    key: "prof",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/hospitals/:id",
-    component: <HospitalAdmin />,
-  },
+
   {
     type: "collapse",
     name: "Profile",
