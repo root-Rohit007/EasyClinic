@@ -9,6 +9,7 @@ const {
   getSingleUser,
   deleteUser,
   updateProfile,
+  getAllDoctors,
 } = require("../controllers/userController");
 
 const { authorizeRoles, isAuthenticatedUser } = require("../middleware/auth");
@@ -17,6 +18,8 @@ router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
 router.route("/logout").get(logoutUser);
 router.route("/me").get(isAuthenticatedUser, getUserDetails);
+
+router.route("/getAllDoctors/:id").get(isAuthenticatedUser, getAllDoctors);
 
 router
   .route("/admin/users")

@@ -5,7 +5,7 @@ const sendToken = require("../utils/jwtToken");
 
 // register user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  console.log("api hit", req.body);
+  console.log("Register user", req.body);
   const {
     salutation,
     name,
@@ -195,6 +195,24 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     user,
+  });
+});
+
+//get all Doctors
+exports.getAllDoctors = catchAsyncErrors(async (req, res, next) => {
+  const id = req.params.id;
+  const doctors = await User.find({
+    role: { $in: ["Doctor"] },
+    hospitalID: id,
+  });
+
+  if (!doctors) {
+    return next(new ErrorHander(`No doctors available: ${hospitalID}`));
+  }
+
+  res.status(200).json({
+    success: true,
+    doctors,
   });
 });
 

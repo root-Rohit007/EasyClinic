@@ -20,6 +20,8 @@ import patientTableData from "layouts/patients/data/patientTableData";
 
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, getALLPatients } from "Actions/patientActions";
+import MDButton from "components/MDButton";
+import { useNavigate } from "react-router-dom";
 // import {} from "Actions/"
 
 function Patients() {
@@ -28,6 +30,7 @@ function Patients() {
   //   const { columns: tCol, rows:tRow } = patientTableData();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { error, loading, patients } = useSelector(
     (state) => state.patientDetails
   );
@@ -76,15 +79,18 @@ function Patients() {
         gender: <Job title={p.gender}></Job>,
         age: <Job title={p.age} />,
         view: (
-          <MDTypography
-            component="a"
-            href={"/patients/" + p._id}
-            variant="caption"
-            color="text"
-            fontWeight="medium"
-          >
+          <MDButton onClick={() => navigate("/patients/" + p._id)}>
             View
-          </MDTypography>
+          </MDButton>
+          // <MDTypography
+          //   component="a"
+          //   href={"/patients/" + p._id}
+          //   variant="caption"
+          //   color="text"
+          //   fontWeight="medium"
+          // >
+          //   View
+          // </MDTypography>
         ),
         edit: (
           <MDTypography
@@ -132,10 +138,15 @@ function Patients() {
                   bgColor="info"
                   borderRadius="lg"
                   coloredShadow="info"
+                  display="flex"
+                  justifyContent="space-between"
                 >
                   <MDTypography variant="h6" color="white">
                     Patients
                   </MDTypography>
+                  <MDButton onClick={() => navigate("/patients/create")}>
+                    create Patients
+                  </MDButton>
                 </MDBox>
                 <MDBox pt={3}>
                   <DataTable

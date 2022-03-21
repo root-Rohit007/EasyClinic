@@ -18,6 +18,7 @@ import {
 import {
   allPatientsReducer,
   patientDetailsReducer,
+  registerPatientsReducer,
 } from "./Reducers/patientsReducer";
 const reducer = combineReducers({
   test: testReducer,
@@ -32,6 +33,7 @@ const reducer = combineReducers({
   registerUser: registerUserReducer,
   registerHospital: registerHospitalReducer,
   profileUpdate: profileReducer,
+  registerPatients: registerPatientsReducer,
 });
 
 let initialState = {};

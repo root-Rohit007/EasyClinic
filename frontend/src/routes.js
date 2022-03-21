@@ -43,6 +43,8 @@ import UpdateHospital from "layouts/update_hospital/updateHospital";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import HospitalDetails from "layouts/Hospital_Details/hospital_details";
+import Patientsform from "layouts/create_patients/createPatients";
+import Appointment from "layouts/appointments/appointment";
 
 export const routesSuperAdmin = [
   {
@@ -186,6 +188,13 @@ export const routesAdmin = [
     component: <Patients />,
   },
   {
+    name: "Patients",
+    key: "patients",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/patients/create",
+    component: <Patientsform />,
+  },
+  {
     name: "user details",
     key: "user_details",
     icon: <Icon fontSize="small">table_view</Icon>,
@@ -198,6 +207,13 @@ export const routesAdmin = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/patients/:id",
     component: <PatientDetails />,
+  },
+  {
+    name: "appointments",
+    key: "appointments",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/appointment",
+    component: <Appointment />,
   },
   {
     name: "create user",

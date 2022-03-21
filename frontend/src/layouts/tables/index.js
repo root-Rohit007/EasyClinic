@@ -66,14 +66,16 @@ function Tables() {
       columns: [
         { Header: "user", accessor: "user", width: "45%", align: "left" },
         { Header: "designation", accessor: "role", align: "left" },
+        { Header: "Mobile no.", accessor: "mobile", align: "center" },
         { Header: "status", accessor: "status", align: "center" },
         { Header: "view", accessor: "view", align: "center" },
-        { Header: "edit", accessor: "edit", align: "center" },
+        // { Header: "edit", accessor: "edit", align: "center" },
       ],
 
       rows: users.map((u) => ({
         user: <Author name={u.name} email={u.email} />,
         role: <Job title={u.role} />,
+        mobile: <Job title={u.phone} />,
         status: (
           <MDBox ml={-1}>
             {u.isActive ? (

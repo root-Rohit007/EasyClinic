@@ -5,16 +5,15 @@ const Patient = require("../models/patientModels");
 // Register patient
 exports.registerPatient = catchAsyncErrors(async (req, res, next) => {
   const {
+    salutation,
     name,
     email,
     phone,
     gender,
     age,
     bloodGroup,
-    bloodPre,
-    height,
-    weight,
     hospitalID,
+    creatorID,
   } = req.body;
 
   const patient = await Patient.create({
@@ -24,10 +23,8 @@ exports.registerPatient = catchAsyncErrors(async (req, res, next) => {
     gender,
     age,
     bloodGroup,
-    bloodPre,
-    height,
-    weight,
     hospitalID,
+    creatorID,
   });
 
   res.status(201).json({
@@ -38,7 +35,10 @@ exports.registerPatient = catchAsyncErrors(async (req, res, next) => {
 
 exports.getPatients = catchAsyncErrors(async (req, res, next) => {
   const { hospitalID } = req.body;
-  const patients = await Patient.find({ hospitalID: hospitalID });
+  const patients = await Patient.find({
+    hospitalID: hospitalID,
+    phone: "9134567890",
+  });
 
   res.status(200).json({
     success: true,
