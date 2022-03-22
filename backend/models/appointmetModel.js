@@ -10,9 +10,17 @@ const appointmentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
+    patientName: {
+      type: String,
+      required: true,
+    },
     doctorID: {
       type: mongoose.Schema.Types.ObjectId,
       required: [true, "please select doctor"],
+    },
+    doctorName: {
+      type: String,
+      required: true,
     },
     creatorID: {
       type: mongoose.Schema.Types.ObjectId,

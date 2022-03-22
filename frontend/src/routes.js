@@ -36,6 +36,7 @@ import CreateHospitals from "layouts/create_hospital/create_hospital";
 import UpdateUser from "layouts/update_user/updateUser";
 import UpdateAdmin from "layouts/update_admin_profile/updateAdmin";
 import UpdateHospital from "layouts/update_hospital/updateHospital";
+import PatientsAppointments from "layouts/appointments_patient/patients_appointments";
 
 // import SignIn from "./layouts/authentication/sign-in";
 // import SignUp from "./layouts/authentication/sign-up";
@@ -214,6 +215,13 @@ export const routesAdmin = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/patients/:id/appointment",
     component: <Appointment />,
+  },
+  {
+    name: "Appointment History",
+    key: "appointment_history",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/appointment_details",
+    component: <PatientsAppointments />,
   },
   {
     name: "create user",

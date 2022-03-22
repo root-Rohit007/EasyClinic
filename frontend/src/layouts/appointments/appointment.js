@@ -34,7 +34,8 @@ function Appointment() {
   const alert = useAlert();
 
   const [doctors, setDoctors] = useState([]);
-  const [doc, setDoc] = useState("");
+  const [doc, setDoc] = useState({});
+  const [patient, setPatient] = useState({});
   const [value, setValue] = React.useState(new Date());
 
   const { id } = useParams();
@@ -43,7 +44,8 @@ function Appointment() {
   const creatorID = useSelector((state) => state.user.user._id);
 
   const handleChange = (event) => {
-    setDoc(event.target.value);
+    const val = event.target.value.split(",");
+    setDoc(val);
   };
 
   const handleDChange = (newValue) => {
@@ -53,25 +55,47 @@ function Appointment() {
   useEffect(() => {
     const fetchDoctors = async () => {
       const res = await axios.get(`/api/v2/getAllDoctors/${hospitalID}`);
+      const res2 = await axios.get(`/api/v4/patient/${id}`);
+      const data2 = res2.data.patient;
       const data = res.data.doctors;
       data.unshift("");
       setDoctors(data);
+      setPatient(data2);
     };
+
     fetchDoctors();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const patientID = id;
-    const doctorID = doc;
+    const doctorID = doc[0];
+    const doctorName = doc[1];
+    const patientName = patient.name;
 
-    console.log(creatorID, hospitalID, patientID, doctorID, value);
+    console.log(
+      creatorID,
+      hospitalID,
+      patientID,
+      doctorID,
+      value,
+      doctorName,
+      patientName
+    );
 
     try {
       const res = await axios({
         method: "post",
         url: "/api/v5/registerAppointment",
-        data: { creatorID, hospitalID, patientID, doctorID, date: value },
+        data: {
+          creatorID,
+          hospitalID,
+          patientID,
+          doctorID,
+          date: value,
+          doctorName,
+          patientName,
+        },
         headers: { "Content-Type": "application/json" },
       });
       console.log(res);
@@ -151,7 +175,7 @@ function Appointment() {
                   onChange={handleChange}
                 >
                   {doctors.map((d) => (
-                    <option key={d._id} value={d._id}>
+                    <option key={d._id} value={d._id + "," + d.name}>
                       {d.name}
                     </option>
                   ))}

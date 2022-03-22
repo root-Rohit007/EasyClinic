@@ -6,7 +6,15 @@ const Appointment = require("../models/appointmetModel");
 exports.registerAppointment = catchAsyncErrors(async (req, res, next) => {
   console.log("register appointment : ", req.body);
 
-  const { hospitalID, patientID, doctorID, creatorID, date } = req.body;
+  const {
+    hospitalID,
+    patientID,
+    doctorID,
+    creatorID,
+    date,
+    doctorName,
+    patientName,
+  } = req.body;
 
   if (doctorID === "") {
     return next(new ErrorHander(`Please select valid doctor`));
@@ -18,6 +26,8 @@ exports.registerAppointment = catchAsyncErrors(async (req, res, next) => {
     doctorID,
     creatorID,
     date,
+    doctorName,
+    patientName,
   });
 
   res.status(201).json({
