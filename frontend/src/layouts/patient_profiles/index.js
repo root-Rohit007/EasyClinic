@@ -30,9 +30,11 @@ import profilesListData from "layouts/profile/data/profilesListData";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getPatientsDetail, clearErrors } from "Actions/patientActions";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import MDButton from "components/MDButton";
 
 function PatientDtails() {
+  const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
   const dispatch = useDispatch();
@@ -43,10 +45,6 @@ function PatientDtails() {
     if (error) {
       console.log(error);
       dispatch(clearErrors());
-    }
-
-    if (patient) {
-      console.log(patient);
     }
 
     dispatch(getPatientsDetail(id));
@@ -62,6 +60,7 @@ function PatientDtails() {
               {/* <Grid item xs={12} md={6} xl={4}>
               <PlatformSettings />
             </Grid> */}
+
               <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
                 <Divider orientation="vertical" sx={{ ml: -2, mr: 1 }} />
                 <ProfileInfoCard
@@ -69,7 +68,7 @@ function PatientDtails() {
                   // description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
                   info={{
                     Name: patient.name,
-                    // fullName: user.name,
+
                     Mobile: patient.phone,
                     Email: patient.email,
                     Gender: patient.gender,
@@ -101,6 +100,37 @@ function PatientDtails() {
                   shadow={false}
                 />
                 {/* <Divider orientation="vertical" sx={{ mx: 0 }} /> */}
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={2}>
+              <Grid
+                item
+                xs={12}
+                sx={{ display: "flex", flexDirection: "column" }}
+              >
+                <Grid item xs={3} marginTop="10px">
+                  <MDButton
+                    variant="contained"
+                    color="info"
+                    fullWidth={true}
+                    onClick={() => navigate(`/patients/${id}/appointment`)}
+                  >
+                    New Appointment
+                  </MDButton>
+                </Grid>
+                <Grid item xs={3} marginTop="10px" marginBottom="20px">
+                  <MDButton
+                    variant="contained"
+                    color="info"
+                    fullWidth={true}
+                    onClick={() =>
+                      navigate(`/patients/${id}/appointment_details`)
+                    }
+                  >
+                    Appointments
+                  </MDButton>
+                </Grid>
               </Grid>
             </Grid>
           </MDBox>

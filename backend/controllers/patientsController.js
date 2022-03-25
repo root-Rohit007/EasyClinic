@@ -37,7 +37,20 @@ exports.getPatients = catchAsyncErrors(async (req, res, next) => {
   const { hospitalID } = req.body;
   const patients = await Patient.find({
     hospitalID: hospitalID,
-    phone: "9134567890",
+  });
+
+  res.status(200).json({
+    success: true,
+    patients,
+  });
+});
+
+exports.getPatientsbyphone = catchAsyncErrors(async (req, res, next) => {
+  const { hospitalID, phoneS } = req.body;
+  const phoneRegExp = new RegExp("^" + phoneS);
+  const patients = await Patient.find({
+    hospitalID: hospitalID,
+    phone: phoneRegExp,
   });
 
   res.status(200).json({

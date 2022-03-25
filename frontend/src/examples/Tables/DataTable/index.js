@@ -109,7 +109,6 @@ function DataTable({
 
   // Search input state handle
   const onSearchChange = useAsyncDebounce((value) => {
-    console.log(value);
     setGlobalFilter(value || undefined);
   }, 100);
 
@@ -178,6 +177,7 @@ function DataTable({
                 size="small"
                 fullWidth
                 onChange={({ currentTarget }) => {
+                  console.log("ct", currentTarget.value);
                   setSearch(search);
                   onSearchChange(currentTarget.value);
                 }}

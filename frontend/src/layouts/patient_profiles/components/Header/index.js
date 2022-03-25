@@ -89,7 +89,7 @@ function Header({ children }) {
           <Grid container spacing={3} alignItems="center">
             <Grid item>
               <MDAvatar
-                src={burceMars}
+                src={"https://www.svgrepo.com/show/284235/patient.svg"}
                 alt="profile-image"
                 size="xl"
                 shadow="sm"

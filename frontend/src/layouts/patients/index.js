@@ -1,5 +1,5 @@
 // @mui material components
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
@@ -16,24 +16,26 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 // import usersTableData from "layouts/tables/data/usersTableData";
 // import projectsTableData from "layouts/tables/data/projectsTableData";
-import patientTableData from "layouts/patients/data/patientTableData";
 
-import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, getALLPatients } from "Actions/patientActions";
+import { useSelector } from "react-redux";
+// import { clearErrors, getALLPatients } from "Actions/patientActions";
 import MDButton from "components/MDButton";
 import { useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import { useAlert } from "react-alert";
 // import {} from "Actions/"
 
 function Patients() {
-  // const { columns, rows } = patientTableData();
-  // const { columns: pColumns, rows: pRows } = projectsTableData();
-  //   const { columns: tCol, rows:tRow } = patientTableData();
+  const alert = useAlert();
+  const [searchPhone, setSearchPhone] = useState("");
+  const [patient, setPatient] = useState([]);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, loading, patients } = useSelector(
-    (state) => state.patientDetails
-  );
+  // const { error, loading, patients } = useSelector(
+  //   (state) => state.patientDetails
+  // );
   const hospitalID = useSelector((state) => state.user.user.hospitalID);
 
   function Data() {
@@ -73,7 +75,7 @@ function Patients() {
         { Header: "edit", accessor: "edit", align: "center" },
       ],
 
-      rows: patients.map((p) => ({
+      rows: patient.map((p) => ({
         patient: <Author name={p.name} email={p.email} />,
         phone: <Job title={p.phone} />,
         gender: <Job title={p.gender}></Job>,
@@ -107,20 +109,43 @@ function Patients() {
     };
   }
 
-  useEffect(() => {
-    if (error) {
-      console.log(error);
-      dispatch(clearErrors());
-    }
-    if (patients) {
-      console.log(patients);
-    }
-    dispatch(getALLPatients(hospitalID));
-  }, [dispatch, error]);
+  // useEffect(() => {
+  //   if (error) {
+  //     console.log(error);
+  //     dispatch(clearErrors());
+  //   }
+  //   if (patients) {
+  //     console.log(patients);
+  //   }
+  //   dispatch(getALLPatients(hospitalID));
+  // }, [dispatch, error]);
 
-  if (patients) {
+  useEffect(() => {
+    console.log("run");
+    const delaySearchFun = setTimeout(() => {
+      console.log(searchPhone);
+      if (searchPhone.length > 0) {
+        axios
+          .post(
+            "/api/v4/getpatientsByPhone",
+            { hospitalID, phoneS: searchPhone },
+            { headers: { "Content-Type": "application/json" } }
+          )
+          .then((res) => {
+            console.log("res", res);
+            setPatient(res.data.patients);
+            if (res.data.patients.length === 0) {
+              alert.error("No records found");
+            }
+          });
+      }
+    }, 1000);
+    return () => clearTimeout(delaySearchFun);
+  }, [searchPhone]);
+
+  if (patient) {
     const { columns, rows } = Data();
-    console.log(patients);
+    console.log(patient);
 
     return (
       <DashboardLayout>
@@ -148,6 +173,14 @@ function Patients() {
                     create Patients
                   </MDButton>
                 </MDBox>
+                <MDBox mx={3} mt={4}>
+                  <TextField
+                    id="standard-basic"
+                    label="Search-by-mobile"
+                    variant="standard"
+                    onChange={(e) => setSearchPhone(e.target.value)}
+                  />
+                </MDBox>
                 <MDBox pt={3}>
                   <DataTable
                     table={{ columns, rows }}
@@ -155,6 +188,7 @@ function Patients() {
                     entriesPerPage={false}
                     showTotalEntries={false}
                     noEndBorder
+                    // canSearch={true}
                   />
                 </MDBox>
               </Card>

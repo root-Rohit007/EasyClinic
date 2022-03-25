@@ -13,15 +13,12 @@ import Footer from "../../examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 import Card from "@mui/material/Card";
 import MDTypography from "components/MDTypography";
-import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
 
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-function Dashboard() {
+function All_appointmets() {
   const [appointments, setAppointments] = useState(null);
-  const [appointmentCount, setAppointmentsCount] = useState(0);
-  const [upcomingAppointmentCount, setUpcomingAppointmentsCount] = useState(0);
   const userRole = useSelector((state) => state.user.user.role);
   const userID = useSelector((state) => state.user.user._id);
   const hospitalID = useSelector((state) => state.user.user.hospitalID);
@@ -30,23 +27,19 @@ function Dashboard() {
     const fetchAppointmnets = async (role) => {
       if (role === "Doctor") {
         try {
-          const res = await axios(`/api/v5/getTodaysAppointmentsDoc/${userID}`);
+          const res = await axios(`/api/v5/getDoctorsAppointments/${userID}`);
           console.log(res);
           setAppointments(res.data.appointments);
-          setAppointmentsCount(res.data.appointmentsCount);
-          setUpcomingAppointmentsCount(res.data.upcomingAppointmentsCount);
         } catch (err) {
           console.log("Error", console.log(err));
         }
       } else {
         try {
           const res = await axios(
-            `/api/v5/getTodaysAppointmentsHos/${hospitalID}`
+            `/api/v5/getHospitalAppointments/${hospitalID}`
           );
           console.log(res);
           setAppointments(res.data.appointments);
-          setAppointmentsCount(res.data.appointmentsCount);
-          setUpcomingAppointmentsCount(res.data.upcomingAppointmentsCount);
         } catch (err) {
           console.log("Error", console.log(err));
         }
@@ -147,40 +140,6 @@ function Dashboard() {
       <DashboardLayout>
         <DashboardNavbar />
         <MDBox pt={6} pb={3}>
-          <MDBox mb={5}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6} lg={3}>
-                <MDBox mb={1.5}>
-                  <ComplexStatisticsCard
-                    icon="leaderboard"
-                    title="Today's Appointments"
-                    count={appointmentCount}
-                    // percentage={{
-                    //   color: "success",
-                    //   amount: "+3%",
-                    //   label: "than last month",
-                    // }}
-                  />
-                </MDBox>
-              </Grid>
-              <Grid item xs={12} md={6} lg={3}>
-                <MDBox mb={1.5}>
-                  <ComplexStatisticsCard
-                    color="primary"
-                    icon="person_add"
-                    title="Upcoming appointments"
-                    count={upcomingAppointmentCount}
-                    // percentage={{
-                    //   color: "success",
-                    //   amount: "",
-                    //   label: "Just updated",
-                    // }}
-                  />
-                </MDBox>
-              </Grid>
-            </Grid>
-          </MDBox>
-
           <Grid container spacing={6}>
             <Grid item xs={12}>
               <Card>
@@ -197,7 +156,7 @@ function Dashboard() {
                   justifyContent="space-between"
                 >
                   <MDTypography variant="h6" color="white">
-                    Today's Appointments
+                    Appointments
                   </MDTypography>
                 </MDBox>
                 <MDBox pt={3}>
@@ -228,4 +187,4 @@ function Dashboard() {
   }
 }
 
-export default Dashboard;
+export default All_appointmets;

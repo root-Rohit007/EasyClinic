@@ -46,6 +46,7 @@ import Icon from "@mui/material/Icon";
 import HospitalDetails from "layouts/Hospital_Details/hospital_details";
 import Patientsform from "layouts/create_patients/createPatients";
 import Appointment from "layouts/appointments/appointment";
+import All_appointmets from "layouts/all_appointments/all_appointments";
 
 export const routesSuperAdmin = [
   {
@@ -237,6 +238,14 @@ export const routesAdmin = [
     icon: <Icon fontSize="small">table_view</Icon>,
     component: <UpdateUser />,
   },
+  {
+    type: "collapse",
+    name: "Appointmnets",
+    key: "all_appointments",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "/all_appointments",
+    component: <All_appointmets />,
+  },
 
   // {
   //   type: "collapse",
@@ -282,6 +291,14 @@ export const receptionistRoutes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <Dashboard />,
+  },
+  {
+    type: "collapse",
+    name: "Appointmnets",
+    key: "all_appointments",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "/all_appointments",
+    component: <All_appointmets />,
   },
   {
     type: "collapse",

@@ -129,6 +129,7 @@ const Create_Hospitals = () => {
       console.log("success", hospital);
       alert.success("Hopital Created");
       dispatch(resetHospital());
+
       navigate("/hospitals");
     }
   }, [dispatch, errorHospital, hospital]);

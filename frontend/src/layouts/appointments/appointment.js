@@ -100,6 +100,7 @@ function Appointment() {
       });
       console.log(res);
       alert.success("Appointment created successfully..!!!");
+      navigate(`/patients/${id}/appointment_details`);
     } catch (error) {
       console.log("error : ", error.response.data.error);
       alert.error(error.response.data.error);
