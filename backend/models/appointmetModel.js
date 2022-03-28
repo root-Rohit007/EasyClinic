@@ -35,3 +35,10 @@ const appointmentSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("appointment", appointmentSchema);
+
+// Current height
+// Current weight
+// Temp
+// SP02
+// BP
+// Status [pending cancel compleated]

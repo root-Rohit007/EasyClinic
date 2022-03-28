@@ -10,6 +10,10 @@ import {
   PATIENT_DETAILS_SUC,
   REGISTER_PATIENTS_RESET,
   CLEAR_ERRORS,
+  UPDATE_PATIENT_FAIL,
+  UPDATE_PATIENT_REQ,
+  UPDATE_PATIENT_SUC,
+  UPDATE_PATIENT_RESET,
 } from "Constants/patientConstant";
 
 export const registerPatientsReducer = (state = { patient: {} }, action) => {
@@ -75,12 +79,18 @@ export const allPatientsReducer = (state = { users: [] }, action) => {
         error: action.payload,
       };
 
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
     default:
       return state;
   }
 };
 
-export const patientDetailsReducer = (state = { user: {} }, action) => {
+export const patientDetailsReducer = (state = { patient: {} }, action) => {
   switch (action.type) {
     case PATIENT_DETAILS_REQ:
       return {
@@ -100,7 +110,52 @@ export const patientDetailsReducer = (state = { user: {} }, action) => {
         loading: false,
         error: action.payload,
       };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
     default:
       return { ...state };
+  }
+};
+
+export const patientProfileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case UPDATE_PATIENT_REQ:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UPDATE_PATIENT_SUC:
+      return {
+        ...state,
+        loading: false,
+        isUpdated: true,
+      };
+
+    case UPDATE_PATIENT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case UPDATE_PATIENT_RESET:
+      return {
+        ...state,
+        isUpdated: false,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
   }
 };

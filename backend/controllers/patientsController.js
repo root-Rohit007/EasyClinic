@@ -5,24 +5,49 @@ const Patient = require("../models/patientModels");
 // Register patient
 exports.registerPatient = catchAsyncErrors(async (req, res, next) => {
   const {
+    casePaperNo,
     salutation,
     name,
     email,
     phone,
+    phone2,
     gender,
+    address,
     age,
     bloodGroup,
+    height,
+    weight,
+    asthma,
+    diabetes,
+    highbp,
+    kidenyStone,
+    thyroid,
+    arthritis,
+    otherDiseases,
     hospitalID,
     creatorID,
   } = req.body;
 
   const patient = await Patient.create({
+    casePaperNo,
+    salutation,
     name,
     email,
     phone,
+    phone2,
     gender,
+    address,
     age,
     bloodGroup,
+    height,
+    weight,
+    asthma,
+    diabetes,
+    highbp,
+    kidenyStone,
+    thyroid,
+    arthritis,
+    otherDiseases,
     hospitalID,
     creatorID,
   });
@@ -76,32 +101,58 @@ exports.getPatientbyID = catchAsyncErrors(async (req, res, next) => {
 
 exports.updatePatient = catchAsyncErrors(async (req, res, next) => {
   const {
+    casePaperNo,
+    salutation,
     name,
     email,
     phone,
+    phone2,
     gender,
+    address,
     age,
     bloodGroup,
-    bloodPre,
     height,
     weight,
+    asthma,
+    diabetes,
+    highbp,
+    kidenyStone,
+    thyroid,
+    arthritis,
+    otherDiseases,
     hospitalID,
+    creatorID,
   } = req.body;
 
   const newData = {
+    casePaperNo,
+    salutation,
     name,
     email,
     phone,
+    phone2,
     gender,
+    address,
     age,
     bloodGroup,
-    bloodPre,
     height,
     weight,
+    asthma,
+    diabetes,
+    highbp,
+    kidenyStone,
+    thyroid,
+    arthritis,
+    otherDiseases,
     hospitalID,
+    creatorID,
   };
 
-  const patient = await Patient.findByIdAndUpdate(req.user.id, newData, {
+  console.log("newData", newData);
+
+  console.log("id", req.params.id);
+
+  const patient = await Patient.findByIdAndUpdate(req.params.id, newData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,

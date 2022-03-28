@@ -37,7 +37,7 @@ import UpdateUser from "layouts/update_user/updateUser";
 import UpdateAdmin from "layouts/update_admin_profile/updateAdmin";
 import UpdateHospital from "layouts/update_hospital/updateHospital";
 import PatientsAppointments from "layouts/appointments_patient/patients_appointments";
-
+import UpdatePatients from "layouts/update_patients/update_patient";
 // import SignIn from "./layouts/authentication/sign-in";
 // import SignUp from "./layouts/authentication/sign-up";
 
@@ -175,8 +175,8 @@ export const routesAdmin = [
   },
   {
     type: "collapse",
-    name: "All Users",
-    key: "all_users",
+    name: "Users",
+    key: "allusers",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/allusers",
     component: <Tables />,
@@ -223,6 +223,13 @@ export const routesAdmin = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/patients/:id/appointment_details",
     component: <PatientsAppointments />,
+  },
+  {
+    name: "Update Patients",
+    key: "update",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/update",
+    component: <UpdatePatients />,
   },
   {
     name: "create user",
@@ -299,6 +306,20 @@ export const receptionistRoutes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/all_appointments",
     component: <All_appointmets />,
+  },
+  {
+    name: "appointments",
+    key: "appointments",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/appointment",
+    component: <Appointment />,
+  },
+  {
+    name: "Appointment History",
+    key: "appointment_history",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/appointment_details",
+    component: <PatientsAppointments />,
   },
   {
     type: "collapse",

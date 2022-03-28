@@ -64,7 +64,7 @@ function Tables() {
 
     return {
       columns: [
-        { Header: "user", accessor: "user", width: "45%", align: "left" },
+        { Header: "user", accessor: "user", width: "35%", align: "left" },
         { Header: "designation", accessor: "role", align: "left" },
         { Header: "Mobile no.", accessor: "mobile", align: "center" },
         { Header: "status", accessor: "status", align: "center" },
@@ -72,53 +72,55 @@ function Tables() {
         // { Header: "edit", accessor: "edit", align: "center" },
       ],
 
-      rows: users.map((u) => ({
-        user: <Author name={u.name} email={u.email} />,
-        role: <Job title={u.role} />,
-        mobile: <Job title={u.phone} />,
-        status: (
-          <MDBox ml={-1}>
-            {u.isActive ? (
-              <MDBadge
-                badgeContent="active"
-                color="success"
-                variant="gradient"
-                size="sm"
-              />
-            ) : (
-              <MDBadge
-                badgeContent="inactive"
-                color="error"
-                variant="gradient"
-                size="sm"
-              />
-            )}
-          </MDBox>
-        ),
-        view: (
-          <MDTypography
-            component="button"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
-            onClick={() => navigate("/allusers/" + u._id)}
-          >
-            View
-          </MDTypography>
-        ),
-        edit: (
-          <MDTypography
-            component="button"
-            // href="#"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
-            onClick={() => navigate("/allusers/" + u._id + "/update")}
-          >
-            Edit
-          </MDTypography>
-        ),
-      })),
+      rows: users.map((u) => {
+        return {
+          user: <Author name={u.name} email={u.email} />,
+          role: <Job title={u.role} />,
+          mobile: <Job title={u.phone} />,
+          status: (
+            <MDBox ml={-1}>
+              {u.isActive ? (
+                <MDBadge
+                  badgeContent="active"
+                  color="success"
+                  variant="gradient"
+                  size="sm"
+                />
+              ) : (
+                <MDBadge
+                  badgeContent="inactive"
+                  color="error"
+                  variant="gradient"
+                  size="sm"
+                />
+              )}
+            </MDBox>
+          ),
+          view: (
+            <MDTypography
+              component="button"
+              variant="caption"
+              color="text"
+              fontWeight="medium"
+              onClick={() => navigate("/allusers/" + u._id)}
+            >
+              View
+            </MDTypography>
+          ),
+          edit: (
+            <MDTypography
+              component="button"
+              // href="#"
+              variant="caption"
+              color="text"
+              fontWeight="medium"
+              onClick={() => navigate("/allusers/" + u._id + "/update")}
+            >
+              Edit
+            </MDTypography>
+          ),
+        };
+      }),
     };
   }
 
@@ -134,6 +136,7 @@ function Tables() {
   if (users) {
     const { columns, rows } = Data();
     // console.log(users);
+
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -165,42 +168,13 @@ function Tables() {
                   <DataTable
                     table={{ columns, rows }}
                     isSorted={false}
-                    entriesPerPage={false}
+                    entriesPerPage={true}
                     showTotalEntries={false}
-                    noEndBorder
-
-                    // canSearch={true}
+                    noEndBorder={true}
                   />
                 </MDBox>
               </Card>
             </Grid>
-            {/* <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Projects Table
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns: pColumns, rows: pRows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
-          </Grid> */}
           </Grid>
         </MDBox>
         <Footer />

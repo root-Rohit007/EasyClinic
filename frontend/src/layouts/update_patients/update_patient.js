@@ -22,21 +22,37 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { registerPatients, clearErrors } from "Actions/patientActions";
+import { useNavigate, useParams } from "react-router-dom";
+import { registerPatients } from "Actions/patientActions";
 import { useAlert } from "react-alert";
-import { resetPatient } from "Actions/patientActions";
+import { resetUpdatePatient } from "Actions/patientActions";
+import { getPatientsDetail } from "Actions/patientActions";
+import { clearErrors as clearErrorPatient } from "Actions/patientActions";
+import { updatePatient } from "Actions/patientActions";
 
-const Patientsform = () => {
+const UpdatePatients = () => {
+  const { id } = useParams();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
 
   const hospitalID = useSelector((state) => state.user.user.hospitalID);
   const ID = useSelector((state) => state.user.user._id);
-  const { error, loading, patient } = useSelector(
-    (state) => state.registerPatients
-  );
+  //   const { error, loading, patient } = useSelector(
+  //     (state) => state.registerPatients
+  //   );
+  const {
+    loading: loadingPatient,
+    patient,
+    error: errorPatient,
+  } = useSelector((state) => state.patientProfile);
+
+  const {
+    loading: loadingUpdate,
+    isUpdated,
+    error: errorUpdate,
+  } = useSelector((state) => state.patientUpdate);
 
   const paperStyle = { padding: "30px 20px", width: 800, margin: "20px auto" };
   const headerStyle = { margin: 0 };
@@ -67,8 +83,8 @@ const Patientsform = () => {
     e.preventDefault();
     console.log("submit");
     // console.log(salutation, name, phone, email, gender, address, age, bg);
-    console.log(bg);
-    let patitionsData = {
+
+    let patientData = {
       casePaperNo: casepaper,
       salutation,
       name,
@@ -92,21 +108,52 @@ const Patientsform = () => {
       creatorID: ID,
     };
 
-    dispatch(registerPatients(patitionsData));
+    // dispatch(registerPatients(patitionsData));
+    dispatch(updatePatient(patientData, id));
+    console.log(patientData);
   };
 
   useEffect(() => {
-    if (error) {
-      console.log(error);
-      alert.error(error);
-      dispatch(clearErrors());
-    } else if (patient !== null && patient.name) {
-      alert.success("Patient created");
-      dispatch(resetPatient());
-      navigate("/patients");
-      console.log("success", patient);
+    if (!loadingUpdate && isUpdated) {
+      console.log("reset-update-patients");
+      dispatch(resetUpdatePatient());
+      alert.success("updated Successfully");
+      navigate(`/patients/${id}`);
     }
-  }, [dispatch, error, patient]);
+    if (patient === null || !patient.name) {
+      console.log("get data");
+      dispatch(getPatientsDetail(id));
+    }
+    if (errorPatient) {
+      console.log("error", errorPatient);
+      alert.error(errorPatient);
+      dispatch(clearErrorPatient());
+    }
+    if (errorUpdate) {
+      console.log("error", errorUpdate);
+      alert.error(errorUpdate);
+      dispatch(clearErrorPatient());
+    } else if (patient !== null && patient.name) {
+      setCasepaper(patient.casePaperNo);
+      setStalutation(patient.salutation);
+      setName(patient.name);
+      setEmail(patient.email);
+      setPhone(patient.phone);
+      setPhone2(patient.phone2);
+      setGender(patient.gender);
+      setAddress(patient.address);
+      setAge(patient.age);
+      setBg(patient.bloodGroup);
+      setHeight(patient.height);
+      setWeight(patient.weight);
+      setAsthama(patient.asthma);
+      setDiabetes(patient.diabetes);
+      setHighbp(patient.highbp);
+      setKs(patient.kidenyStone);
+      setThyroid(patient.thyroid);
+      setArthritis(patient.arthritis);
+    }
+  }, [dispatch, errorUpdate, isUpdated, patient]);
 
   return (
     <DashboardLayout>
@@ -216,11 +263,13 @@ const Patientsform = () => {
                         value="female"
                         control={<Radio />}
                         label="Female"
+                        checked={gender === "female"}
                       />
                       <FormControlLabel
                         value="male"
                         control={<Radio />}
                         label="Male"
+                        checked={gender === "male"}
                       />
                     </RadioGroup>
                   </FormControl>
@@ -307,6 +356,7 @@ const Patientsform = () => {
                   <FormControlLabel
                     control={<Checkbox name="checkedA" />}
                     label="Astama"
+                    checked={asthma}
                     onChange={() => {
                       setAsthama(!asthma);
                     }}
@@ -316,6 +366,7 @@ const Patientsform = () => {
                   <FormControlLabel
                     control={<Checkbox name="checkedA" />}
                     label="Dibeties"
+                    checked={diabetes}
                     onChange={() => {
                       setDiabetes(!diabetes);
                     }}
@@ -325,6 +376,7 @@ const Patientsform = () => {
                   <FormControlLabel
                     control={<Checkbox name="checkedA" />}
                     label="High-BP"
+                    checked={highbp}
                     onChange={() => {
                       setHighbp(!highbp);
                     }}
@@ -334,6 +386,7 @@ const Patientsform = () => {
                   <FormControlLabel
                     control={<Checkbox name="checkedA" />}
                     label="Kidneystone"
+                    checked={ks}
                     onChange={() => {
                       setKs(!ks);
                     }}
@@ -343,6 +396,7 @@ const Patientsform = () => {
                   <FormControlLabel
                     control={<Checkbox name="checkedA" />}
                     label="Thyroid"
+                    checked={thyroid}
                     onChange={() => {
                       setThyroid(!thyroid);
                     }}
@@ -352,6 +406,7 @@ const Patientsform = () => {
                   <FormControlLabel
                     control={<Checkbox name="checkedA" />}
                     label="arthritis"
+                    checked={arthritis}
                     onChange={() => {
                       setArthritis(!arthritis);
                     }}
@@ -380,4 +435,4 @@ const Patientsform = () => {
   );
 };
 
-export default Patientsform;
+export default UpdatePatients;

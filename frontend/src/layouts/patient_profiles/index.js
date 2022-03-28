@@ -67,15 +67,31 @@ function PatientDtails() {
                   title="profile information"
                   // description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
                   info={{
-                    Name: patient.name,
-
-                    Mobile: patient.phone,
+                    "Case Paper No": patient.casePaperNo,
+                    Name:
+                      (patient.salutation ? patient.salutation : " ") +
+                      " " +
+                      patient.name,
+                    Mobile:
+                      patient.phone +
+                      " " +
+                      (patient.phone2 === "0000000000" ? " " : patient.phone2),
                     Email: patient.email,
-                    Gender: patient.gender,
-                    Age: patient.age,
-                    BloodGroup: patient.bloodGroup,
-                    Height: patient.height + "cm",
-                    Weight: patient.weight + "Kg",
+                    Gender: patient.gender ? patient.gender : " ",
+                    Address: patient.address ? patient.address : " ",
+                    Age: patient.age ? patient.age : " ",
+                    BloodGroup: patient.bloodGroup ? patient.bloodGroup : " ",
+                    Height: patient.height ? patient.height + " cm" : " ",
+                    Weight: patient.weight ? patient.weight + " Kg" : " ",
+                    Asthma: patient.asthma ? "Yes" : "No",
+                    Diabeties: patient.diabetes ? "Yes" : "No",
+                    HighBP: patient.highbp ? "Yes" : "No",
+                    Thyroid: patient.thyroid ? "Yes" : "No",
+                    KidenyStone: patient.kidenyStone ? "Yes" : "No",
+                    Arthritis: patient.arthritis ? "Yes" : "No",
+                    "Other Diseases": patient.otherDiseases
+                      ? patient.otherDiseases.toString()
+                      : " ",
 
                     // Role: user.role,
                   }}
@@ -96,7 +112,10 @@ function PatientDtails() {
                   //     color: "instagram",
                   //   },
                   // ]}
-                  action={{ route: "", tooltip: "Edit Profile" }}
+                  action={{
+                    route: `/patients/${id}/update`,
+                    tooltip: "Edit Profile",
+                  }}
                   shadow={false}
                 />
                 {/* <Divider orientation="vertical" sx={{ mx: 0 }} /> */}
@@ -109,7 +128,7 @@ function PatientDtails() {
                 xs={12}
                 sx={{ display: "flex", flexDirection: "column" }}
               >
-                <Grid item xs={3} marginTop="10px">
+                <Grid item xs={12} sm={6} lg={3} marginTop="10px">
                   <MDButton
                     variant="contained"
                     color="info"
@@ -119,7 +138,14 @@ function PatientDtails() {
                     New Appointment
                   </MDButton>
                 </Grid>
-                <Grid item xs={3} marginTop="10px" marginBottom="20px">
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  lg={3}
+                  marginTop="10px"
+                  marginBottom="20px"
+                >
                   <MDButton
                     variant="contained"
                     color="info"
