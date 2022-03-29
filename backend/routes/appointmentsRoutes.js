@@ -8,29 +8,47 @@ const {
   getAllappointments_by_HospitalID,
   getAllappointments_today_doc,
   getAllappointments_today_hos,
+  getAppointment,
+  updateAppointment,
 } = require("../controllers/appointmentController");
 const { isAuthenticatedUser } = require("../middleware/auth");
 
+// Reg
 router
   .route("/registerAppointment")
   .post(isAuthenticatedUser, registerAppointment);
 
+// update
+router
+  .route("/updateAppointment/:id")
+  .put(isAuthenticatedUser, updateAppointment);
+
+// get appointmentbyid
+router
+  .route("/getAppointmentByID/:id")
+  .get(isAuthenticatedUser, getAppointment);
+
+// Doc Dash
 router
   .route("/getTodaysAppointmentsDoc/:id")
   .get(isAuthenticatedUser, getAllappointments_today_doc);
 
+// Res Dash
 router
   .route("/getTodaysAppointmentsHos/:id")
   .get(isAuthenticatedUser, getAllappointments_today_hos);
 
+// patinet
 router
   .route("/getPatientsAppointments/:id")
   .get(isAuthenticatedUser, getAllappointments_by_PatientsID);
 
+// doc
 router
   .route("/getDoctorsAppointments/:id")
   .get(isAuthenticatedUser, getAllappointments_by_DoctorsID);
 
+// Receptionist
 router
   .route("/getHospitalAppointments/:id")
   .get(isAuthenticatedUser, getAllappointments_by_HospitalID);

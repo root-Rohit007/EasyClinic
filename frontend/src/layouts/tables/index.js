@@ -69,7 +69,7 @@ function Tables() {
         { Header: "Mobile no.", accessor: "mobile", align: "center" },
         { Header: "status", accessor: "status", align: "center" },
         { Header: "view", accessor: "view", align: "center" },
-        // { Header: "edit", accessor: "edit", align: "center" },
+        { Header: "edit", accessor: "edit", align: "center" },
       ],
 
       rows: users.map((u) => {
@@ -97,27 +97,16 @@ function Tables() {
             </MDBox>
           ),
           view: (
-            <MDTypography
-              component="button"
-              variant="caption"
-              color="text"
-              fontWeight="medium"
-              onClick={() => navigate("/allusers/" + u._id)}
-            >
+            <MDButton onClick={() => navigate("/allusers/" + u._id)}>
               View
-            </MDTypography>
+            </MDButton>
           ),
           edit: (
-            <MDTypography
-              component="button"
-              // href="#"
-              variant="caption"
-              color="text"
-              fontWeight="medium"
+            <MDButton
               onClick={() => navigate("/allusers/" + u._id + "/update")}
             >
               Edit
-            </MDTypography>
+            </MDButton>
           ),
         };
       }),

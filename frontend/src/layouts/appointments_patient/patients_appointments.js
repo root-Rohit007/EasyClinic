@@ -8,12 +8,12 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDBadge from "components/MDBadge";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const PatientsAppointments = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [appointment, setAppointMents] = useState([]);
 
   useEffect(() => {
@@ -71,8 +71,8 @@ const PatientsAppointments = () => {
         const t = dateString.toTimeString().split(" ");
 
         return {
-          doctor: <Author name={a.doctorName} email={a.doctorID} />,
-          patient: <Job title={a.patientName} />,
+          doctor: <Author name={a.doctorID.name} email={a.doctorID._id} />,
+          patient: <Job title={a.patientID.name} />,
           date: <Job title={d} />,
           time: <Job title={t[0]} />,
           view: (
@@ -81,7 +81,14 @@ const PatientsAppointments = () => {
               variant="caption"
               color="text"
               fontWeight="medium"
-              // onClick={() => navigate("/allusers/" + u._id)}
+              onClick={() =>
+                navigate(
+                  "/patients/" +
+                    a.patientID._id +
+                    "/appointment_details/" +
+                    a._id
+                )
+              }
             >
               View
             </MDTypography>

@@ -9,18 +9,14 @@ const appointmentSchema = new mongoose.Schema(
     patientID: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-    },
-    patientName: {
-      type: String,
-      required: true,
+      ref: "Patient",
+      autopopulate: true,
     },
     doctorID: {
       type: mongoose.Schema.Types.ObjectId,
       required: [true, "please select doctor"],
-    },
-    doctorName: {
-      type: String,
-      required: true,
+      ref: "User",
+      autopopulate: true,
     },
     creatorID: {
       type: mongoose.Schema.Types.ObjectId,
@@ -30,10 +26,30 @@ const appointmentSchema = new mongoose.Schema(
       type: Date,
       require: true,
     },
+    currentHeight: {
+      type: String,
+    },
+    currentWeight: {
+      type: String,
+    },
+    temp: {
+      type: String,
+    },
+    spo2: {
+      type: String,
+    },
+    bp: {
+      type: String,
+    },
+    Status: {
+      type: String,
+      enum: ["pending", "compleated", "rejected"],
+      default: "pending",
+    },
   },
   { timestamps: true }
 );
-
+appointmentSchema.plugin(require("mongoose-autopopulate"));
 module.exports = mongoose.model("appointment", appointmentSchema);
 
 // Current height

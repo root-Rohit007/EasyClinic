@@ -1,19 +1,27 @@
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncerrors");
 const Appointment = require("../models/appointmetModel");
+const Patient = require("../models/patientModels");
+const User = require("../models/userModel");
 
 // Register appointment
 exports.registerAppointment = catchAsyncErrors(async (req, res, next) => {
   console.log("register appointment : ", req.body);
 
   const {
+    creatorID,
     hospitalID,
     patientID,
     doctorID,
-    creatorID,
     date,
     doctorName,
     patientName,
+    currentHeight,
+    currentWeight,
+    temp,
+    spo2,
+    bp,
+    Status,
   } = req.body;
 
   if (doctorID === "") {
@@ -21,13 +29,19 @@ exports.registerAppointment = catchAsyncErrors(async (req, res, next) => {
   }
 
   const appointment = await Appointment.create({
+    creatorID,
     hospitalID,
     patientID,
     doctorID,
-    creatorID,
     date,
     doctorName,
     patientName,
+    currentHeight,
+    currentWeight,
+    temp,
+    spo2,
+    bp,
+    Status,
   });
 
   res.status(201).json({
@@ -35,6 +49,89 @@ exports.registerAppointment = catchAsyncErrors(async (req, res, next) => {
     appointment,
   });
 });
+
+// Update appointment
+exports.updateAppointment = catchAsyncErrors(async (req, res, next) => {
+  const {
+    creatorID,
+    hospitalID,
+    patientID,
+    doctorID,
+    date,
+    currentHeight,
+    currentWeight,
+    temp,
+    spo2,
+    bp,
+    Status,
+  } = req.body;
+
+  const newData = {
+    creatorID,
+    hospitalID,
+    patientID,
+    doctorID,
+    date,
+    currentHeight,
+    currentWeight,
+    temp,
+    spo2,
+    bp,
+    Status,
+  };
+
+  const id = req.params.id;
+
+  const appointment = await Appointment.findByIdAndUpdate(id, newData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    appointment,
+  });
+});
+
+// getAppointmentBYID
+exports.getAppointment = catchAsyncErrors(async (req, res, next) => {
+  const id = req.params.id;
+  const appointment = await Appointment.findById(id);
+  if (!appointment) {
+    return next(new ErrorHander(`No appointments exists : ${id}`));
+  }
+  res.status(200).json({
+    success: true,
+    appointment,
+  });
+});
+
+// const getAllData = (appointments) => {
+//   let resArray = [];
+//   appointments.map(async (d, i) => {
+//     //  console.log(d);
+//     const patient = await Patient.findById(d.patientID);
+//     const doctor = await User.findById(d.doctorID);
+//     if ((doctor, patient)) {
+//       resArray.push(doctor, patient);
+//     }
+//   });
+//   console.log(resArray);
+//   return resArray;
+// };
+
+// async function getData(appointments) {
+//   let array = [];
+//   await appointments.map(async (d) => {
+//     Patient.find({ _id: d.patientID }).then((res) => {
+//       console.log("resp", res);
+//       array.push(res);
+//     });
+//   });
+//   console.log("res", array);
+//   return array;
+// }
 
 exports.getAllappointments_today_doc = catchAsyncErrors(
   async (req, res, next) => {
@@ -44,7 +141,7 @@ exports.getAllappointments_today_doc = catchAsyncErrors(
     dnext.setHours(24, 0, 0, 0);
     dnow.setHours(0, 0, 0, 0);
     // console.log(dnow, dnext);
-    const appointments = await Appointment.find({
+    let appointments = await Appointment.find({
       doctorID: id,
       date: {
         $gte: dnow,
@@ -62,6 +159,15 @@ exports.getAllappointments_today_doc = catchAsyncErrors(
     if (!appointments) {
       return next(new ErrorHander(`no appointments exists: ${req.params.id}`));
     }
+
+    // appointments.map(async (d) => {
+    //   const patient = await Patient.find({ _id: d.patientID });
+    //   return {
+    //     d,
+    //     patient,
+    //   };
+    // });
+    // // .then((resp) => console.log(resp));
 
     res.status(200).json({
       success: true,

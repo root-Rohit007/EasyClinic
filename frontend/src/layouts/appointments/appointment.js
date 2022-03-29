@@ -4,15 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import FormControl from "@mui/material/FormControl";
-
 import InputLabel from "@mui/material/InputLabel";
-
 import NativeSelect from "@mui/material/NativeSelect";
-
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import { Grid, Paper, Typography, Button } from "@material-ui/core";
-
+import { Grid, Paper, Button } from "@material-ui/core";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -37,6 +33,12 @@ function Appointment() {
   const [doc, setDoc] = useState({});
   const [patient, setPatient] = useState({});
   const [value, setValue] = React.useState(new Date());
+  const [currentHeight, setCurrentHeight] = useState("");
+  const [currentWeight, setCurrentWeight] = useState("");
+  const [temp, setTemp] = useState("");
+  const [spo2, setSpo2] = useState("");
+  const [bp, setBp] = useState("");
+  const [status, setStatus] = useState("pending");
 
   const { id } = useParams();
 
@@ -69,9 +71,7 @@ function Appointment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const patientID = id;
-    const doctorID = doc[0];
-    const doctorName = doc[1];
-    const patientName = patient.name;
+    const doctorID = doc;
 
     console.log(
       creatorID,
@@ -79,8 +79,13 @@ function Appointment() {
       patientID,
       doctorID,
       value,
-      doctorName,
-      patientName
+
+      currentHeight,
+      currentWeight,
+      temp,
+      spo2,
+      bp,
+      status
     );
 
     try {
@@ -93,8 +98,12 @@ function Appointment() {
           patientID,
           doctorID,
           date: value,
-          doctorName,
-          patientName,
+          currentHeight,
+          currentWeight,
+          temp,
+          spo2,
+          bp,
+          Status: status,
         },
         headers: { "Content-Type": "application/json" },
       });
@@ -105,23 +114,6 @@ function Appointment() {
       console.log("error : ", error.response.data.error);
       alert.error(error.response.data.error);
     }
-
-    // axios
-    //   .post("/api/v5/registerAppointment", {
-    //     hospitalID,
-    //     patientID,
-    //     doctorID,
-    //     creatorID,
-    //     value,
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     console.log("Registered appointment");
-    //   })
-    //   .catch((err) => {
-    //     console.log("Error : ", err);
-    //     alert.error(err);
-    //   });
   };
 
   return (
@@ -133,65 +125,135 @@ function Appointment() {
           <h2 style={{ marginBottom: "30px" }}>Set - Appointment</h2>
 
           <form onSubmit={handleSubmit}>
-            {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDateTimePicker
-                id="time-picker"
-                label="Date and time"
-                value={selectedDate}
-                onChange={handleDateChange}
-              />
-            </MuiPickersUtilsProvider> */}
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <Stack spacing={5}>
+                    <DateTimePicker
+                      label="Date&Time picker"
+                      value={value}
+                      onChange={handleDChange}
+                      renderInput={(params) => <TextField {...params} />}
+                      ampm={false}
+                    />
+                  </Stack>
+                </LocalizationProvider>
+              </Grid>
 
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <Stack spacing={5}>
-                <DateTimePicker
-                  label="Date&Time picker"
-                  value={value}
-                  onChange={handleDChange}
-                  renderInput={(params) => <TextField {...params} />}
-                  ampm={false}
+              <Grid item xs={12}>
+                <FormControl fullWidth>
+                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    Select Doctor
+                  </InputLabel>
+                  <NativeSelect
+                    value={doc}
+                    inputProps={{
+                      name: "doctor",
+                      id: "uncontrolled-native",
+                    }}
+                    onChange={handleChange}
+                  >
+                    {doctors.map((d) => (
+                      <option key={d._id} value={d._id}>
+                        {d.name}
+                      </option>
+                    ))}
+                  </NativeSelect>
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={6}>
+                <TextField
+                  type="number"
+                  fullWidth
+                  label="Height"
+                  variant="outlined"
+                  placeholder="Enter height in cm"
+                  value={currentHeight}
+                  onChange={(e) => setCurrentHeight(e.target.value)}
                 />
-              </Stack>
-            </LocalizationProvider>
+              </Grid>
 
-            {/* <Dropdown /> */}
+              <Grid item xs={6}>
+                <TextField
+                  type="number"
+                  fullWidth
+                  label="Weight"
+                  variant="outlined"
+                  placeholder="Enter weight in kg"
+                  value={currentWeight}
+                  onChange={(e) => setCurrentWeight(e.target.value)}
+                />
+              </Grid>
 
-            <div
-              style={{
-                marginLeft: "5px",
-                marginRight: "5px",
-                marginTop: "30px",
-              }}
-            >
-              <FormControl fullWidth>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                  Select Doctor
-                </InputLabel>
-                <NativeSelect
-                  value={doc}
-                  inputProps={{
-                    name: "doctor",
-                    id: "uncontrolled-native",
+              <Grid item xs={6}>
+                <TextField
+                  type="number"
+                  fullWidth
+                  label="Temperature"
+                  variant="outlined"
+                  placeholder="Enter temp in deg cel"
+                  value={temp}
+                  onChange={(e) => setTemp(e.target.value)}
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <TextField
+                  type="number"
+                  fullWidth
+                  label="SPO2"
+                  variant="outlined"
+                  placeholder="Enter spo2"
+                  value={spo2}
+                  onChange={(e) => setSpo2(e.target.value)}
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <TextField
+                  type="number"
+                  fullWidth
+                  label="bp"
+                  variant="outlined"
+                  placeholder="Enter bp"
+                  value={bp}
+                  onChange={(e) => setBp(e.target.value)}
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <TextField
+                  id="outlined-select-currency"
+                  select
+                  label="Status"
+                  // value={currency}
+                  // onChange={handleChange}
+                  variant="outlined"
+                  fullWidth
+                  SelectProps={{
+                    native: true,
                   }}
-                  onChange={handleChange}
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
                 >
-                  {doctors.map((d) => (
-                    <option key={d._id} value={d._id + "," + d.name}>
-                      {d.name}
-                    </option>
-                  ))}
-                </NativeSelect>
-              </FormControl>
-            </div>
+                  <option value={"pending"}>Pending</option>
+                  <option value={"compleated"}>Compleated</option>
+                  <option value={"rejected"}>Rejected</option>
+                </TextField>
+              </Grid>
 
-            <Button
-              style={{ marginTop: "30px" }}
-              type="submit"
-              variant="contained"
-              color="inherit"
-            >
-              submit
-            </Button>
+              <Grid item xs={12}>
+                <Button
+                  style={{ marginTop: "30px" }}
+                  type="submit"
+                  variant="contained"
+                  color="inherit"
+                >
+                  submit
+                </Button>
+              </Grid>
+            </Grid>
           </form>
         </Paper>
       </Grid>

@@ -47,6 +47,8 @@ import HospitalDetails from "layouts/Hospital_Details/hospital_details";
 import Patientsform from "layouts/create_patients/createPatients";
 import Appointment from "layouts/appointments/appointment";
 import All_appointmets from "layouts/all_appointments/all_appointments";
+import AppointmentDetails from "layouts/AppointmentView/apppointmentView";
+import AppointmentUpdate from "layouts/AppointmentEdit/appointmentEdit";
 
 export const routesSuperAdmin = [
   {
@@ -223,6 +225,20 @@ export const routesAdmin = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/patients/:id/appointment_details",
     component: <PatientsAppointments />,
+  },
+  {
+    name: "Appointment",
+    key: "appointment",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/appointment_details/:appointmentid",
+    component: <AppointmentDetails />,
+  },
+  {
+    name: "Appointment update",
+    key: "appointment_update",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/appointment_details/:appointmentid/update",
+    component: <AppointmentUpdate />,
   },
   {
     name: "Update Patients",

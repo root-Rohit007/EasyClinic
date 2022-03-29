@@ -27,7 +27,7 @@ router
 
 router
   .route("/admin/user/:id")
-  .get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser)
+  .get(isAuthenticatedUser, getSingleUser)
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateProfile)
   // .put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole)
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);

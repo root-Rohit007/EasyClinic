@@ -17,8 +17,11 @@ import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatist
 
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import MDButton from "components/MDButton";
 
 function Dashboard() {
+  const navigate = useNavigate();
   const [appointments, setAppointments] = useState(null);
   const [appointmentCount, setAppointmentsCount] = useState(0);
   const [upcomingAppointmentCount, setUpcomingAppointmentsCount] = useState(0);
@@ -91,7 +94,7 @@ function Dashboard() {
         { Header: "Date", accessor: "date", align: "center" },
         { Header: "Time", accessor: "time", align: "center" },
         { Header: "view", accessor: "view", align: "center" },
-        // { Header: "edit", accessor: "edit", align: "center" },
+        { Header: "edit", accessor: "edit", align: "center" },
       ],
 
       rows: appointments.map((a) => {
@@ -100,32 +103,38 @@ function Dashboard() {
         const t = dateString.toTimeString().split(" ");
 
         return {
-          patient: <Author name={a.patientName} email={a.patientID} />,
-          doctor: <Author name={a.doctorName} email={a.doctorID} />,
+          patient: (
+            <Author name={a.patientID.name} email={a.patientID.casePaperNo} />
+          ),
+          doctor: (
+            <Author
+              name={a.doctorID.name}
+              email={a.doctorID.degree.toString()}
+            />
+          ),
           date: <Job title={d} />,
           time: <Job title={t[0]} />,
           view: (
-            <MDTypography
-              component="button"
-              variant="caption"
-              color="text"
-              fontWeight="medium"
-              // onClick={() => navigate("/allusers/" + u._id)}
+            <MDButton
+              onClick={() =>
+                navigate(
+                  `/patients/${a.patientID_id}/appointment_details/${a._id}`
+                )
+              }
             >
               View
-            </MDTypography>
+            </MDButton>
           ),
           edit: (
-            <MDTypography
-              component="button"
-              // href="#"
-              variant="caption"
-              color="text"
-              fontWeight="medium"
-              // onClick={() => navigate("/allusers/" + u._id + "/update")}
+            <MDButton
+              onClick={() =>
+                navigate(
+                  `/patients/${a.patientID_id}/appointment_details/${a._id}/update`
+                )
+              }
             >
               Edit
-            </MDTypography>
+            </MDButton>
           ),
         };
       }),
