@@ -10,6 +10,7 @@ const {
   getAllappointments_today_hos,
   getAppointment,
   updateAppointment,
+  update,
 } = require("../controllers/appointmentController");
 const { isAuthenticatedUser } = require("../middleware/auth");
 
@@ -19,9 +20,9 @@ router
   .post(isAuthenticatedUser, registerAppointment);
 
 // update
-router
-  .route("/updateAppointment/:id")
-  .put(isAuthenticatedUser, updateAppointment);
+router.route("/updateAppointment/:id").put(isAuthenticatedUser, update);
+
+router.route("/update/:id").put(isAuthenticatedUser, update);
 
 // get appointmentbyid
 router

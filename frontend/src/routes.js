@@ -20,7 +20,6 @@
   10. The `component` key is used to store the component of its route.
 */
 
-// Material Dashboard 2 React layouts
 import Dashboard from "./layouts/dashboard";
 import Tables from "./layouts/tables";
 import Patients from "./layouts/patients";
@@ -49,6 +48,7 @@ import Appointment from "layouts/appointments/appointment";
 import All_appointmets from "layouts/all_appointments/all_appointments";
 import AppointmentDetails from "layouts/AppointmentView/apppointmentView";
 import AppointmentUpdate from "layouts/AppointmentEdit/appointmentEdit";
+import Prescription from "layouts/Prescription/prescription";
 
 export const routesSuperAdmin = [
   {
@@ -239,6 +239,13 @@ export const routesAdmin = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/patients/:id/appointment_details/:appointmentid/update",
     component: <AppointmentUpdate />,
+  },
+  {
+    name: "Prescription",
+    key: "prescription",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/appointment_details/:appointmentid/prescription",
+    component: <Prescription />,
   },
   {
     name: "Update Patients",

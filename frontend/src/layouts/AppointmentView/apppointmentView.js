@@ -96,7 +96,16 @@ const AppointmentDetails = () => {
               </Grid>
               {role === "Doctor" ? (
                 <Grid item sx={6}>
-                  <Button fullWidth variant="contained" color="info">
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="info"
+                    onClick={() =>
+                      navigate(
+                        `/patients/${appointment.patientID._id}/appointment_details/${appointment._id}/prescription`
+                      )
+                    }
+                  >
                     Attend
                   </Button>
                 </Grid>

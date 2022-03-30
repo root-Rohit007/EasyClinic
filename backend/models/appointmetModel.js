@@ -5,6 +5,8 @@ const appointmentSchema = new mongoose.Schema(
     hospitalID: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: "Hospital",
+      autopopulate: true,
     },
     patientID: {
       type: mongoose.Schema.Types.ObjectId,
@@ -45,6 +47,9 @@ const appointmentSchema = new mongoose.Schema(
       type: String,
       enum: ["pending", "compleated", "rejected"],
       default: "pending",
+    },
+    prescription: {
+      type: Array,
     },
   },
   { timestamps: true }

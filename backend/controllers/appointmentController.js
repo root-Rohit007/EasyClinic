@@ -94,6 +94,17 @@ exports.updateAppointment = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// update
+exports.update = catchAsyncErrors(async (req, res, next) => {
+  const data = req.body;
+  const id = req.params.id;
+  const appointment = await Appointment.findByIdAndUpdate(id, data);
+  res.status(200).json({
+    success: true,
+    appointment,
+  });
+});
+
 // getAppointmentBYID
 exports.getAppointment = catchAsyncErrors(async (req, res, next) => {
   const id = req.params.id;
@@ -106,32 +117,6 @@ exports.getAppointment = catchAsyncErrors(async (req, res, next) => {
     appointment,
   });
 });
-
-// const getAllData = (appointments) => {
-//   let resArray = [];
-//   appointments.map(async (d, i) => {
-//     //  console.log(d);
-//     const patient = await Patient.findById(d.patientID);
-//     const doctor = await User.findById(d.doctorID);
-//     if ((doctor, patient)) {
-//       resArray.push(doctor, patient);
-//     }
-//   });
-//   console.log(resArray);
-//   return resArray;
-// };
-
-// async function getData(appointments) {
-//   let array = [];
-//   await appointments.map(async (d) => {
-//     Patient.find({ _id: d.patientID }).then((res) => {
-//       console.log("resp", res);
-//       array.push(res);
-//     });
-//   });
-//   console.log("res", array);
-//   return array;
-// }
 
 exports.getAllappointments_today_doc = catchAsyncErrors(
   async (req, res, next) => {

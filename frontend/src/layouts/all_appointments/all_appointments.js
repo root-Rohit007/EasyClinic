@@ -20,7 +20,7 @@ import MDButton from "components/MDButton";
 import { useNavigate } from "react-router-dom";
 
 function All_appointmets() {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const [appointments, setAppointments] = useState(null);
 
   const userRole = useSelector((state) => state.user.user.role);
@@ -110,7 +110,7 @@ function All_appointmets() {
             <MDButton
               onClick={() =>
                 navigate(
-                  `/patients/${a.patientID_id}/appointment_details/${a._id}`
+                  `/patients/${a.patientID._id}/appointment_details/${a._id}`
                 )
               }
             >
@@ -121,7 +121,7 @@ function All_appointmets() {
             <MDButton
               onClick={() =>
                 navigate(
-                  `/patients/${a.patientID_id}/appointment_details/${a._id}/update`
+                  `/patients/${a.patientID._id}/appointment_details/${a._id}/update`
                 )
               }
             >
