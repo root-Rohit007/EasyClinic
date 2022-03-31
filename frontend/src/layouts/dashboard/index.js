@@ -118,7 +118,7 @@ function Dashboard() {
             <MDButton
               onClick={() =>
                 navigate(
-                  `/patients/${a.patientID_id}/appointment_details/${a._id}`
+                  `/patients/${a.patientID._id}/appointment_details/${a._id}`
                 )
               }
             >
