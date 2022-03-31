@@ -36,9 +36,9 @@ const Prescription = () => {
   const [medicine, setMedicine] = useState("");
   const [manual, setManual] = useState(false);
   const [qty, setQty] = useState();
-  const [morning, setMorning] = useState("after breakfast");
-  const [afternoon, setAfternoon] = useState("after lunch");
-  const [evening, setEvening] = useState("after dinner");
+  const [morning, setMorning] = useState("No Dose");
+  const [afternoon, setAfternoon] = useState("No Dose");
+  const [evening, setEvening] = useState("No Dose");
   const [morningText, setMorningText] = useState("");
   const [afternoonText, setAfternoonText] = useState("");
   const [eveningText, setEveningText] = useState("");
@@ -242,6 +242,7 @@ const Prescription = () => {
                 >
                   <option value={"before breakfast"}>before breakfast</option>
                   <option value={"after breakfast"}>after breakfast</option>
+                  <option value={"No Dose"}>no dose</option>
                 </TextField>
               </Grid>
 
@@ -272,6 +273,7 @@ const Prescription = () => {
                 >
                   <option value={"before lunch"}>before lunch</option>
                   <option value={"after lunch"}>after lunch</option>
+                  <option value={"No Dose"}>no dose</option>
                 </TextField>
               </Grid>
 
@@ -302,6 +304,7 @@ const Prescription = () => {
                 >
                   <option value={"before dinner"}>before dinner</option>
                   <option value={"after dinner"}>after dinner</option>
+                  <option value={"No Dose"}>no dose</option>
                 </TextField>
               </Grid>
 
@@ -337,7 +340,7 @@ const Prescription = () => {
                           {i + 1}
                         </MDTypography>
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid item xs={3} pr={3}>
                         <MDTypography
                           fontWeight="light"
                           color="inherit"

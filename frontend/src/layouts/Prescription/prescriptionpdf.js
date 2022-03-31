@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
   page: {
     fontFamily: "opensans",
     backgroundColor: "white",
-    fontSize: 12,
-    lineHeight: 1.5,
+    fontSize: 10,
+    lineHeight: 2,
   },
   section1: {
     margin: 10,
@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     textAlign: "left",
+  },
+  address_width: {
+    width: 200,
   },
   section2: {
     margin: 10,
@@ -177,6 +180,8 @@ const Pdf = () => {
 
   if (appointment) {
     const datestr = new Date(appointment.date);
+    const timestr = datestr.toTimeString().split(" ")[0];
+    debugger
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -188,7 +193,7 @@ const Pdf = () => {
                   <Text style={styles.headers}>
                     {appointment.hospitalID.name.toUpperCase()}
                   </Text>
-                  <Text>{appointment.hospitalID.address}</Text>
+                  <Text style={styles.address_width}>{appointment.hospitalID.address}</Text>
                 </View>
                 <View style={styles.section2}>
                   <Text style={styles.headers}>
@@ -196,6 +201,7 @@ const Pdf = () => {
                   </Text>
                   <Text>{appointment.doctorID.degree.toString()}</Text>
                   <Text>{appointment.doctorID.email}</Text>
+                  <Text>{appointment.doctorID.phone}</Text>
                 </View>
               </View>
               <View style={styles.section3}>
@@ -207,7 +213,9 @@ const Pdf = () => {
                 </Text>
                 <Text>
                   <p style={{ fontStyle: "bold" }}>Date</p>:&nbsp;&nbsp;
-                  {datestr.toDateString()}
+                  {datestr.toDateString()}&nbsp;&nbsp;
+                  <p style={{ fontStyle: "bold" }}>Time</p>:&nbsp;&nbsp;
+                  {timestr}
                 </Text>
               </View>
               <View style={styles.section4}>
@@ -215,10 +223,13 @@ const Pdf = () => {
                   <p style={{ fontStyle: "bold" }}>BP</p>:&nbsp;&nbsp;
                   {appointment.bp ? appointment.bp : "   "} mmHg &nbsp; &nbsp;
                   <p style={{ fontStyle: "bold" }}>Weight</p>: &nbsp;&nbsp;
-                  {appointment.currentWeight
-                    ? appointment.currentWeight
-                    : "   "}{" "}
-                  kg
+                  {appointment.currentWeight ? appointment.currentWeight: "   "}{" "} Kg &nbsp; &nbsp;
+                  <p style={{ fontStyle: "bold" }}>Height</p>: &nbsp;&nbsp;
+                  {appointment.currentHeight ? appointment.currentHeight: "   "}{" "} cm &nbsp; &nbsp;
+                  <p style={{ fontStyle: "bold" }}>SPO2</p>: &nbsp;&nbsp;
+                  {appointment.spo2 ? appointment.currentWeight: "   "}{" "} % &nbsp; &nbsp;
+                  <p style={{ fontStyle: "bold" }}>Temperature</p>: &nbsp;&nbsp;
+                  {appointment.temp ? appointment.currentWeight: "   "}{" "} F &nbsp; &nbsp;
                 </Text>
               </View>
 
