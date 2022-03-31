@@ -45,7 +45,7 @@ const appointmentSchema = new mongoose.Schema(
     },
     Status: {
       type: String,
-      enum: ["pending", "compleated", "rejected"],
+      enum: ["pending", "completed", "rejected"],
       default: "pending",
     },
     prescription: {
@@ -62,4 +62,4 @@ module.exports = mongoose.model("appointment", appointmentSchema);
 // Temp
 // SP02
 // BP
-// Status [pending cancel compleated]
+// Status [pending cancel completed]

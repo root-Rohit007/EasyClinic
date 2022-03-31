@@ -121,7 +121,7 @@ const Prescription = () => {
       const config = { headers: { "Content-Type": "application/json" } };
       const res = await axios.put(
         `/api/v5/update/${appointmentid}`,
-        { prescription: pres, Status: "compleated" },
+        { prescription: pres, Status: "completed" },
         config
       );
       console.log(res.data.appointment);

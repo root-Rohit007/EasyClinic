@@ -315,7 +315,7 @@ const Patientsform = () => {
                 <Grid item xs={2}>
                   <FormControlLabel
                     control={<Checkbox name="checkedA" />}
-                    label="Dibeties"
+                    label="Diabetes"
                     onChange={() => {
                       setDiabetes(!diabetes);
                     }}
@@ -351,7 +351,7 @@ const Patientsform = () => {
                 <Grid item xs={2}>
                   <FormControlLabel
                     control={<Checkbox name="checkedA" />}
-                    label="arthritis"
+                    label="Arthritis"
                     onChange={() => {
                       setArthritis(!arthritis);
                     }}

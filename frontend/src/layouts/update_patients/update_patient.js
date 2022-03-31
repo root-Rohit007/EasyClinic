@@ -365,7 +365,7 @@ const UpdatePatients = () => {
                 <Grid item xs={2}>
                   <FormControlLabel
                     control={<Checkbox name="checkedA" />}
-                    label="Dibeties"
+                    label="Diabetes"
                     checked={diabetes}
                     onChange={() => {
                       setDiabetes(!diabetes);

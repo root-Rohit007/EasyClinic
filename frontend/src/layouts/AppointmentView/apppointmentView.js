@@ -62,17 +62,17 @@ const AppointmentDetails = () => {
 
             <p>
               <b>Current Height</b> :{" "}
-              {appointment.currentHeight ? appointment.currentHeight : " "}
+              {appointment.currentHeight ? appointment.currentHeight : " "}  cm
             </p>
             <p>
               <b>Current Weight</b> :{" "}
-              {appointment.currentWeight ? appointment.currentWeight : " "}
+              {appointment.currentWeight ? appointment.currentWeight : " "} Kgs
             </p>
             <p>
-              <b>SPO2</b> : {appointment.spo2 ? appointment.spo2 : " "}
+              <b>SPO2</b> : {appointment.spo2 ? appointment.spo2 : " "} %
             </p>
             <p>
-              <b>Blood Pressure</b> : {appointment.bp ? appointment.bp : " "}
+              <b>Blood Pressure</b> : {appointment.bp ? appointment.bp : " "} mmHg
             </p>
             <p>
               <b>Status</b> : {appointment.Status}
