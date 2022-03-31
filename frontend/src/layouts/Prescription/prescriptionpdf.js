@@ -66,8 +66,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 10,
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "flex-end",
+    textAlign: "right",
   },
 
   headers: {
@@ -263,6 +264,7 @@ const Pdf = () => {
                 <Text style={{ fontStyle: "bold" }}>
                   {appointment.doctorID.name}
                 </Text>
+                <Text>{appointment.doctorID.degree.toString()}</Text>
               </View>
             </Page>
           </Document>
