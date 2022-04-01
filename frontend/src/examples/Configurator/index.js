@@ -327,7 +327,7 @@ function Configurator() {
             <MDBox mr={1.5}>
               <MDButton
                 component={Link}
-                href="//twitter.com/intent/tweet?text=Check%20Material%20Dashboard%20React%20made%20by%20%40%20%23webdesign%20%23dashboard%20%23react%20%mui&url=https%3A%2F%2Fwww.easy-clinic.com%2Fproduct%2Fmaterial-dashboard-react"
+                href="//twitter.com/intent/tweet?text=Check%20Material%20Dashboard%20React%20made%20by%20%40%20%23webdesign%20%23dashboard%20%23react%20%mui&url=https%3A%2F%2Fwww.drsavvy.com%2Fproduct%2Fmaterial-dashboard-react"
                 target="_blank"
                 rel="noreferrer"
                 color="dark"
@@ -338,7 +338,7 @@ function Configurator() {
             </MDBox>
             <MDButton
               component={Link}
-              href="https://www.facebook.com/sharer/sharer.php?u=https://www.easy-clinic.com/product/material-dashboard-react"
+              href="https://www.facebook.com/sharer/sharer.php?u=https://www.drsavvy.com/product/material-dashboard-react"
               target="_blank"
               rel="noreferrer"
               color="dark"

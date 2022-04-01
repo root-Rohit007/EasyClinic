@@ -22,7 +22,7 @@ function CoverLayout({ coverHeight, image, children }) {
       <DefaultNavbar
         action={{
           type: "external",
-          route: "https://easy-clinic.com/product/material-dashboard-react",
+          route: "https://drsavvy.com/product/material-dashboard-react",
           label: "free download",
         }}
         transparent

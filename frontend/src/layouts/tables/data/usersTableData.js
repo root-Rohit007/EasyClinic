@@ -50,7 +50,7 @@ export default function Data() {
 
     rows: [
       {
-        user: <Author name="John Michael" email="john@easy-clinic.com" />,
+        user: <Author name="John Michael" email="john@drsavvy.com" />,
         role: <Job title="DOCTOR" />,
         status: (
           <MDBox ml={-1}>

@@ -89,7 +89,7 @@ function Transactions() {
           <Transaction
             color="success"
             icon="expand_less"
-            name="Easy Clinic"
+            name="Dr.Savvy"
             description="26 March 2020, at 08:30 AM"
             value="+ $ 2,500"
           />

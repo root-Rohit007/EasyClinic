@@ -46,7 +46,7 @@ export default function data() {
 
     rows: [
       {
-        patient: <Author name="Johichael" email="john@easy-clinic.com" />,
+        patient: <Author name="Johichael" email="john@drsavvy.com" />,
         phone: <Job title="1234567890" />,
         gender: <Job title="Male"></Job>,
         age:<Job title="30"/>,

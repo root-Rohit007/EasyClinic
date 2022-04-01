@@ -86,7 +86,7 @@ function Basic() {
           textAlign="center"
         >
           <MDTypography variant="h3" fontWeight="medium" color="white" mt={1}>
-            Easy Clinic
+            Dr.Savvy
           </MDTypography>
           <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
             Login

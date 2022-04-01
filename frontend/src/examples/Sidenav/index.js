@@ -213,7 +213,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       <MDBox p={2} mt="auto">
         <MDButton
           component="a"
-          // href="https://www.easy-clinic.com/product/material-dashboard-pro-react"
+          // href="https://www.drsavvy.com/product/material-dashboard-pro-react"
           target="_blank"
           rel="noreferrer"
           variant="gradient"
