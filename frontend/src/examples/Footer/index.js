@@ -13,7 +13,7 @@ import MDTypography from "../../components/MDTypography";
 import typography from "../../assets/theme/base/typography";
 
 function Footer({ company, links }) {
-  // const { href, name } = company;
+  const { href, name } = company;
   const { size } = typography;
 
   // const renderLinks = () =>
@@ -36,7 +36,7 @@ function Footer({ company, links }) {
       alignItems="center"
       px={1.5}
     >
-      {/* <MDBox
+      <MDBox
         display="flex"
         justifyContent="center"
         alignItems="center"
@@ -45,20 +45,12 @@ function Footer({ company, links }) {
         fontSize={size.sm}
         px={1.5}
       >
-        &copy; {new Date().getFullYear()}, made with
+        &copy; {new Date().getFullYear()}, All rights reserved with Thought Pickers LLP
         <MDBox fontSize={size.md} color="text" mb={-0.5} mx={0.25}>
           <Icon color="inherit" fontSize="inherit">
-            favorite
           </Icon>
         </MDBox>
-        by
-        <Link href={href} target="_blank">
-          <MDTypography variant="button" fontWeight="medium">
-            &nbsp;{name}&nbsp;
-          </MDTypography>
-        </Link>
-        for a better web.
-      </MDBox> */}
+      </MDBox>
       <MDBox
         component="ul"
         sx={({ breakpoints }) => ({
@@ -77,6 +69,7 @@ function Footer({ company, links }) {
         })}
       >
         {/* {renderLinks()} */}
+        For Support : support@drsavvy.in / 6364704704
       </MDBox>
     </MDBox>
   );
@@ -84,7 +77,7 @@ function Footer({ company, links }) {
 
 // Setting default values for the props of Footer
 Footer.defaultProps = {
-  // company: { href: "https://www.drsavvy.com/", name: "Dr.Savvy" },
+  company: { href: "https://www.drsavvy.com/", name: "Dr.Savvy" },
 
 };
 
