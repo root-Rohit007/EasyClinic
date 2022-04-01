@@ -185,7 +185,7 @@ export default function App() {
                   ? brandDark
                   : brandWhite
               }
-              brandName="Easy Clinic"
+              brandName="Dr.Savvy"
               routes={
                 // user.role === "SuperAdmin" ? routesSuperAdmin : routesAdmin
                 routing
