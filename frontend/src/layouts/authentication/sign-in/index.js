@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import logo from "./dr-savvy.png";
+
 // react-router-dom components
 import { Link } from "react-router-dom";
 
@@ -76,7 +78,7 @@ function Basic() {
       <Card>
         <MDBox
           variant="gradient"
-          bgColor="info"
+          bgColor="light"
           borderRadius="lg"
           coloredShadow="info"
           mx={2}
@@ -85,10 +87,13 @@ function Basic() {
           mb={1}
           textAlign="center"
         >
-          <MDTypography variant="h3" fontWeight="medium" color="white" mt={1}>
+          <div>
+            <img src={logo} alt="logo" width="100%" />
+          </div>
+          {/* <MDTypography variant="h3" fontWeight="medium" color="white" mt={1}>
             Dr.Savvy
-          </MDTypography>
-          <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
+          </MDTypography> */}
+          <MDTypography variant="h4" fontWeight="bold" mt={1}>
             Login
           </MDTypography>
           {/* <Grid
