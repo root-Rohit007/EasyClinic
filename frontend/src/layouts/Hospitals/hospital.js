@@ -199,15 +199,18 @@ function HospitalTable() {
         //   </MDBox>
         // ),
         view: (
-          <MDTypography
-            component="button"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
-            onClick={() => navigate("/hospitals/" + h._id)}
-          >
-            View
-          </MDTypography>
+          // <MDTypography
+          //   component="button"
+          //   variant="caption"
+          //   color="text"
+          //   fontWeight="medium"
+          //   onClick={() => navigate("/hospitals/" + h._id)}
+          // >
+          //   View
+          // </MDTypography>
+          <MDButton onClick={() => navigate("/hospitals/" + h._id)}>
+            view
+          </MDButton>
         ),
         edit: (
           <MDTypography

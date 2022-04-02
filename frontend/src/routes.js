@@ -252,7 +252,7 @@ export const routesAdmin = [
     name: "Prescription pdf",
     key: "prescription_pdf",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/patients/:id/appointment_details/:appointmentid/prescription/pdf",
+    route: "/patients/:id/appointment_details/:appointmentid/pdf",
     component: <Pdf />,
   },
   {
@@ -353,6 +353,28 @@ export const receptionistRoutes = [
     component: <PatientsAppointments />,
   },
   {
+    name: "Appointment",
+    key: "appointment",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/appointment_details/:appointmentid",
+    component: <AppointmentDetails />,
+  },
+  {
+    name: "Appointment update",
+    key: "appointment_update",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/appointment_details/:appointmentid/update",
+    component: <AppointmentUpdate />,
+  },
+  {
+    name: "Prescription pdf",
+    key: "prescription_pdf",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/appointment_details/:appointmentid/pdf",
+    component: <Pdf />,
+  },
+
+  {
     type: "collapse",
     name: "Patients",
     key: "patients",
@@ -361,10 +383,24 @@ export const receptionistRoutes = [
     component: <Patients />,
   },
   {
+    name: "Patients",
+    key: "patients",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/patients/create",
+    component: <Patientsform />,
+  },
+  {
     name: "patient details",
     key: "patient_details",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/patients/:id",
     component: <PatientDetails />,
+  },
+  {
+    name: "Update Patients",
+    key: "update",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/patients/:id/update",
+    component: <UpdatePatients />,
   },
 ];

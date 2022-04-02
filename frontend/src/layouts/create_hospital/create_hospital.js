@@ -28,6 +28,8 @@ import {
   resetHospital,
   clearErrors as clearErrorsHospital,
 } from "Actions/hospitalActions";
+import { updateProfile } from "Actions/userActions";
+import { resetProfileUpdate } from "Actions/userActions";
 
 const Create_Hospitals = () => {
   const dispatch = useDispatch();
@@ -106,6 +108,12 @@ const Create_Hospitals = () => {
   const { errorHospital, loadingHospital, hospital } = useSelector(
     (state) => state.registerHospital
   );
+  const {
+    loading: loadingUpdate,
+    isUpdated,
+    error: errorUpdate,
+  } = useSelector((state) => state.profileUpdate);
+
   useEffect(() => {
     if (error) {
       console.log(error);
@@ -121,6 +129,16 @@ const Create_Hospitals = () => {
   }, [dispatch, error, user]);
 
   useEffect(() => {
+    if (!loadingUpdate && isUpdated) {
+      dispatch(resetProfileUpdate());
+      alert.success("user updated");
+      navigate("/hospitals");
+    }
+    if (errorUpdate) {
+      console.log(errorUpdate);
+      alert.error(errorUpdate);
+      dispatch(clearErrors());
+    }
     if (errorHospital) {
       console.log(errorHospital);
       alert.error(errorHospital);
@@ -129,10 +147,16 @@ const Create_Hospitals = () => {
       console.log("success", hospital);
       alert.success("Hopital Created");
       dispatch(resetHospital());
-
-      navigate("/hospitals");
+      dispatch(updateProfile({ ...user, hospitalID: hospital._id }, adminID));
     }
-  }, [dispatch, errorHospital, hospital]);
+  }, [
+    dispatch,
+    errorHospital,
+    hospital,
+    errorUpdate,
+    isUpdated,
+    loadingUpdate,
+  ]);
 
   return (
     <DashboardLayout>
@@ -376,7 +400,7 @@ const Create_Hospitals = () => {
                 >
                   <option value="" />
                   <option>Doctor</option>
-                  <option>Receptionist</option>
+                  {/* <option>Receptionist</option> */}
                 </Select>
 
                 <br />
@@ -389,6 +413,7 @@ const Create_Hospitals = () => {
                                 </FormControl> */}
 
                 <TextField
+                  type="password"
                   label="Password"
                   variant="outlined"
                   placeholder="Enter your password"

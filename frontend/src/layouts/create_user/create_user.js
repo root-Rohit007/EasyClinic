@@ -350,6 +350,7 @@ const Signup = () => {
                 <br />
 
                 <TextField
+                  type={"password"}
                   label="Password"
                   variant="outlined"
                   placeholder="Enter your password"
@@ -365,7 +366,7 @@ const Signup = () => {
                   }}
                 />
                 <Button type="submit" variant="contained" color="primary">
-                  Sign up
+                  create user
                 </Button>
               </FormControl>
             </Grid>

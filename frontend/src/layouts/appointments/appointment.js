@@ -212,7 +212,7 @@ function Appointment() {
 
               <Grid item xs={6}>
                 <TextField
-                  type="number"
+                  type="text"
                   fullWidth
                   label="bp"
                   variant="outlined"

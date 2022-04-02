@@ -62,7 +62,7 @@ const AppointmentDetails = () => {
 
             <p>
               <b>Current Height</b> :{" "}
-              {appointment.currentHeight ? appointment.currentHeight : " "}  cm
+              {appointment.currentHeight ? appointment.currentHeight : " "} cm
             </p>
             <p>
               <b>Current Weight</b> :{" "}
@@ -72,7 +72,8 @@ const AppointmentDetails = () => {
               <b>SPO2</b> : {appointment.spo2 ? appointment.spo2 : " "} %
             </p>
             <p>
-              <b>Blood Pressure</b> : {appointment.bp ? appointment.bp : " "} mmHg
+              <b>Blood Pressure</b> : {appointment.bp ? appointment.bp : " "}{" "}
+              mmHg
             </p>
             <p>
               <b>Status</b> : {appointment.Status}
@@ -80,7 +81,7 @@ const AppointmentDetails = () => {
           </div>
           <div style={{ padding: "20px" }}>
             <Grid container spacing={3}>
-              <Grid item sx={6}>
+              <Grid item xs={4}>
                 <Button
                   fullWidth
                   variant="contained"
@@ -94,8 +95,22 @@ const AppointmentDetails = () => {
                   Edit
                 </Button>
               </Grid>
+              <Grid item xs={4}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="info"
+                  onClick={() =>
+                    navigate(
+                      `/patients/${appointment.patientID._id}/appointment_details/${appointment._id}/pdf`
+                    )
+                  }
+                >
+                  Prescription
+                </Button>
+              </Grid>
               {role === "Doctor" ? (
-                <Grid item sx={6}>
+                <Grid item xs={4}>
                   <Button
                     fullWidth
                     variant="contained"
