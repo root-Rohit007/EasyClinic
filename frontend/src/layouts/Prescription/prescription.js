@@ -19,6 +19,7 @@ import MDButton from "components/MDButton";
 import { useAlert } from "react-alert";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function sleep(delay = 0) {
   return new Promise((resolve) => {
@@ -28,6 +29,7 @@ function sleep(delay = 0) {
 
 const Prescription = () => {
   const alert = useAlert();
+  const navigate = useNavigate();
   const { appointmentid } = useParams();
 
   const [open, setOpen] = React.useState(false);
@@ -126,6 +128,9 @@ const Prescription = () => {
       );
       console.log(res.data.appointment);
       alert.success("Updated");
+      navigate(
+        `/patients/${appointment.patientID._id}/appointment_details/${appointment._id}/pdf`
+      );
     } catch (err) {
       alert.error(err);
     }
@@ -138,7 +143,7 @@ const Prescription = () => {
         <Box sx={{ padding: "30px" }}>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
-              <Grid item xs={1}>
+              <Grid item xs={2} md={2} lg={1}>
                 <IconButton
                   color="primary"
                   aria-label="Manual add"
@@ -150,7 +155,7 @@ const Prescription = () => {
               </Grid>
 
               {/* medicine */}
-              <Grid item xs={9}>
+              <Grid item xs={10} md={6} lg={9}>
                 {manual ? (
                   <TextField
                     type={"text"}
@@ -203,7 +208,7 @@ const Prescription = () => {
                 )}
               </Grid>
               {/* Qty */}
-              <Grid item xs={2}>
+              <Grid item xs={12} md={4} lg={2}>
                 <TextField
                   fullWidth
                   type="number"
@@ -212,11 +217,12 @@ const Prescription = () => {
                   value={qty}
                   onChange={(e) => setQty(e.target.value)}
                   required
+                  InputProps={{ inputProps: { min: 0 } }}
                 />
               </Grid>
 
               {/* morning */}
-              <Grid item xs={2}>
+              <Grid item xs={12} md={6} lg={2}>
                 <TextField
                   fullWidth
                   type="text"
@@ -227,7 +233,7 @@ const Prescription = () => {
                   required
                 />
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={12} md={6} lg={2}>
                 <TextField
                   id="outlined-select-currency-native"
                   select
@@ -247,7 +253,7 @@ const Prescription = () => {
               </Grid>
 
               {/* Afternoon */}
-              <Grid item xs={2}>
+              <Grid item xs={12} md={6} lg={2}>
                 <TextField
                   fullWidth
                   type="text"
@@ -258,7 +264,7 @@ const Prescription = () => {
                   required
                 />
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={12} md={6} lg={2}>
                 <TextField
                   id="outlined-select-currency-native"
                   select
@@ -278,7 +284,7 @@ const Prescription = () => {
               </Grid>
 
               {/* Lunch */}
-              <Grid item xs={2}>
+              <Grid item xs={12} md={6} lg={2}>
                 <TextField
                   fullWidth
                   type="text"
@@ -289,7 +295,7 @@ const Prescription = () => {
                   required
                 />
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={12} md={6} lg={2}>
                 <TextField
                   id="outlined-select-currency-native"
                   select
@@ -327,6 +333,40 @@ const Prescription = () => {
         <Paper style={{ margin: "20px" }}>
           <Box sx={{ padding: "30px" }}>
             <Grid container spacing={1}>
+              <Grid Grid item xs={1}>
+                <MDTypography variant="body2" fontWeight="bold" color="inherit">
+                  Index
+                </MDTypography>
+              </Grid>
+              <Grid item xs={3} pr={3}>
+                <MDTypography fontWeight="bold" color="inherit" variant="body2">
+                  Medicine
+                </MDTypography>
+              </Grid>
+
+              <Grid item xs={6} textAlign="center">
+                <MDTypography fontWeight="bold" color="inherit" variant="body2">
+                  Dose
+                </MDTypography>
+              </Grid>
+
+              <Grid item xs={1}>
+                <MDTypography fontWeight="bold" color="inherit" variant="body2">
+                  Qty
+                </MDTypography>
+              </Grid>
+
+              <Grid item xs={1}>
+                <MDTypography
+                  fontWeight="bold"
+                  color="inherit"
+                  variant="body2"
+                  verticalAlign="bottom"
+                >
+                  delete
+                </MDTypography>
+              </Grid>
+
               {pres.map((p, i) => {
                 return (
                   <Grid item xs={12} key={i}>

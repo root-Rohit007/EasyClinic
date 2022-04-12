@@ -288,6 +288,7 @@ const Patientsform = () => {
                     placeholder="Enter height in cm"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
+                    InputProps={{ inputProps: { min: 0 } }}
                   />
                 </Grid>
 
@@ -300,6 +301,7 @@ const Patientsform = () => {
                     placeholder="Enter weight in kg"
                     value={weight}
                     onChange={(e) => setWeight(e.target.value)}
+                    InputProps={{ inputProps: { min: 0 } }}
                   />
                 </Grid>
 

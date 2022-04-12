@@ -182,7 +182,7 @@ const Pdf = () => {
   if (appointment) {
     const datestr = new Date(appointment.date);
     const timestr = datestr.toTimeString().split(" ")[0];
-    debugger
+
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -194,7 +194,9 @@ const Pdf = () => {
                   <Text style={styles.headers}>
                     {appointment.hospitalID.name.toUpperCase()}
                   </Text>
-                  <Text style={styles.address_width}>{appointment.hospitalID.address}</Text>
+                  <Text style={styles.address_width}>
+                    {appointment.hospitalID.address}
+                  </Text>
                 </View>
                 <View style={styles.section2}>
                   <Text style={styles.headers}>
@@ -224,13 +226,21 @@ const Pdf = () => {
                   <p style={{ fontStyle: "bold" }}>BP</p>:&nbsp;&nbsp;
                   {appointment.bp ? appointment.bp : "   "} mmHg &nbsp; &nbsp;
                   <p style={{ fontStyle: "bold" }}>Weight</p>: &nbsp;&nbsp;
-                  {appointment.currentWeight ? appointment.currentWeight: "   "}{" "} Kg &nbsp; &nbsp;
+                  {appointment.currentWeight
+                    ? appointment.currentWeight
+                    : "   "}{" "}
+                  Kg &nbsp; &nbsp;
                   <p style={{ fontStyle: "bold" }}>Height</p>: &nbsp;&nbsp;
-                  {appointment.currentHeight ? appointment.currentHeight: "   "}{" "} cm &nbsp; &nbsp;
+                  {appointment.currentHeight
+                    ? appointment.currentHeight
+                    : "   "}{" "}
+                  cm &nbsp; &nbsp;
                   <p style={{ fontStyle: "bold" }}>SPO2</p>: &nbsp;&nbsp;
-                  {appointment.spo2 ? appointment.currentWeight: "   "}{" "} % &nbsp; &nbsp;
+                  {appointment.spo2 ? appointment.currentWeight : "   "} %
+                  &nbsp; &nbsp;
                   <p style={{ fontStyle: "bold" }}>Temperature</p>: &nbsp;&nbsp;
-                  {appointment.temp ? appointment.currentWeight: "   "}{" "} F &nbsp; &nbsp;
+                  {appointment.temp ? appointment.currentWeight : "   "} F
+                  &nbsp; &nbsp;
                 </Text>
               </View>
 

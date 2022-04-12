@@ -85,6 +85,7 @@ function All_appointmets() {
         { Header: "Doctor", accessor: "doctor", width: "25%", align: "left" },
         { Header: "Date", accessor: "date", align: "center" },
         { Header: "Time", accessor: "time", align: "center" },
+        { Header: "Status", accessor: "status", align: "center" },
         { Header: "view", accessor: "view", align: "center" },
         { Header: "edit", accessor: "edit", align: "center" },
       ],
@@ -106,6 +107,7 @@ function All_appointmets() {
           ),
           date: <Job title={d} />,
           time: <Job title={t[0]} />,
+          status: <Job title={a.Status} />,
           view: (
             <MDButton
               onClick={() =>

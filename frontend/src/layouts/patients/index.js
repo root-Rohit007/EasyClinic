@@ -76,7 +76,7 @@ function Patients() {
       ],
 
       rows: patient.map((p) => ({
-        patient: <Author name={p.name} email={p.email} />,
+        patient: <Author name={p.name} email={p.casePaperNo} />,
         phone: <Job title={p.phone} />,
         gender: <Job title={p.gender}></Job>,
         age: <Job title={p.age} />,
