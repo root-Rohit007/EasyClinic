@@ -54,6 +54,17 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [isActive, setIsActive] = useState(false);
 
+  function adharValidation(no) {
+    const regexp = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
+
+    return regexp.test(no);
+  }
+
+  function panValidation(no) {
+    const regexp = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+    return regexp.test(no);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(
@@ -73,6 +84,14 @@ const Signup = () => {
     //   password,
     //   isActive
     // );
+    if (adhar !== "" && !adharValidation(adhar)) {
+      return alert.error("Incorrect Aadhar format");
+    }
+
+    if (pan !== "" && !panValidation(pan)) {
+      return alert.error("Incorrect PAN format");
+    }
+
     const userData = {
       salutation,
       name,
@@ -112,9 +131,6 @@ const Signup = () => {
       <Grid>
         <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
-            <Avatar style={avatarStyle}>
-              <AddCircleOutlineOutlinedIcon />
-            </Avatar>
             <h2 style={headerStyle}>Create user</h2>
             <Typography variant="caption" gutterBottom>
               Please fill this form to create user account!
@@ -223,11 +239,13 @@ const Signup = () => {
                   width: "100px",
                 }}
                 label="Age"
+                type="number"
                 id="outlined-size-small"
                 size="small"
                 variant="outlined"
                 value={age}
                 required
+                InputProps={{ inputProps: { min: 0, max: 100 } }}
                 onChange={(e) => setAge(e.target.value)}
               />
 

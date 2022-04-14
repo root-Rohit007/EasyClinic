@@ -180,6 +180,7 @@ const AppointmentUpdate = () => {
                     placeholder="Enter height in cm"
                     value={currentHeight}
                     onChange={(e) => setCurrentHeight(e.target.value)}
+                    InputProps={{ inputProps: { min: 0 } }}
                   />
                 </Grid>
 
@@ -192,6 +193,7 @@ const AppointmentUpdate = () => {
                     placeholder="Enter weight in kg"
                     value={currentWeight}
                     onChange={(e) => setCurrentWeight(e.target.value)}
+                    InputProps={{ inputProps: { min: 0 } }}
                   />
                 </Grid>
 
@@ -204,6 +206,7 @@ const AppointmentUpdate = () => {
                     placeholder="Enter temp in deg cel"
                     value={temp}
                     onChange={(e) => setTemp(e.target.value)}
+                    InputProps={{ inputProps: { min: 0 } }}
                   />
                 </Grid>
 
@@ -216,6 +219,7 @@ const AppointmentUpdate = () => {
                     placeholder="Enter spo2"
                     value={spo2}
                     onChange={(e) => setSpo2(e.target.value)}
+                    InputProps={{ inputProps: { min: 0, max: 100 } }}
                   />
                 </Grid>
 

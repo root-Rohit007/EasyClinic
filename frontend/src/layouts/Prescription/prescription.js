@@ -45,8 +45,14 @@ const Prescription = () => {
   const [afternoonText, setAfternoonText] = useState("");
   const [eveningText, setEveningText] = useState("");
   const [appointment, setApointment] = useState({});
+  const [reason, setReason] = useState("");
+  const [disease, setDisease] = useState("");
+  const [lineTreatment, setLineTreatment] = useState("");
+  const [procedure, setProcedure] = useState("");
+  const [fees, setFees] = useState();
 
   const [pres, setPres] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,6 +63,11 @@ const Prescription = () => {
       if (res.data.appointment.prescription) {
         setPres(res.data.appointment.prescription);
       }
+      setReason(res.data.appointment.reason);
+      setDisease(res.data.appointment.disease);
+      setLineTreatment(res.data.appointment.lineTreatment);
+      setProcedure(res.data.appointment.procedure);
+      setFees(+res.data.appointment.fees);
     };
 
     fetchData();
@@ -91,6 +102,7 @@ const Prescription = () => {
   const handleSubmit = (e) => {
     console.log("added");
     e.preventDefault();
+
     setPres([
       ...pres,
       {
@@ -123,7 +135,15 @@ const Prescription = () => {
       const config = { headers: { "Content-Type": "application/json" } };
       const res = await axios.put(
         `/api/v5/update/${appointmentid}`,
-        { prescription: pres, Status: "completed" },
+        {
+          reason,
+          disease,
+          lineTreatment,
+          procedure,
+          fees,
+          prescription: pres,
+          Status: "completed",
+        },
         config
       );
       console.log(res.data.appointment);
@@ -143,6 +163,60 @@ const Prescription = () => {
         <Box sx={{ padding: "30px" }}>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
+              <Grid item xs={12} md={6} lg={6}>
+                <TextField
+                  fullWidth
+                  type="text"
+                  variant="outlined"
+                  label="The reason of patients visit "
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} lg={6}>
+                <TextField
+                  fullWidth
+                  type="text"
+                  variant="outlined"
+                  label=" Cause of the disease"
+                  value={disease}
+                  onChange={(e) => setDisease(e.target.value)}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6} lg={6}>
+                <TextField
+                  fullWidth
+                  type="text"
+                  variant="outlined"
+                  label=" What is the line of Treatment he have aligned / Suggested"
+                  value={lineTreatment}
+                  onChange={(e) => setLineTreatment(e.target.value)}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={3} lg={3}>
+                <TextField
+                  fullWidth
+                  type="text"
+                  variant="outlined"
+                  label=" Any Procedure taken in clinic"
+                  value={procedure}
+                  onChange={(e) => setProcedure(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} md={3} lg={3}>
+                <TextField
+                  fullWidth
+                  type="number"
+                  variant="outlined"
+                  label="Fees"
+                  value={fees}
+                  onChange={(e) => setFees(e.target.value)}
+                  InputProps={{ inputProps: { min: 0 } }}
+                />
+              </Grid>
+
               <Grid item xs={2} md={2} lg={1}>
                 <IconButton
                   color="primary"

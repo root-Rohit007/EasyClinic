@@ -51,6 +51,11 @@ const appointmentSchema = new mongoose.Schema(
     prescription: {
       type: Array,
     },
+    reason: String,
+    disease: String,
+    lineTreatment: String,
+    procedure: String,
+    fees: String,
   },
   { timestamps: true }
 );

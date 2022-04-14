@@ -120,9 +120,6 @@ const Create_Hospitals = () => {
       <Grid>
         <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
-            <Avatar style={avatarStyle}>
-              <AddCircleOutlineOutlinedIcon />
-            </Avatar>
             <h2 style={headerStyle}>Hospital Form</h2>
             <Typography variant="caption" gutterBottom>
               Please fill this form to create an account !

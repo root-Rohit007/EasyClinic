@@ -242,6 +242,36 @@ const Pdf = () => {
                   {appointment.temp ? appointment.currentWeight : "   "} F
                   &nbsp; &nbsp;
                 </Text>
+                <Text>
+                  <p style={{ fontStyle: "bold" }}>
+                    The reason of patients visit{" "}
+                  </p>
+                  :&nbsp;&nbsp;
+                  {appointment.reason ? appointment.reason : "   "}
+                </Text>
+                <Text>
+                  <p style={{ fontStyle: "bold" }}>Cause of the disease </p>
+                  :&nbsp;&nbsp;
+                  {appointment.disease ? appointment.disease : "   "}
+                </Text>
+
+                <Text>
+                  <p style={{ fontStyle: "bold" }}>
+                    What is the line of Treatment he have aligned / Suggested{" "}
+                  </p>
+                  :&nbsp;&nbsp;
+                  {appointment.lineTreatment
+                    ? appointment.lineTreatment
+                    : "   "}
+                </Text>
+
+                <Text>
+                  <p style={{ fontStyle: "bold" }}>
+                    Any Procedure taken in clinic{" "}
+                  </p>
+                  :&nbsp;&nbsp;
+                  {appointment.procedure ? appointment.procedure : "   "}
+                </Text>
               </View>
 
               {/* Table */}

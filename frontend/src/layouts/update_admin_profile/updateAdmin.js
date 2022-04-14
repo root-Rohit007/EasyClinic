@@ -147,9 +147,6 @@ const UpdateAdmin = () => {
       <Grid>
         <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
-            <Avatar style={avatarStyle}>
-              <AddCircleOutlineOutlinedIcon />
-            </Avatar>
             <h2 style={headerStyle}>Update details</h2>
             <Typography variant="caption" gutterBottom>
               Please fill this form to update user account!

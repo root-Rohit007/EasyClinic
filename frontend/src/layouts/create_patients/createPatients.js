@@ -115,9 +115,6 @@ const Patientsform = () => {
       <Grid>
         <Paper elevation={20} style={paperStyle}>
           <Grid align="center">
-            <Avatar style={avatarStyle}>
-              <AddCircleOutlineOutlinedIcon />
-            </Avatar>
             <h2 style={headerStyle}>Patient Details</h2>
             <Typography variant="caption" gutterBottom>
               Please fill this form to create an account !
@@ -250,6 +247,7 @@ const Patientsform = () => {
                     required
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
+                    InputProps={{ inputProps: { min: 0 } }}
                   />
                 </Grid>
 
