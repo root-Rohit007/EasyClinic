@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 
 // react-router-dom components
@@ -210,7 +209,11 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         }
       />
       <List>{renderRoutes}</List>
-      <MDBox p={2} mt="auto">
+      <MDBox
+        p={2}
+        mt="auto"
+        style={{ display: "flex", flexDirection: "column" }}
+      >
         <MDButton
           component="a"
           // href="https://www.drsavvy.com/product/material-dashboard-pro-react"
@@ -222,6 +225,19 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           onClick={logoutSession}
         >
           Logout
+        </MDButton>
+        <MDButton
+          style={{ marginTop: "5px" }}
+          component="a"
+          // href="https://www.drsavvy.com/product/material-dashboard-pro-react"
+          target="_blank"
+          rel="noreferrer"
+          variant="gradient"
+          color={sidenavColor}
+          fullWidth
+          onClick={() => navigate("/support")}
+        >
+          Support
         </MDButton>
       </MDBox>
     </SidenavRoot>

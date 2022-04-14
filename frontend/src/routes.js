@@ -50,6 +50,7 @@ import AppointmentDetails from "layouts/AppointmentView/apppointmentView";
 import AppointmentUpdate from "layouts/AppointmentEdit/appointmentEdit";
 import Prescription from "layouts/Prescription/prescription";
 import Pdf from "layouts/Prescription/prescriptionpdf";
+import Support from "Pages/Support/support";
 
 export const routesSuperAdmin = [
   {
@@ -97,6 +98,13 @@ export const routesSuperAdmin = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <Dashboard />,
+  },
+  {
+    name: "suppport",
+    key: "update_user",
+    route: "/support",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    component: <Support />,
   },
 
   // {
@@ -285,6 +293,13 @@ export const routesAdmin = [
     component: <All_appointmets />,
   },
 
+  {
+    name: "suppport",
+    key: "update_user",
+    route: "/support",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    component: <Support />,
+  },
   // {
   //   type: "collapse",
   //   name: "Notifications",
@@ -314,6 +329,13 @@ export const routesAdmin = [
 ];
 
 export const receptionistRoutes = [
+  {
+    name: "suppport",
+    key: "update_user",
+    route: "/support",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    component: <Support />,
+  },
   {
     type: "collapse",
     name: "Profile",

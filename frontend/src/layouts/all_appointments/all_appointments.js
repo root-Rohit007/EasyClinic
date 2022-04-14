@@ -173,8 +173,7 @@ function All_appointmets() {
                   <DataTable
                     table={{ columns, rows }}
                     isSorted={false}
-                    entriesPerPage={false}
-                    showTotalEntries={false}
+                    showTotalEntries={true}
                     noEndBorder
 
                     // canSearch={true}
