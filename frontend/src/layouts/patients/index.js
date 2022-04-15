@@ -95,15 +95,9 @@ function Patients() {
           // </MDTypography>
         ),
         edit: (
-          <MDTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
-          >
+          <MDButton onClick={() => navigate("/patients/" + p._id + "/update")}>
             Edit
-          </MDTypography>
+          </MDButton>
         ),
       })),
     };

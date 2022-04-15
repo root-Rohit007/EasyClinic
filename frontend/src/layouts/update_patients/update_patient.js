@@ -60,7 +60,7 @@ const UpdatePatients = () => {
   const marginTop = { marginTop: 5 };
 
   const [salutation, setStalutation] = useState("");
-  const [casepaper, setCasepaper] = useState("");
+  // const [casepaper, setCasepaper] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [phone2, setPhone2] = useState("");
@@ -85,7 +85,7 @@ const UpdatePatients = () => {
     // console.log(salutation, name, phone, email, gender, address, age, bg);
 
     let patientData = {
-      casePaperNo: casepaper,
+      // casePaperNo: casepaper,
       salutation,
       name,
       email,
@@ -134,7 +134,7 @@ const UpdatePatients = () => {
       alert.error(errorUpdate);
       dispatch(clearErrorPatient());
     } else if (patient !== null && patient.name) {
-      setCasepaper(patient.casePaperNo);
+      // setCasepaper(patient.casePaperNo);
       setStalutation(patient.salutation);
       setName(patient.name);
       setEmail(patient.email);
@@ -170,7 +170,7 @@ const UpdatePatients = () => {
           <form onSubmit={handleSubmit}>
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                   <TextField
                     fullWidth
                     variant="outlined"
@@ -180,7 +180,7 @@ const UpdatePatients = () => {
                     value={casepaper}
                     onChange={(e) => setCasepaper(e.target.value)}
                   />
-                </Grid>
+                </Grid> */}
 
                 <Grid item xs={3}>
                   <TextField

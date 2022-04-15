@@ -5,7 +5,7 @@ const Patient = require("../models/patientModels");
 // Register patient
 exports.registerPatient = catchAsyncErrors(async (req, res, next) => {
   const {
-    casePaperNo,
+    // casePaperNo,
     salutation,
     name,
     email,
@@ -28,8 +28,11 @@ exports.registerPatient = catchAsyncErrors(async (req, res, next) => {
     creatorID,
   } = req.body;
 
+  const countPatients = await Patient.count();
+  console.log(countPatients);
+
   const patient = await Patient.create({
-    casePaperNo,
+    casePaperNo: countPatients * 100,
     salutation,
     name,
     email,

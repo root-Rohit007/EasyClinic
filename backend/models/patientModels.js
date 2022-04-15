@@ -5,7 +5,8 @@ const patientSchema = new mongoose.Schema(
   {
     casePaperNo: {
       type: String,
-      required: [true, "Enter case paper no"],
+      required: [true, "Case paper conflict enter again"],
+      unique: true,
     },
     salutation: {
       type: String,

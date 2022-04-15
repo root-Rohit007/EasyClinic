@@ -7,7 +7,7 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
-import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
+
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -40,11 +40,11 @@ const Patientsform = () => {
 
   const paperStyle = { padding: "30px 20px", width: 800, margin: "20px auto" };
   const headerStyle = { margin: 0 };
-  const avatarStyle = { backgroundColor: "#1bbd7e" };
+
   const marginTop = { marginTop: 5 };
 
   const [salutation, setStalutation] = useState("");
-  const [casepaper, setCasepaper] = useState("");
+  // const [casepaper, setCasepaper] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [phone2, setPhone2] = useState("");
@@ -69,7 +69,7 @@ const Patientsform = () => {
     // console.log(salutation, name, phone, email, gender, address, age, bg);
     console.log(bg);
     let patitionsData = {
-      casePaperNo: casepaper,
+      // casePaperNo: casepaper,
       salutation,
       name,
       email,
@@ -123,7 +123,7 @@ const Patientsform = () => {
           <form onSubmit={handleSubmit}>
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                   <TextField
                     fullWidth
                     variant="outlined"
@@ -133,7 +133,7 @@ const Patientsform = () => {
                     value={casepaper}
                     onChange={(e) => setCasepaper(e.target.value)}
                   />
-                </Grid>
+                </Grid> */}
 
                 <Grid item xs={3}>
                   <TextField

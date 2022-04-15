@@ -61,7 +61,7 @@ function PatientDtails() {
               <PlatformSettings />
             </Grid> */}
 
-              <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
+              <Grid item xs={12} md={6} xl={4} sx={{ display: "flex" }}>
                 <Divider orientation="vertical" sx={{ ml: -2, mr: 1 }} />
                 <ProfileInfoCard
                   title="profile information"
@@ -80,9 +80,66 @@ function PatientDtails() {
                     Gender: patient.gender ? patient.gender : " ",
                     Address: patient.address ? patient.address : " ",
                     Age: patient.age ? patient.age : " ",
-                    BloodGroup: patient.bloodGroup ? patient.bloodGroup : " ",
+                    // BloodGroup: patient.bloodGroup ? patient.bloodGroup : " ",
                     Height: patient.height ? patient.height + " cm" : " ",
                     Weight: patient.weight ? patient.weight + " Kg" : " ",
+                    // Asthma: patient.asthma ? "Yes" : "No",
+                    // Diabeties: patient.diabetes ? "Yes" : "No",
+                    // HighBP: patient.highbp ? "Yes" : "No",
+                    // Thyroid: patient.thyroid ? "Yes" : "No",
+                    // KidenyStone: patient.kidenyStone ? "Yes" : "No",
+                    // Arthritis: patient.arthritis ? "Yes" : "No",
+                    // "Other Diseases": patient.otherDiseases
+                    //   ? patient.otherDiseases.toString()
+                    //   : " ",
+
+                    // Role: user.role,
+                  }}
+                  // social={[
+                  //   {
+                  //     link: "https://www.facebook.com/",
+                  //     icon: <FacebookIcon />,
+                  //     color: "facebook",
+                  //   },
+                  //   {
+                  //     link: "https://twitter.com/",
+                  //     icon: <TwitterIcon />,
+                  //     color: "twitter",
+                  //   },
+                  //   {
+                  //     link: "https://www.instagram.com/",
+                  //     icon: <InstagramIcon />,
+                  //     color: "instagram",
+                  //   },
+                  // ]}
+                  action={{
+                    route: `/patients/${id}/update`,
+                    tooltip: "Edit Profile",
+                  }}
+                  shadow={false}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} xl={4} sx={{ display: "flex" }}>
+                <ProfileInfoCard
+                  title="Other details"
+                  // description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
+                  info={{
+                    // "Case Paper No": patient.casePaperNo,
+                    // Name:
+                    //   (patient.salutation ? patient.salutation : " ") +
+                    //   " " +
+                    //   patient.name,
+                    // Mobile:
+                    //   patient.phone +
+                    //   " " +
+                    //   (patient.phone2 === "0000000000" ? " " : patient.phone2),
+                    // Email: patient.email,
+                    // Gender: patient.gender ? patient.gender : " ",
+                    // Address: patient.address ? patient.address : " ",
+                    // Age: patient.age ? patient.age : " ",
+                    BloodGroup: patient.bloodGroup ? patient.bloodGroup : " ",
+                    // Height: patient.height ? patient.height + " cm" : " ",
+                    // Weight: patient.weight ? patient.weight + " Kg" : " ",
                     Asthma: patient.asthma ? "Yes" : "No",
                     Diabeties: patient.diabetes ? "Yes" : "No",
                     HighBP: patient.highbp ? "Yes" : "No",
@@ -118,45 +175,38 @@ function PatientDtails() {
                   }}
                   shadow={false}
                 />
-                {/* <Divider orientation="vertical" sx={{ mx: 0 }} /> */}
               </Grid>
             </Grid>
 
             <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} lg={6} marginTop="10px">
+                <MDButton
+                  variant="contained"
+                  color="info"
+                  fullWidth={true}
+                  onClick={() => navigate(`/patients/${id}/appointment`)}
+                >
+                  New Appointment
+                </MDButton>
+              </Grid>
               <Grid
                 item
                 xs={12}
-                sx={{ display: "flex", flexDirection: "column" }}
+                sm={6}
+                lg={6}
+                marginTop="10px"
+                marginBottom="20px"
               >
-                <Grid item xs={12} sm={6} lg={3} marginTop="10px">
-                  <MDButton
-                    variant="contained"
-                    color="info"
-                    fullWidth={true}
-                    onClick={() => navigate(`/patients/${id}/appointment`)}
-                  >
-                    New Appointment
-                  </MDButton>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  lg={3}
-                  marginTop="10px"
-                  marginBottom="20px"
+                <MDButton
+                  variant="contained"
+                  color="info"
+                  fullWidth={true}
+                  onClick={() =>
+                    navigate(`/patients/${id}/appointment_details`)
+                  }
                 >
-                  <MDButton
-                    variant="contained"
-                    color="info"
-                    fullWidth={true}
-                    onClick={() =>
-                      navigate(`/patients/${id}/appointment_details`)
-                    }
-                  >
-                    Appointments
-                  </MDButton>
-                </Grid>
+                  Appointments
+                </MDButton>
               </Grid>
             </Grid>
           </MDBox>
