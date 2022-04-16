@@ -69,7 +69,6 @@ function Footer({ company, links }) {
         })}
       >
         {/* {renderLinks()} */}
-        For Support : support@drsavvy.in / 6364704704
       </MDBox>
     </MDBox>
   );

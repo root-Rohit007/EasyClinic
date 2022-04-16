@@ -286,7 +286,7 @@ export const routesAdmin = [
   },
   {
     type: "collapse",
-    name: "Appointmnets",
+    name: "Appointments",
     key: "all_appointments",
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/all_appointments",
@@ -354,7 +354,7 @@ export const receptionistRoutes = [
   },
   {
     type: "collapse",
-    name: "Appointmnets",
+    name: "Appointments",
     key: "all_appointments",
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/all_appointments",

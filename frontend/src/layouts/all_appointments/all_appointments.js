@@ -28,7 +28,7 @@ function All_appointmets() {
   const hospitalID = useSelector((state) => state.user.user.hospitalID);
 
   useEffect(() => {
-    const fetchAppointmnets = async (role) => {
+    const fetchAppointments = async (role) => {
       if (role === "Doctor") {
         try {
           const res = await axios(`/api/v5/getDoctorsAppointments/${userID}`);
@@ -49,7 +49,7 @@ function All_appointmets() {
         }
       }
     };
-    fetchAppointmnets(userRole);
+    fetchAppointments(userRole);
   }, []);
 
   function Data() {

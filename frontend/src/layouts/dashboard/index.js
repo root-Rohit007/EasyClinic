@@ -30,7 +30,7 @@ function Dashboard() {
   const hospitalID = useSelector((state) => state.user.user.hospitalID);
 
   useEffect(() => {
-    const fetchAppointmnets = async (role) => {
+    const fetchAppointments = async (role) => {
       if (role === "Doctor") {
         try {
           const res = await axios(`/api/v5/getTodaysAppointmentsDoc/${userID}`);
@@ -55,7 +55,7 @@ function Dashboard() {
         }
       }
     };
-    fetchAppointmnets(userRole);
+    fetchAppointments(userRole);
   }, []);
 
   console.log("Appointments : ", appointments);
