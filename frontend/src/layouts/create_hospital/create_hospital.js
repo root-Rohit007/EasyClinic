@@ -66,9 +66,28 @@ const Create_Hospitals = () => {
   const [admin, setAdmin] = useState(false);
   const [adminID, setAdminID] = useState("");
 
+  function adharValidation(no) {
+    const regexp = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
+    return regexp.test(no);
+  }
+
+  function panValidation(no) {
+    const regexp = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+    return regexp.test(no);
+  }
+
+  function gstValidation(no) {
+    const regexp = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+    return regexp.test(no);
+  }
+
   const handleSubmit2 = (e) => {
     e.preventDefault();
-    console.log(nameH, addressH, gst, desclaimer, tandc);
+
+    if (gst !== "" && !gstValidation(gst)) {
+      return alert.error("Incorrect GST format");
+    }
+
     const hospitaData = {
       name: nameH,
       address: addressH,
@@ -82,6 +101,14 @@ const Create_Hospitals = () => {
 
   const handleSubmit1 = (e) => {
     e.preventDefault();
+
+    if (adhar !== "" && !adharValidation(adhar)) {
+      return alert.error("Incorrect Aadhar format");
+    }
+
+    if (pan !== "" && !panValidation(pan)) {
+      return alert.error("Incorrect PAN format");
+    }
 
     const userData = {
       salutation,

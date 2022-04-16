@@ -28,11 +28,14 @@ exports.registerPatient = catchAsyncErrors(async (req, res, next) => {
     creatorID,
   } = req.body;
 
-  const countPatients = await Patient.count();
-  console.log(countPatients);
+  const countPatients = await Patient.find({
+    hospitalID: hospitalID,
+  }).count();
+  // console.log(hospitalID);
+  // console.log(countPatients);
 
   const patient = await Patient.create({
-    casePaperNo: countPatients * 100,
+    casePaperNo: countPatients + 1 ,
     salutation,
     name,
     email,

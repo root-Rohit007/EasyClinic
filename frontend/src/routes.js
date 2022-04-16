@@ -91,14 +91,14 @@ export const routesSuperAdmin = [
     route: "/profile",
     component: <Profile />,
   },
-  {
-    type: "collapse",
-    name: "Dashboard",
-    key: "dashboard",
-    icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/dashboard",
-    component: <Dashboard />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Dashboard",
+  //   key: "dashboard",
+  //   icon: <Icon fontSize="small">dashboard</Icon>,
+  //   route: "/dashboard",
+  //   component: <Dashboard />,
+  // },
   {
     name: "suppport",
     key: "update_user",
