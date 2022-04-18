@@ -116,6 +116,7 @@ const Prescription = () => {
         eveningText,
       },
     ]);
+    setMedicine("");
     setQty("");
     setMorningText("");
     setAfternoonText("");
@@ -171,6 +172,8 @@ const Prescription = () => {
                   label="The reason of patients visit "
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
+                  multiline
+                  rows={3}
                 />
               </Grid>
               <Grid item xs={12} md={6} lg={6}>
@@ -181,6 +184,8 @@ const Prescription = () => {
                   label=" Cause of the disease"
                   value={disease}
                   onChange={(e) => setDisease(e.target.value)}
+                  multiline
+                  rows={3}
                 />
               </Grid>
 
@@ -189,23 +194,27 @@ const Prescription = () => {
                   fullWidth
                   type="text"
                   variant="outlined"
-                  label=" What is the line of Treatment he have aligned / Suggested"
+                  label=" Line of Treatment "
                   value={lineTreatment}
                   onChange={(e) => setLineTreatment(e.target.value)}
+                  multiline
+                  rows={3}
                 />
               </Grid>
 
-              <Grid item xs={12} md={3} lg={3}>
+              <Grid item xs={12} md={4} lg={4}>
                 <TextField
                   fullWidth
                   type="text"
                   variant="outlined"
-                  label=" Any Procedure taken in clinic"
+                  label="Clinical Procedure if any"
                   value={procedure}
                   onChange={(e) => setProcedure(e.target.value)}
+                  multiline
+                  rows={3}
                 />
               </Grid>
-              <Grid item xs={12} md={3} lg={3}>
+              <Grid item xs={12} md={2} lg={2}>
                 <TextField
                   fullWidth
                   type="number"

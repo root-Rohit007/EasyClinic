@@ -9,6 +9,8 @@ import {
   PDFViewer,
   Font,
 } from "@react-pdf/renderer";
+import { Grid, Button } from "@material-ui/core";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import axios from "axios";
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
@@ -22,7 +24,7 @@ Font.register({
   family: "opensans",
   fonts: [{ src: OpenSans }, { src: OpenSansB, fontStyle: "bold" }],
 });
-const borderColor = "#90e5fc";
+const borderColor = "#b0b5b5";
 // Create styles
 const styles = StyleSheet.create({
   page: {
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     padding: 10,
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#bff0fd",
+    backgroundColor: "#b0b5b5",
   },
   section4: {
     marginTop: 20,
@@ -85,13 +87,13 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     marginTop: 24,
     borderWidth: 1,
-    borderColor: "#bff0fd",
+    borderColor: "#b0b5b5",
     width: "100%",
   },
   container: {
     flexDirection: "row",
-    borderBottomColor: "#bff0fd",
-    backgroundColor: "#bff0fd",
+    borderBottomColor: "#b0b5b5",
+    backgroundColor: "#b0b5b5",
     borderBottomWidth: 1,
     alignItems: "center",
     height: 24,
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    borderBottomColor: "#bff0fd",
+    borderBottomColor: "#b0b5b5",
     borderBottomWidth: 1,
     alignItems: "center",
     height: 24,
@@ -186,6 +188,33 @@ const Pdf = () => {
     return (
       <DashboardLayout>
         <DashboardNavbar />
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              startIcon={<WhatsAppIcon />}
+              style={{
+                backgroundColor: "green",
+                color: "white",
+                margin: "5px",
+              }}
+              // onClick={() =>
+              //   // navigate(
+              //   //   "https://api.whatsapp.com/send/?phone=918329536186&text=HI&app_absent=0"
+              //   // )
+              // }
+            >
+              <a
+                href={`https://api.whatsapp.com/send/?phone=${appointment.patientID.phone}&text=HI&app_absent=0`}
+                target="_blank"
+                style={{ textDecoration: "none", color: "white" }}
+                rel="noreferrer"
+              >
+                Ping on whatsapp
+              </a>
+            </Button>
+          </Grid>
+        </Grid>
         <PDFViewer width="100%" height="900">
           <Document>
             <Page size="A4" style={styles.page}>
@@ -256,9 +285,7 @@ const Pdf = () => {
                 </Text>
 
                 <Text>
-                  <p style={{ fontStyle: "bold" }}>
-                    What is the line of Treatment he have aligned / Suggested{" "}
-                  </p>
+                  <p style={{ fontStyle: "bold" }}>Line of Treatment</p>
                   :&nbsp;&nbsp;
                   {appointment.lineTreatment
                     ? appointment.lineTreatment
