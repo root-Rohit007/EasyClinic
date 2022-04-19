@@ -350,7 +350,7 @@ const Pdf = () => {
                   For Official Use:
                 </Text>
               </View>
-              <Text style={{ padding: 10 }}>
+              <Text style={{ padding: 10, fontSize: 15 }}>
                  1. Fees = {appointment.fees}/-
               </Text>
             </Page>
