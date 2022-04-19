@@ -8,6 +8,7 @@ import {
   StyleSheet,
   PDFViewer,
   Font,
+  Image,
 } from "@react-pdf/renderer";
 import { Grid, Button } from "@material-ui/core";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -19,6 +20,8 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import OpenSans from "Fonts/Open_Sans/static/OpenSans/OpenSans-Regular.ttf";
 import OpenSansB from "Fonts/Open_Sans/static/OpenSans/OpenSans-Bold.ttf";
+
+import img from "assets/rx.png";
 
 Font.register({
   family: "opensans",
@@ -299,6 +302,10 @@ const Pdf = () => {
                   :&nbsp;&nbsp;
                   {appointment.procedure ? appointment.procedure : "   "}
                 </Text>
+              </View>
+
+              <View style={{ paddingLeft: "20px" }}>
+                <Image src={img} style={{ height: "15px", width: "15px" }} />
               </View>
 
               {/* Table */}
