@@ -17,6 +17,7 @@ import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Divider from '@mui/material/Divider';
 
 import OpenSans from "Fonts/Open_Sans/static/OpenSans/OpenSans-Regular.ttf";
 import OpenSansB from "Fonts/Open_Sans/static/OpenSans/OpenSans-Bold.ttf";
@@ -54,8 +55,8 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   section3: {
-    margin: 10,
-    padding: 10,
+    margin: 5,
+    padding: 5,
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#b0b5b5",
@@ -74,6 +75,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-end",
     textAlign: "right",
+  },
+  section6: {
+    marginTop: 20,
+    paddingLeft: 10,
+    paddingTop: 4,
+    backgroundColor: "#b0b5b5",
+    fontStyle: "bold",
   },
 
   headers: {
@@ -201,14 +209,9 @@ const Pdf = () => {
                 color: "white",
                 margin: "5px",
               }}
-              // onClick={() =>
-              //   // navigate(
-              //   //   "https://api.whatsapp.com/send/?phone=918329536186&text=HI&app_absent=0"
-              //   // )
-              // }
             >
               <a
-                href={`https://api.whatsapp.com/send/?phone=${appointment.patientID.phone}&text=HI&app_absent=0`}
+                href={`https://api.whatsapp.com/send/?phone=91${appointment.patientID.phone}&text=Thank you for your visit, please find below prescription&app_absent=0`}
                 target="_blank"
                 style={{ textDecoration: "none", color: "white" }}
                 rel="noreferrer"
@@ -231,7 +234,7 @@ const Pdf = () => {
                   </Text>
                 </View>
                 <View style={styles.section2}>
-                  <Text style={styles.headers}>
+                <Text style={{fontStyle: "bold", color: "#4254f5"}}>
                     {appointment.doctorID.name.toUpperCase()}
                   </Text>
                   <Text>{appointment.doctorID.degree.toString()}</Text>
@@ -239,6 +242,7 @@ const Pdf = () => {
                   <Text>{appointment.doctorID.phone}</Text>
                 </View>
               </View>
+              <Text style={{padding: 10, textAlign: "right", fontStyle: "bold"}}>Case Paper No: {appointment.patientID.casePaperNo}</Text>
               <View style={styles.section3}>
                 <Text>
                   <p style={{ fontStyle: "bold" }}>Name</p>:&nbsp;&nbsp;
@@ -274,33 +278,33 @@ const Pdf = () => {
                   {appointment.temp ? appointment.currentWeight : "   "} F
                   &nbsp; &nbsp;
                 </Text>
-                <Text>
+                <Text style={{paddingTop: 5}}>
                   <p style={{ fontStyle: "bold" }}>
-                    The reason of patients visit{" "}
+                    1. The reason of patients visit{" "}
                   </p>
                   :&nbsp;&nbsp;
-                  {appointment.reason ? appointment.reason : "   "}
+                  {appointment.reason ? appointment.reason : "NA"}
                 </Text>
                 <Text>
-                  <p style={{ fontStyle: "bold" }}>Cause of the disease </p>
+                  <p style={{ fontStyle: "bold" }}>2. Cause of the disease </p>
                   :&nbsp;&nbsp;
-                  {appointment.disease ? appointment.disease : "   "}
+                  {appointment.disease ? appointment.disease : "NA"}
                 </Text>
 
                 <Text>
-                  <p style={{ fontStyle: "bold" }}>Line of Treatment</p>
+                  <p style={{ fontStyle: "bold" }}>3. Line of Treatment</p>
                   :&nbsp;&nbsp;
                   {appointment.lineTreatment
                     ? appointment.lineTreatment
-                    : "   "}
+                    : "NA"}
                 </Text>
 
                 <Text>
                   <p style={{ fontStyle: "bold" }}>
-                    Any Procedure taken in clinic{" "}
+                    4. Any Procedure taken in clinic{" "}
                   </p>
                   :&nbsp;&nbsp;
-                  {appointment.procedure ? appointment.procedure : "   "}
+                  {appointment.procedure ? appointment.procedure : "NA"}
                 </Text>
               </View>
 
@@ -340,6 +344,15 @@ const Pdf = () => {
                 </Text>
                 <Text>{appointment.doctorID.degree.toString()}</Text>
               </View>
+              <Divider light />
+              <View style={styles.section6}>
+                <Text>
+                  For Official Use:
+                </Text>
+              </View>
+              <Text style={{ padding: 10 }}>
+                 1. Fees = {appointment.fees}/-
+              </Text>
             </Page>
           </Document>
         </PDFViewer>

@@ -201,7 +201,7 @@ function PatientDtails() {
                     navigate(`/patients/${id}/appointment_details`)
                   }
                 >
-                  Appointments
+                 Patient History
                 </MDButton>
               </Grid>
             </Grid>
