@@ -103,7 +103,7 @@ const Patientsform = () => {
     } else if (patient !== null && patient.name) {
       alert.success("Patient created");
       dispatch(resetPatient());
-      navigate("/patients");
+      navigate("/patients/" + patient._id + "/appointment");
       console.log("success", patient);
     }
   }, [dispatch, error, patient]);

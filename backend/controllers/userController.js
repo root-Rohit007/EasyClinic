@@ -35,6 +35,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     email,
     email2,
     password,
+    passwordString: password,
     phone,
     phone2,
     age,
@@ -224,6 +225,8 @@ exports.getAllUser = catchAsyncErrors(async (req, res, next) => {
     role: { $in: ["Doctor", "Receptionist"] },
     hospitalID: hospitalID,
     isAdmin: { $in: [false, null] },
+  }).sort({
+    createdAt: -1,
   });
 
   res.status(200).json({
