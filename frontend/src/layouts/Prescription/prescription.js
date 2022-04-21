@@ -189,7 +189,7 @@ const Prescription = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={6} lg={6}>
+              <Grid item xs={12} md={5} lg={5}>
                 <TextField
                   fullWidth
                   type="text"
@@ -202,7 +202,7 @@ const Prescription = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={4} lg={4}>
+              <Grid item xs={12} md={5} lg={5}>
                 <TextField
                   fullWidth
                   type="text"
@@ -215,11 +215,11 @@ const Prescription = () => {
                 />
               </Grid>
               <Grid item xs={12} md={2} lg={2}>
+                <small>Fees:</small>
                 <TextField
                   fullWidth
                   type="number"
                   variant="outlined"
-                  label="Fees"
                   value={fees}
                   onChange={(e) => setFees(e.target.value)}
                   InputProps={{ inputProps: { min: 0 } }}
