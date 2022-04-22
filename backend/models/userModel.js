@@ -82,10 +82,9 @@ const userSchema = new mongoose.Schema(
     pan: {
       type: String,
     },
-    // regNo: {
-    //   type: String,
-    //   required: true,
-    // },
+    regNo: {
+      type: String,
+    },
     role: {
       type: String,
       enum: ["SuperAdmin", "Doctor", "Receptionist"],

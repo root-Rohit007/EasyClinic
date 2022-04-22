@@ -17,7 +17,7 @@ import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
 
 import OpenSans from "Fonts/Open_Sans/static/OpenSans/OpenSans-Regular.ttf";
 import OpenSansB from "Fonts/Open_Sans/static/OpenSans/OpenSans-Bold.ttf";
@@ -234,15 +234,24 @@ const Pdf = () => {
                   </Text>
                 </View>
                 <View style={styles.section2}>
-                <Text style={{fontStyle: "bold", color: "#4254f5"}}>
+                  <Text style={{ fontStyle: "bold", color: "#4254f5" }}>
                     {appointment.doctorID.name.toUpperCase()}
                   </Text>
                   <Text>{appointment.doctorID.degree.toString()}</Text>
                   <Text>{appointment.doctorID.email}</Text>
                   <Text>{appointment.doctorID.phone}</Text>
+                  <Text>
+                    {appointment.doctorID.regNo
+                      ? appointment.doctorID.regNo
+                      : " "}
+                  </Text>
                 </View>
               </View>
-              <Text style={{padding: 10, textAlign: "right", fontStyle: "bold"}}>Case Paper No: {appointment.patientID.casePaperNo}</Text>
+              <Text
+                style={{ padding: 10, textAlign: "right", fontStyle: "bold" }}
+              >
+                Case Paper No: {appointment.patientID.casePaperNo}
+              </Text>
               <View style={styles.section3}>
                 <Text>
                   <p style={{ fontStyle: "bold" }}>Name</p>:&nbsp;&nbsp;
@@ -278,7 +287,7 @@ const Pdf = () => {
                   {appointment.temp ? appointment.currentWeight : "   "} F
                   &nbsp; &nbsp;
                 </Text>
-                <Text style={{paddingTop: 5}}>
+                <Text style={{ paddingTop: 5 }}>
                   <p style={{ fontStyle: "bold" }}>
                     1. The reason of patients visit{" "}
                   </p>
@@ -294,9 +303,7 @@ const Pdf = () => {
                 <Text>
                   <p style={{ fontStyle: "bold" }}>3. Line of Treatment</p>
                   :&nbsp;&nbsp;
-                  {appointment.lineTreatment
-                    ? appointment.lineTreatment
-                    : "NA"}
+                  {appointment.lineTreatment ? appointment.lineTreatment : "NA"}
                 </Text>
 
                 <Text>
@@ -346,12 +353,10 @@ const Pdf = () => {
               </View>
               <Divider light />
               <View style={styles.section6}>
-                <Text>
-                  For Official Use:
-                </Text>
+                <Text>For Official Use:</Text>
               </View>
               <Text style={{ padding: 10, fontSize: 15 }}>
-                 1. Fees = {appointment.fees}/-
+                1. Fees = {appointment.fees}/-
               </Text>
             </Page>
           </Document>

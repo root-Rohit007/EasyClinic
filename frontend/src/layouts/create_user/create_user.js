@@ -39,6 +39,7 @@ const Signup = () => {
   const marginTop = { marginTop: 5 };
 
   const [salutation, setStalutation] = useState("");
+  const [regNo, setRegNo] = useState("");
   const [name, setName] = useState("");
   const [email1, setEmail1] = useState("");
   const [email2, setEmail2] = useState("");
@@ -93,6 +94,7 @@ const Signup = () => {
     }
 
     const userData = {
+      regNo,
       salutation,
       name,
       email: email1,
@@ -137,6 +139,20 @@ const Signup = () => {
             </Typography>
           </Grid>
           <form onSubmit={handleSubmit}>
+            <Grid align="left">
+              <TextField
+                style={{
+                  marginRight: "10px",
+                  width: "100%",
+                }}
+                label="Registration no"
+                variant="outlined"
+                placeholder="Enter reg no"
+                value={regNo}
+                onChange={(e) => setRegNo(e.target.value)}
+              />
+            </Grid>
+            <br />
             <Grid align="left">
               <TextField
                 style={{
