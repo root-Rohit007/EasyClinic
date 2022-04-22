@@ -12,7 +12,6 @@ const hospitalSchema = new mongoose.Schema(
     },
     GST: {
       type: String,
-      required: [true, "Enter GST"],
     },
     desclaimer: {
       type: String,

@@ -23,7 +23,9 @@ exports.createHospitals = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.getHospitals = catchAsyncErrors(async (req, res, next) => {
-  const hospitals = await Hospital.find();
+  const hospitals = await Hospital.find().sort({
+    createdAt: -1,
+  });
 
   res.status(200).json({
     success: true,
