@@ -75,128 +75,130 @@ function Basic() {
 
   return (
     <BasicLayout image={bgImage}>
-      <Card>
-        <MDBox
-          variant="gradient"
-          bgColor="light"
-          borderRadius="lg"
-          coloredShadow="info"
-          mx={2}
-          mt={-3}
-          p={2}
-          mb={1}
-          textAlign="center"
-        >
-          <div>
-            <img src={logo} alt="logo" width="100%" />
-          </div>
-          {/* <MDTypography variant="h3" fontWeight="medium" color="white" mt={1}>
-            Dr.Savvy
-          </MDTypography> */}
-          <MDTypography variant="h4" fontWeight="bold" mt={1}>
-            Login
-          </MDTypography>
-          {/* <Grid
-            container
-            spacing={3}
-            justifyContent="center"
-            sx={{ mt: 1, mb: 2 }}
+        <Card>
+          <MDBox
+            variant="gradient"
+            bgColor="light"
+            borderRadius="lg"
+            coloredShadow="info"
+            mx={2}
+            mt={-3}
+            p={2}
+            mb={1}
+            textAlign="center"
           >
-            <Grid item xs={2}>
-              <MDTypography
-                component={MuiLink}
-                href="#"
-                variant="body1"
-                color="white"
-              >
-                <FacebookIcon color="inherit" />
-              </MDTypography>
-            </Grid> */}
-          {/* <Grid item xs={2}>
-              <MDTypography
-                component={MuiLink}
-                href="#"
-                variant="body1"
-                color="white"
-              >
-                <GitHubIcon color="inherit" />
-              </MDTypography>
-            </Grid> */}
-          {/* <Grid item xs={2}>
-              <MDTypography
-                component={MuiLink}
-                href="#"
-                variant="body1"
-                color="white"
-              >
-                <GoogleIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-          </Grid> */}
-        </MDBox>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
-            <MDBox mb={2}>
-              <MDInput
-                type="email"
-                label="Email"
-                fullWidth
-                required
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-              />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput
-                type="password"
-                label="Password"
-                fullWidth
-                placeholder="Password"
-                required
-                value={loginPassword}
-                onChange={(e) => setLoginPassword(e.target.value)}
-              />
-            </MDBox>
-            {/* <MDBox display="flex" alignItems="center" ml={-1}>
-              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-              <MDTypography
-                variant="button"
-                fontWeight="regular"
-                color="text"
-                onClick={handleSetRememberMe}
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-              >
-                &nbsp;&nbsp;Remember me
-              </MDTypography>
-            </MDBox> */}
-            <MDBox mt={4} mb={1}>
-              <MDButton
-                variant="gradient"
-                color="info"
-                fullWidth
-                onClick={loginSubmit}
-              >
-                sign in
-              </MDButton>
-            </MDBox>
-            {/* <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
-                Don&apos;t have an account?{" "}
+            <div>
+              <img src={logo} alt="logo" width="100%" />
+            </div>
+            {/* <MDTypography variant="h3" fontWeight="medium" color="white" mt={1}>
+              Dr.Savvy
+            </MDTypography> */}
+            <MDTypography variant="h4" fontWeight="bold" mt={1}>
+              Login
+            </MDTypography>
+            {/* <Grid
+              container
+              spacing={3}
+              justifyContent="center"
+              sx={{ mt: 1, mb: 2 }}
+            >
+              <Grid item xs={2}>
                 <MDTypography
-                  component={Link}
-                  to="/authentication/sign-up"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
+                  component={MuiLink}
+                  href="#"
+                  variant="body1"
+                  color="white"
                 >
-                  Sign up
+                  <FacebookIcon color="inherit" />
                 </MDTypography>
-              </MDTypography>
-            </MDBox> */}
+              </Grid> */}
+            {/* <Grid item xs={2}>
+                <MDTypography
+                  component={MuiLink}
+                  href="#"
+                  variant="body1"
+                  color="white"
+                >
+                  <GitHubIcon color="inherit" />
+                </MDTypography>
+              </Grid> */}
+            {/* <Grid item xs={2}>
+                <MDTypography
+                  component={MuiLink}
+                  href="#"
+                  variant="body1"
+                  color="white"
+                >
+                  <GoogleIcon color="inherit" />
+                </MDTypography>
+              </Grid>
+            </Grid> */}
           </MDBox>
-        </MDBox>
-      </Card>
+          <MDBox pt={4} pb={3} px={3}>
+            <MDBox component="form" role="form">
+              <MDBox mb={2}>
+                <MDInput
+                  type="email"
+                  label="Email"
+                  fullWidth
+                  required
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                />
+              </MDBox>
+              <MDBox mb={2}>
+                <MDInput
+                  type="password"
+                  label="Password"
+                  fullWidth
+                  placeholder="Password"
+                  required
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                />
+              </MDBox>
+              {/* <MDBox display="flex" alignItems="center" ml={-1}>
+                <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+                <MDTypography
+                  variant="button"
+                  fontWeight="regular"
+                  color="text"
+                  onClick={handleSetRememberMe}
+                  sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
+                >
+                  &nbsp;&nbsp;Remember me
+                </MDTypography>
+              </MDBox> */}
+              <MDBox mt={4} mb={1}>
+                <MDButton
+                  variant="gradient"
+                  color="info"
+                  fullWidth
+                  onClick={loginSubmit}
+                >
+                  sign in
+                </MDButton>
+              </MDBox>
+              {/* <MDBox mt={3} mb={1} textAlign="center">
+                <MDTypography variant="button" color="text">
+                  Don&apos;t have an account?{" "}
+                  <MDTypography
+                    component={Link}
+                    to="/authentication/sign-up"
+                    variant="button"
+                    color="info"
+                    fontWeight="medium"
+                    textGradient
+                  >
+                    Sign up
+                  </MDTypography>
+                </MDTypography>
+              </MDBox> */}
+            </MDBox>
+          </MDBox>
+        </Card>
+        <p style={{color: "white", position: "absolute", bottom: "0px", left : "10px"}}>Mobile : 6364704704, Website: www.drsavvy.in, Email: support@drsavvy.in</p>
+        <p style={{color: "white", position: "absolute ", bottom: "25px", left: "10px"}}>Thought Pickers LLP, Banglore © 2022 copyrights </p>
     </BasicLayout>
   );
 }
