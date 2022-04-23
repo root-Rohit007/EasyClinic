@@ -166,7 +166,6 @@ const Create_Hospitals = () => {
                 label="GST No."
                 variant="outlined"
                 placeholder="Enter your GST Number"
-                required
                 value={gst}
                 onChange={(e) => setGst(e.target.value)}
               />

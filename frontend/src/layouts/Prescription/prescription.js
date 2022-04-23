@@ -103,6 +103,10 @@ const Prescription = () => {
     console.log("added");
     e.preventDefault();
 
+    if (!medicine.trim()) {
+      return alert.error("Enter medicine");
+    }
+
     setPres([
       ...pres,
       {
@@ -248,6 +252,7 @@ const Prescription = () => {
                     value={medicine}
                     onChange={(e) => setMedicine(e.target.value)}
                     required
+                    pattern=".*\S+.*"
                   />
                 ) : (
                   <Autocomplete

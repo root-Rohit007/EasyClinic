@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import MDButton from "components/MDButton";
 import { useNavigate } from "react-router-dom";
+import MDBadge from "components/MDBadge";
 
 function All_appointmets() {
   const navigate = useNavigate();
@@ -95,6 +96,18 @@ function All_appointmets() {
         const d = dateString.toDateString();
         const t = dateString.toTimeString().split(" ");
 
+        let colorBadge;
+        console.log(a.Status);
+        if (a.Status === "completed") {
+          colorBadge = "success";
+        } else if (a.Status === "pending") {
+          colorBadge = "warning";
+        } else {
+          colorBadge = "error";
+        }
+
+        console.log(colorBadge);
+
         return {
           patient: (
             <Author name={a.patientID.name} email={a.patientID.casePaperNo} />
@@ -107,7 +120,17 @@ function All_appointmets() {
           ),
           date: <Job title={d} />,
           time: <Job title={t[0]} />,
-          status: <Job title={a.Status} />,
+          // Status: <Job title={a.Status} />,
+          status: (
+            <MDBox ml={-1}>
+              <MDBadge
+                badgeContent={a.Status}
+                color={colorBadge}
+                variant="gradient"
+                size="sm"
+              />
+            </MDBox>
+          ),
           view: (
             <MDButton
               onClick={() =>

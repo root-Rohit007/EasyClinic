@@ -171,14 +171,14 @@ function HospitalTable() {
       columns: [
         { Header: "Name", accessor: "name", width: "45%", align: "left" },
         { Header: "Address", accessor: "address", align: "left" },
-        { Header: "GST", accessor: "gst", align: "center" },
+        // { Header: "GST", accessor: "gst", align: "center" },
         { Header: "view", accessor: "view", align: "center" },
         { Header: "edit", accessor: "edit", align: "center" },
       ],
 
       rows: hospitals.map((h) => ({
         name: <Author name={h.name} email={" "} />,
-        gst: <Job title={h.GST} />,
+        // gst: <Job title={h.GST} />,
         address: <p>{h.address}</p>,
         // address: (
         //   <MDBox ml={-1}>
@@ -214,15 +214,9 @@ function HospitalTable() {
           </MDButton>
         ),
         edit: (
-          <MDTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
-          >
+          <MDButton onClick={() => navigate("/hospitals/" + h._id + "/update")}>
             Edit
-          </MDTypography>
+          </MDButton>
         ),
       })),
     };

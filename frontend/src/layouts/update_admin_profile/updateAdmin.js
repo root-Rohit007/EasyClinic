@@ -48,6 +48,7 @@ const UpdateAdmin = () => {
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const marginTop = { marginTop: 5 };
 
+  const [regNo, setRegNo] = useState("");
   const [salutation, setSalutation] = useState("");
   const [name, setName] = useState("");
   const [email1, setEmail1] = useState("");
@@ -66,24 +67,25 @@ const UpdateAdmin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      salutation,
-      name,
-      email1,
-      email2,
-      phone,
-      phone2,
-      age,
-      gender,
-      degree,
-      adhar,
-      pan,
-      address,
-      role,
+    // console.log(
+    //   salutation,
+    //   name,
+    //   email1,
+    //   email2,
+    //   phone,
+    //   phone2,
+    //   age,
+    //   gender,
+    //   degree,
+    //   adhar,
+    //   pan,
+    //   address,
+    //   role,
 
-      isActive
-    );
+    //   isActive
+    // );
     const userData = {
+      regNo,
       salutation,
       name,
       email: email1,
@@ -118,6 +120,7 @@ const UpdateAdmin = () => {
       alert.error(errorProfileUpdate);
       dispatch(clearErrors());
     } else if (user !== null && user.name) {
+      setRegNo(user.regNo);
       setSalutation(user.salutation);
       setName(user.name);
       setEmail1(user.email);
@@ -153,6 +156,21 @@ const UpdateAdmin = () => {
             </Typography>
           </Grid>
           <form onSubmit={handleSubmit}>
+            <Grid>
+              <TextField
+                style={{
+                  marginRight: "10px",
+                  width: "100%",
+                }}
+                label="Registration no"
+                variant="outlined"
+                placeholder="Reg no"
+                // required
+                value={regNo}
+                onChange={(e) => setRegNo(e.target.value)}
+              />
+            </Grid>
+            <br />
             <Grid align="left">
               <TextField
                 style={{

@@ -57,6 +57,7 @@ const UpdateUser = () => {
   const marginTop = { marginTop: 5 };
 
   const [salutation, setSalutation] = useState("");
+  const [regNo, setRegNo] = useState("");
   const [name, setName] = useState("");
   const [email1, setEmail1] = useState("");
   const [email2, setEmail2] = useState("");
@@ -111,6 +112,7 @@ const UpdateUser = () => {
       return alert.error("Incorrect PAN format");
     }
     const userData = {
+      regNo,
       salutation,
       name,
       email: email1,
@@ -151,6 +153,7 @@ const UpdateUser = () => {
       alert.error(errorProfileUpdate);
       dispatch(clearErrors());
     } else if (user !== null && user.name) {
+      setRegNo(user.regNo);
       setSalutation(user.salutation);
       setName(user.name);
       setEmail1(user.email);
@@ -192,6 +195,21 @@ const UpdateUser = () => {
               </Typography>
             </Grid>
             <form onSubmit={handleSubmit}>
+              <Grid align="left">
+                <TextField
+                  style={{
+                    marginRight: "10px",
+                    width: "100%",
+                  }}
+                  label="Registration no"
+                  variant="outlined"
+                  placeholder="reg no"
+                  required
+                  value={regNo}
+                  onChange={(e) => setRegNo(e.target.value)}
+                />
+              </Grid>
+              <br />
               <Grid align="left">
                 <TextField
                   style={{

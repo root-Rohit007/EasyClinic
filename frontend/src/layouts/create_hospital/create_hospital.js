@@ -47,6 +47,7 @@ const Create_Hospitals = () => {
   const [desclaimer, setDesclaimer] = useState("");
   const [tandc, setTandc] = useState("");
 
+  const [regNo, setRegNo] = useState("");
   const [salutation, setStalutation] = useState("");
   const [name, setName] = useState("");
   const [email1, setEmail1] = useState("");
@@ -111,6 +112,7 @@ const Create_Hospitals = () => {
     }
 
     const userData = {
+      regNo,
       salutation,
       name,
       email: email1,
@@ -120,9 +122,9 @@ const Create_Hospitals = () => {
       age: +age,
       gender,
       degree: degree.split(" "),
-      Adhar: adhar,
-      Pan: pan,
-      Address: address,
+      adhar: adhar,
+      pan: pan,
+      address: address,
       role,
       password,
       isActive,
@@ -202,6 +204,22 @@ const Create_Hospitals = () => {
               <TextField
                 style={{
                   marginRight: "10px",
+                  width: "97%",
+                }}
+                label="Registration No"
+                variant="outlined"
+                placeholder="Reg no"
+                // required
+                value={regNo}
+                onChange={(e) => setRegNo(e.target.value)}
+              />
+            </Grid>
+            <br />
+
+            <Grid align="left">
+              <TextField
+                style={{
+                  marginRight: "10px",
                   width: "120px",
                 }}
                 label="Mr./Mrs./Dr."
@@ -257,7 +275,6 @@ const Create_Hospitals = () => {
                 onChange={(e) => setEmail2(e.target.value)}
               />
             </Grid>
-            <br />
             <br />
 
             {/* style ={{width: '80%'}} */}
